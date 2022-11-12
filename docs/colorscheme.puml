@@ -1,0 +1,29 @@
+@startuml
+
+class TetrisModel {
+- currentColorScheme: ColorScheme
++ getPieceColor(Piece) -> Color
+}
+
+interface ColorScheme {
++ render(Piece): Color
+}
+
+class DefaultColorScheme {
++ render(Piece): Color
+}
+
+class HighContrastColorScheme {
++ render(Piece): Color
+}
+
+class ConcreteColorScheme {
++ render(Piece): Color
+}
+
+TetrisModel o--> ColorScheme
+ColorScheme <|-- DefaultColorScheme
+ColorScheme <|-- HighContrastColorScheme
+ColorScheme <|-- ConcreteColorScheme
+
+@enduml
