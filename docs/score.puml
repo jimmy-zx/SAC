@@ -1,8 +1,5 @@
 @startuml
 
-interface Observer {
-+ update(TetrisBoard)
-}
 
 class TetrisBoard {
 - notifyAll()
@@ -16,7 +13,7 @@ note right of TetrisBoard::onRowClear
 calls notifyAll()
 end note
 
-abstract ScoreObserver {
+interface ScoreObserver {
 + getScore(): int
 + update(TetrisBoard)
 }
@@ -31,14 +28,10 @@ class ComboScoreObserver {
 + update(TetrisBoard)
 }
 
-class GarbageGeneratorObserver {
-+ update(TetrisBoard)
-}
 
 Observer <|.. ScoreObserver
 TetrisBoard *--> Observer
-ScoreObserver <|-- DefaultScoreObserver
-ScoreObserver <|-- ComboScoreObserver
-Observer <|.. GarbageGeneratorObserver
+ScoreObserver <|.. DefaultScoreObserver
+ScoreObserver <|.. ComboScoreObserver
 
 @enduml

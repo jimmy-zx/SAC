@@ -1,7 +1,9 @@
 @startuml
 
 class TetrisBoard {
+- board: List[List[Color]]
 - currentColorScheme: ColorScheme
++ getXY(int, int): Color
 + getPieceColor(Piece) -> Color
 + placePiece(Piece, int, int)
 }
