@@ -29,8 +29,7 @@ class ComboScoreObserver {
 }
 
 
-Observer <|.. ScoreObserver
-TetrisBoard *--> Observer
+TetrisBoard *--> ScoreObserver
 ScoreObserver <|.. DefaultScoreObserver
 ScoreObserver <|.. ComboScoreObserver
 
