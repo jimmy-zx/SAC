@@ -1,0 +1,44 @@
+@startuml
+
+class TetrisBoard {
++ placePiece(Piece, int, int)
+}
+
+note right of TetrisBoard::placePiece
+calculate the state of the piece and calls Piece.setState()
+end note
+
+interface State {
++ rotate(Piece): Piece
+}
+
+class DefaultState {
++ rotate(Piece): Piece
+}
+
+class LeftWallKick {
++ rotate(Piece): Piece
+}
+
+class RightWallKick {
++ rotate(Piece): Piece
+}
+
+abstract Piece {
++ state: State
++ setState(State)
++ rotate(Piece): Piece
+}
+
+note right of Piece::rotate
+calls State.rotate()
+end note
+
+TetrisBoard <.. State
+TetrisBoard <-- Piece
+Piece o--> State
+State <|-- DefaultState
+State <|-- LeftWallKick
+State <|-- RightWallKick
+
+@enduml

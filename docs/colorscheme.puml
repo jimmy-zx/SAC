@@ -1,9 +1,14 @@
 @startuml
 
-class TetrisModel {
+class TetrisBoard {
 - currentColorScheme: ColorScheme
 + getPieceColor(Piece) -> Color
++ placePiece(Piece, int, int)
 }
+
+note left of TetrisBoard::placePiece
+calls getPieceColor()
+end note
 
 interface ColorScheme {
 + render(Piece): Color
@@ -17,13 +22,8 @@ class HighContrastColorScheme {
 + render(Piece): Color
 }
 
-class ConcreteColorScheme {
-+ render(Piece): Color
-}
-
-TetrisModel o--> ColorScheme
+TetrisBoard o--> ColorScheme
 ColorScheme <|-- DefaultColorScheme
 ColorScheme <|-- HighContrastColorScheme
-ColorScheme <|-- ConcreteColorScheme
 
 @enduml
