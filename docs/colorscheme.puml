@@ -23,7 +23,7 @@ class HighContrastColorScheme {
 }
 
 TetrisBoard o--> ColorScheme
-ColorScheme <|-- DefaultColorScheme
-ColorScheme <|-- HighContrastColorScheme
+ColorScheme <|.. DefaultColorScheme
+ColorScheme <|.. HighContrastColorScheme
 
 @enduml

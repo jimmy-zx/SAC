@@ -37,8 +37,8 @@ end note
 TetrisBoard <.. State
 TetrisBoard <-- Piece
 Piece o--> State
-State <|-- DefaultState
-State <|-- LeftWallKick
-State <|-- RightWallKick
+State <|.. DefaultState
+State <|.. LeftWallKick
+State <|.. RightWallKick
 
 @enduml

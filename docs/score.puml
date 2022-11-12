@@ -1,0 +1,39 @@
+@startuml
+
+interface Observer {
++ update(TetrisBoard)
+}
+
+class TetrisBoard {
+- notifyAll()
+- rowClearObservers: List[Observer]
++ addRowClearObserver(Observer)
++ removeRowClearObserver(Observer)
+}
+
+abstract ScoreObserver {
++ getScore(): int
++ update(TetrisBoard)
+}
+
+class DefaultScoreObserver {
++ getScore(): int
++ update(TetrisBoard)
+}
+
+class ComboScoreObserver {
++ getScore(): int
++ update(TetrisBoard)
+}
+
+class GarbageObserver {
++ update(TetrisBoard)
+}
+
+Observer <|.. ScoreObserver
+TetrisBoard *--> Observer
+ScoreObserver <|-- DefaultScoreObserver
+ScoreObserver <|-- ComboScoreObserver
+Observer <|.. GarbageObserver
+
+@enduml
