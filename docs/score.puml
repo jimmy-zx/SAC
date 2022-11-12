@@ -6,10 +6,15 @@ interface Observer {
 
 class TetrisBoard {
 - notifyAll()
-- rowClearObservers: List[Observer]
-+ addRowClearObserver(Observer)
-+ removeRowClearObserver(Observer)
+- onRowClear()
+- observers: List[Observer]
++ addObserver(Observer)
++ removeObserver(Observer)
 }
+
+note right of TetrisBoard::onRowClear
+calls notifyAll()
+end note
 
 abstract ScoreObserver {
 + getScore(): int
@@ -26,7 +31,7 @@ class ComboScoreObserver {
 + update(TetrisBoard)
 }
 
-class GarbageObserver {
+class GarbageGeneratorObserver {
 + update(TetrisBoard)
 }
 
@@ -34,6 +39,6 @@ Observer <|.. ScoreObserver
 TetrisBoard *--> Observer
 ScoreObserver <|-- DefaultScoreObserver
 ScoreObserver <|-- ComboScoreObserver
-Observer <|.. GarbageObserver
+Observer <|.. GarbageGeneratorObserver
 
 @enduml
