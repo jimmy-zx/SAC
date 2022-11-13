@@ -44,7 +44,7 @@
 \thispagestyle{fancy}
 
 \section{Project Identification}
- The project is intended to create a better version of the Tetris from A2. The outcome of this project contains more function than the tetris from A2 and adopts distinct users' opinions in order to create an extraordinary user experience.
+ The project is intended to create a better version of the Tetris from A2. The outcome of this project contains more functions than the tetris from A2 and adopts distinct users' opinions in order to create an extraordinary user experience.
 \section{User Story}
 % \begin{xltabular}{\textwidth}{|X|X|X|l|l|l|}
 \begin{xltabular}{\textwidth}{|p{2cm}|p{0.5cm}|p{1.5cm}|p{3cm}|p{3.5cm}|p{1.75cm}|p{1.25cm}|}
@@ -77,7 +77,7 @@ Reduce delay
 & 1.4
 & Junxi Liu
 & As a user, I want Tetris to response with low latency.  
-& Tweak JavaFX to increase the framerate.
+& Update the view every time an operation is done.
 & 1 & 3 \\
 
 \hline
@@ -94,14 +94,14 @@ Ghost Piece
 & Shiqi Chen
 & As a beginner to Tetris, I want the option to show where a piece will fall to so that the number of misdrops can be reduced. 
 & Every time the function `placePiece` is called, place a piece at both the desired position and where the piece will fall (with different color). 
-& 3 & 1 \\
+& 2 & 1 \\
 \hline
 Piece Preview 
 & 2.2
 & Junxi Liu
 & As a classic Tetris player, I want a window showing the upcoming blocks so that I can plan where to drop the blocks in advance. 
 & Maintain a queue of `n` upcoming pieces in the model that can be read by view.
-& 3 & 1 \\
+& 2 & 1 \\
 \hline
 T-spin 
 & 2.3
@@ -114,8 +114,8 @@ Game mode
 & 3.1
 & Shiqi Chen
 & As a player, I want different kinds of game mode (e.g., marathon, 40-lines, time-limited) so that I can have various gaming experiences. 
-& \textbf{Template pattern}.
-& 3 & 2 \\
+& \textbf{Template pattern}. Provide a game mode class which manages how the game runs. This class can be inherited to modify the behavior of the game.
+& 2 & 2 \\
 \hline
 Creative mode (Training mode)
 & 3.2
@@ -124,20 +124,19 @@ Creative mode (Training mode)
 & Strategy pattern. Replace the piece generator strategy with a manual one, which provides a window to allow users to choose arbitrary piece.
 & 3 & 3 \\
 \hline
-Input device support [Adaptor] 
+Input device support [Adaptor]
 & 3.3
 & Jianjun Zhao
 & As a user, I want Tetris to support various adaptive devices (e.g., joystick) so that I can use devices that satisfy my own need. 
 & Adapter pattern. Implement various Adapters that allow communication between this program and different input devices with incompatible interfaces. 
 & 3 & 2 \\
 
-
 \hline
 Haptic feedback 
 & 3.4
 & Kaitian Zheng
 & As a developer, I want the user to have a stronger sense of interaction by perceiving the tactile stimuli. 
-&
+& Add an observer to the row clear event. Notify the haptic device every time a row is cleared.
 & 3 & 2 \\
 \hline
 \end{xltabular}
