@@ -7,6 +7,10 @@ class TetrisView {
 }
 
 note left of TetrisView::runGame
+currentGameMode.runGame()
+end note
+
+note left of GameMode::runGame
 onGameStart()
 while not checkGameEnd():
     tick()
@@ -15,6 +19,7 @@ end note
 
 class GameMode {
 - PieceGenerator generator
++ runGame()
 + onGameStart()
 + onGameEnd()
 + checkGameEnd(): boolean
@@ -33,21 +38,21 @@ class TimeLimitedMode {
 }
 
 note bottom of TimeLimitedMode
-checkGameEnd() also checks whether time limit is reached
+check if currentTime > timeLimit
 end note
 
-class GodMode {
+class TrainingMode {
 + checkGameEnd(): boolean
 + tick()
 }
 
-note bottom of GodMode
+note bottom of TrainingMode
 checkGameEnd() always returns false
 tick() pops up a window to let user select a piece to generate
 end note
 
 TetrisView o--> GameMode
-GameMode <|-- GodMode
+GameMode <|-- TrainingMode
 GameMode <|-- TimeLimitedMode
 
 @enduml
