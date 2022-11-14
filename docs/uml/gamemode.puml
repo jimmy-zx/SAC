@@ -1,0 +1,58 @@
+@startuml
+
+class TetrisView {
+- currentGameMode: GameMode
++ setGameMode(GameMode)
++ runGame()
+}
+
+note left of TetrisView::runGame
+currentGameMode.runGame()
+end note
+
+note left of GameMode::runGame
+onGameStart()
+while not checkGameEnd():
+    tick()
+onGameEnd()
+end note
+
+class GameMode {
+- PieceGenerator generator
++ runGame()
++ onGameStart()
++ onGameEnd()
++ checkGameEnd(): boolean
++ tick()
+}
+
+note right of GameMode
+checkGameEnd() returns whether maximum height is reached
+tick() picks a piece from the random generator
+end note
+
+class TimeLimitedMode {
+- currentTime
+- timeLimit
++ checkGameEnd(): boolean
+}
+
+note bottom of TimeLimitedMode
+check if currentTime > timeLimit
+end note
+
+class TrainingMode {
++ checkGameEnd(): boolean
++ tick()
+}
+
+note bottom of TrainingMode
+checkGameEnd() always returns false
+tick() pops up a window to let user select a piece to generate
+end note
+
+TetrisView o--> GameMode
+GameMode <|-- TrainingMode
+GameMode <|-- TimeLimitedMode
+
+@enduml

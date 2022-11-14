@@ -1,0 +1,38 @@
+@startuml
+
+class TetrisBoard {
+- currentColorScheme: ColorScheme
++ render()
++ setColorScheme(ColorScheme)
+}
+
+note left of TetrisBoard::render
+currentColorScheme.render()
+end note
+
+interface ColorScheme {
+- colors: List[Color]
++ render()
+}
+
+class DefaultColorScheme {
+- colors: List[Color]
++ render()
+}
+
+class HighContrastColorScheme {
+- colors: List[Color]
++ render()
+}
+
+TetrisBoard o--> ColorScheme
+ColorScheme <|.. DefaultColorScheme
+ColorScheme <|.. HighContrastColorScheme
+TetrisBoard <-- TetrisModel: client
+
+note on link
+tetrisBoard.setColorScheme(new DefaultColorScheme)
+tetrisBoard.render()
+end note
+
+@enduml

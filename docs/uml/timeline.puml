@@ -1,0 +1,59 @@
+@startgantt
+
+[Class structure design] as [A] lasts 2 days
+[Class structure design completed] happens at [A]'s end
+[Gameplay Improvements] lasts 28 days
+
+[Lock delay] starts at [A]'s end
+[Lock delay] lasts 3 days
+
+[Hold] starts at [A]'s end
+[Hold] lasts 1 days
+
+[Score calculation] starts at [Hold]'s end
+[Score calculation] lasts 3 days
+
+[Observer Pattern Implemented] happens at [Score calculation]'s end
+
+[Reduce delay] starts at [Hold]'s end
+[Reduce delay] lasts 4 days
+
+[Sprint 1 completed] as [1] happens at [Reduce delay]'s end
+
+[Ghost piece] starts at [1]'s end
+[Ghost piece] lasts 3 days
+
+[Piece preview] starts at [1]'s end
+[Piece preview] lasts 2 days
+
+[T-spin] starts at [1]'s end
+[T-spin] lasts 7 days
+
+[Sprint 2 completed] as [2] happens at [T-spin]'s end
+
+[Game mode] starts at [2]'s end
+[Game mode] lasts 4 days
+
+[Template method pattern implemented] happens at [Game mode]'s end
+
+[Training mode] lasts 2 days
+[Training mode] starts at [Game mode]'s end
+
+[Gameplay Improvements completed] happens at [Training mode]'s end
+
+[Accessibility Improvments] lasts 28 days
+
+[Colour scheme] lasts 3 days
+[Colour scheme] starts at [A]'s end
+
+[Strategy Pattern Implemented] happens at [Colour scheme]'s end
+
+[Adaptive input device support] starts at [2]'s end
+[Adaptive input device support] lasts 4 days
+
+[Haptic feedback] lasts 3 days
+[Haptic feedback] starts at [Adaptive input device support]'s end
+[Accessibility improvements completed] happens at [Haptic feedback]'s end
+[Sprint 3 completed] as [3] happens at [Haptic feedback]'s end
+[Project completed] happens at [Haptic feedback]'s end
+@endgantt

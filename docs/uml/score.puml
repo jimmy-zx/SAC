@@ -1,0 +1,53 @@
+@startuml
+
+class TetrisBoard {
+- notifyAll()
+- onRowClear()
+- scoreObservers: List[ScoreObserver]
++ addScoreObserver(ScoreObserver)
++ removeScoreObserver(ScoreObserver)
+}
+
+note right of TetrisBoard::onRowClear
+calls notifyAll()
+end note
+
+note left of TetrisBoard::notifyAll
+for each in scoreObservers
+    each.update()
+end note
+
+interface ScoreObserver {
++ getScore(): int
++ update(TetrisBoard)
+}
+
+class OtherScoreObserver {
++ getScore(): int
++ update(TetrisBoard)
+}
+
+class ComboScoreObserver {
+- currentCombo: int
++ getScore(): int
++ update(TetrisBoard)
+}
+
+class TetrisModel {
+
+}
+
+
+TetrisBoard o--> ScoreObserver
+ScoreObserver <|.. OtherScoreObserver
+ScoreObserver <|.. ComboScoreObserver
+TetrisBoard <-- TetrisModel: client
+
+note on link
+comboScore = new ComboScoreObserver()
+tetrisBoard.addScoreObserver(comboScore)
+...
+comboScore.getScore()
+end note
+
+@enduml
