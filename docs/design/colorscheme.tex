@@ -12,7 +12,6 @@
 \definecolor{plantucolor0006}{RGB}{3,128,72}
 \definecolor{plantucolor0007}{RGB}{254,255,221}
 \definecolor{plantucolor0008}{RGB}{180,167,229}
-\scalebox{1.75}{
 \begin{tikzpicture}[yscale=-1
 ,pstyle0/.style={color=plantucolor0001,fill=plantucolor0000,line width=0.5pt}
 ,pstyle1/.style={color=plantucolor0001,fill=plantucolor0002,line width=1.0pt}
@@ -21,59 +20,75 @@
 ,pstyle4/.style={color=plantucolor0006,fill=plantucolor0005,line width=1.0pt}
 ,pstyle5/.style={color=plantucolor0001,fill=plantucolor0007,line width=0.5pt}
 ,pstyle7/.style={color=plantucolor0001,line width=1.0pt}
+,pstyle8/.style={color=plantucolor0001,fill=plantucolor0001,line width=1.0pt}
 ,pstyle9/.style={color=plantucolor0001,line width=1.0pt,dash pattern=on 7.0pt off 7.0pt}
 ]
-\draw[pstyle0] (185.5pt,12pt) arc (180:270:5pt) -- (190.5pt,7pt) -- (439.14pt,7pt) arc (270:360:5pt) -- (444.14pt,12pt) -- (444.14pt,127.5195pt) arc (0:90:5pt) -- (439.14pt,132.5195pt) -- (190.5pt,132.5195pt) arc (90:180:5pt) -- (185.5pt,127.5195pt) -- cycle;
-\draw[pstyle1] (271.6064pt,23pt) ellipse (11pt and 11pt);
-\node at (271.6064pt,23pt)[]{\textbf{\Large C}};
-\node at (292.1064pt,15.248pt)[below right,color=black]{TetrisBoard};
-\draw[pstyle2] (186.5pt,39pt) -- (443.14pt,39pt);
-\draw[pstyle3] (193.5pt,49.252pt) rectangle (199.5pt,55.252pt);
-\node at (205.5pt,43pt)[below right,color=black]{board: List[List[Color]]};
-\draw[pstyle3] (193.5pt,64.7559pt) rectangle (199.5pt,70.7559pt);
-\node at (205.5pt,58.5039pt)[below right,color=black]{currentColorScheme: ColorScheme};
-\draw[pstyle2] (186.5pt,78.0078pt) -- (443.14pt,78.0078pt);
-\draw[pstyle4] (196.5pt,91.2598pt) ellipse (3pt and 3pt);
-\node at (205.5pt,82.0078pt)[below right,color=black]{getXY(int, int): Color};
-\draw[pstyle4] (196.5pt,106.7637pt) ellipse (3pt and 3pt);
-\node at (205.5pt,97.5117pt)[below right,color=black]{getPieceColor(Piece) -\textgreater  Color};
-\draw[pstyle4] (196.5pt,122.2676pt) ellipse (3pt and 3pt);
-\node at (205.5pt,113.0156pt)[below right,color=black]{placePiece(Piece, int, int)};
-\draw[pstyle5] (6pt,53pt) -- (6pt,77.3965pt) -- (150.1303pt,77.3965pt) -- (150.1303pt,71pt) -- (189.5pt,120.7676pt) -- (150.1303pt,63pt) -- (150.1303pt,63pt) -- (140.1303pt,53pt) -- (6pt,53pt);
-\draw[pstyle5] (140.1303pt,53pt) -- (140.1303pt,63pt) -- (150.1303pt,63pt) -- (140.1303pt,53pt);
-\node at (12pt,58pt)[below right,color=black]{calls getPieceColor()};
-\draw[pstyle0] (236pt,198pt) arc (180:270:5pt) -- (241pt,193pt) -- (389.0632pt,193pt) arc (270:360:5pt) -- (394.0632pt,198pt) -- (394.0632pt,251.5039pt) arc (0:90:5pt) -- (389.0632pt,256.5039pt) -- (241pt,256.5039pt) arc (90:180:5pt) -- (236pt,251.5039pt) -- cycle;
-\draw[color=plantucolor0001,fill=plantucolor0008,line width=1.0pt] (268.0117pt,209pt) ellipse (11pt and 11pt);
-\node at (268.0117pt,209pt)[]{\textbf{\Large I}};
-\node at (285.792pt,201.248pt)[below right,color=black]{\textit{ColorScheme}};
-\draw[pstyle2] (237pt,225pt) -- (393.0632pt,225pt);
-\draw[pstyle2] (237pt,233pt) -- (393.0632pt,233pt);
-\draw[pstyle4] (247pt,246.252pt) ellipse (3pt and 3pt);
-\node at (256pt,237pt)[below right,color=black]{render(Piece): Color};
-\draw[pstyle0] (118.5pt,322pt) arc (180:270:5pt) -- (123.5pt,317pt) -- (282.0709pt,317pt) arc (270:360:5pt) -- (287.0709pt,322pt) -- (287.0709pt,375.5039pt) arc (0:90:5pt) -- (282.0709pt,380.5039pt) -- (123.5pt,380.5039pt) arc (90:180:5pt) -- (118.5pt,375.5039pt) -- cycle;
-\draw[pstyle1] (133.5pt,333pt) ellipse (11pt and 11pt);
-\node at (133.5pt,333pt)[]{\textbf{\Large C}};
-\node at (147.5pt,325.248pt)[below right,color=black]{DefaultColorScheme};
-\draw[pstyle2] (119.5pt,349pt) -- (286.0709pt,349pt);
-\draw[pstyle2] (119.5pt,357pt) -- (286.0709pt,357pt);
-\draw[pstyle4] (129.5pt,370.252pt) ellipse (3pt and 3pt);
-\node at (138.5pt,361pt)[below right,color=black]{render(Piece): Color};
-\draw[pstyle0] (322.5pt,322pt) arc (180:270:5pt) -- (327.5pt,317pt) -- (526.3pt,317pt) arc (270:360:5pt) -- (531.3pt,322pt) -- (531.3pt,375.5039pt) arc (0:90:5pt) -- (526.3pt,380.5039pt) -- (327.5pt,380.5039pt) arc (90:180:5pt) -- (322.5pt,375.5039pt) -- cycle;
-\draw[pstyle1] (337.5pt,333pt) ellipse (11pt and 11pt);
-\node at (337.5pt,333pt)[]{\textbf{\Large C}};
-\node at (351.5pt,325.248pt)[below right,color=black]{HighContrastColorScheme};
-\draw[pstyle2] (323.5pt,349pt) -- (530.3pt,349pt);
-\draw[pstyle2] (323.5pt,357pt) -- (530.3pt,357pt);
-\draw[pstyle4] (333.5pt,370.252pt) ellipse (3pt and 3pt);
-\node at (342.5pt,361pt)[below right,color=black]{render(Piece): Color};
-\draw[pstyle7] (315pt,145.23pt) ..controls (315pt,145.23pt) and (315pt,169.25pt) .. (315pt,179.73pt);
-\draw[color=plantucolor0001,fill=plantucolor0001,line width=1.0pt] (315pt,192.85pt) -- (319pt,183.85pt) -- (315pt,187.85pt) -- (311pt,183.85pt) -- (315pt,192.85pt) -- cycle;
-\draw[pstyle7] (315pt,187.85pt) -- (315pt,179.85pt);
-\draw[pstyle7] (315pt,133.23pt) -- (311pt,139.23pt) -- (315pt,145.23pt) -- (319pt,139.23pt) -- (315pt,133.23pt) -- cycle;
-\draw[pstyle9] (272.69pt,272.09pt) ..controls (258.93pt,287.08pt) and (244pt,303.34pt) .. (231.5pt,316.96pt);
-\draw[pstyle7] (267.77pt,267.1pt) -- (286.45pt,257.1pt) -- (278.08pt,276.57pt) -- (267.77pt,267.1pt) -- cycle;
-\draw[pstyle9] (357.31pt,272.09pt) ..controls (371.07pt,287.08pt) and (386pt,303.34pt) .. (398.5pt,316.96pt);
-\draw[pstyle7] (351.92pt,276.57pt) -- (343.55pt,257.1pt) -- (362.23pt,267.1pt) -- (351.92pt,276.57pt) -- cycle;
+\draw[pstyle0] (234pt,12pt) arc (180:270:5pt) -- (239pt,7pt) -- (487.64pt,7pt) arc (270:360:5pt) -- (492.64pt,12pt) -- (492.64pt,96.5117pt) arc (0:90:5pt) -- (487.64pt,101.5117pt) -- (239pt,101.5117pt) arc (90:180:5pt) -- (234pt,96.5117pt) -- cycle;
+\draw[pstyle1] (320.1064pt,23pt) ellipse (11pt and 11pt);
+\node at (320.1064pt,23pt)[]{\textbf{\Large C}};
+\node at (340.6064pt,15.248pt)[below right,color=black]{TetrisBoard};
+\draw[pstyle2] (235pt,39pt) -- (491.64pt,39pt);
+\draw[pstyle3] (242pt,49.252pt) rectangle (248pt,55.252pt);
+\node at (254pt,43pt)[below right,color=black]{currentColorScheme: ColorScheme};
+\draw[pstyle2] (235pt,62.5039pt) -- (491.64pt,62.5039pt);
+\draw[pstyle4] (245pt,75.7559pt) ellipse (3pt and 3pt);
+\node at (254pt,66.5039pt)[below right,color=black]{render()};
+\draw[pstyle4] (245pt,91.2598pt) ellipse (3pt and 3pt);
+\node at (254pt,82.0078pt)[below right,color=black]{setColorScheme(ColorScheme)};
+\draw[pstyle5] (6pt,37.5pt) -- (6pt,61.8965pt) -- (199.2275pt,61.8965pt) -- (199.2275pt,55.5pt) -- (238pt,74.2559pt) -- (199.2275pt,47.5pt) -- (199.2275pt,47.5pt) -- (189.2275pt,37.5pt) -- (6pt,37.5pt);
+\draw[pstyle5] (189.2275pt,37.5pt) -- (189.2275pt,47.5pt) -- (199.2275pt,47.5pt) -- (189.2275pt,37.5pt);
+\node at (12pt,42.5pt)[below right,color=black]{currentColorScheme.render()};
+\draw[pstyle0] (179.5pt,232pt) arc (180:270:5pt) -- (184.5pt,227pt) -- (322.2231pt,227pt) arc (270:360:5pt) -- (327.2231pt,232pt) -- (327.2231pt,301.0078pt) arc (0:90:5pt) -- (322.2231pt,306.0078pt) -- (184.5pt,306.0078pt) arc (90:180:5pt) -- (179.5pt,301.0078pt) -- cycle;
+\draw[color=plantucolor0001,fill=plantucolor0008,line width=1.0pt] (206.8586pt,243pt) ellipse (11pt and 11pt);
+\node at (206.8586pt,243pt)[]{\textbf{\Large I}};
+\node at (223.605pt,235.248pt)[below right,color=black]{\textit{ColorScheme}};
+\draw[pstyle2] (180.5pt,259pt) -- (326.2231pt,259pt);
+\draw[pstyle3] (187.5pt,269.252pt) rectangle (193.5pt,275.252pt);
+\node at (199.5pt,263pt)[below right,color=black]{colors: List[Color]};
+\draw[pstyle2] (180.5pt,282.5039pt) -- (326.2231pt,282.5039pt);
+\draw[pstyle4] (190.5pt,295.7559pt) ellipse (3pt and 3pt);
+\node at (199.5pt,286.5039pt)[below right,color=black]{render()};
+\draw[pstyle0] (57pt,372pt) arc (180:270:5pt) -- (62pt,367pt) -- (220.5709pt,367pt) arc (270:360:5pt) -- (225.5709pt,372pt) -- (225.5709pt,441.0078pt) arc (0:90:5pt) -- (220.5709pt,446.0078pt) -- (62pt,446.0078pt) arc (90:180:5pt) -- (57pt,441.0078pt) -- cycle;
+\draw[pstyle1] (72pt,383pt) ellipse (11pt and 11pt);
+\node at (72pt,383pt)[]{\textbf{\Large C}};
+\node at (86pt,375.248pt)[below right,color=black]{DefaultColorScheme};
+\draw[pstyle2] (58pt,399pt) -- (224.5709pt,399pt);
+\draw[pstyle3] (65pt,409.252pt) rectangle (71pt,415.252pt);
+\node at (77pt,403pt)[below right,color=black]{colors: List[Color]};
+\draw[pstyle2] (58pt,422.5039pt) -- (224.5709pt,422.5039pt);
+\draw[pstyle4] (68pt,435.7559pt) ellipse (3pt and 3pt);
+\node at (77pt,426.5039pt)[below right,color=black]{render()};
+\draw[pstyle0] (261pt,372pt) arc (180:270:5pt) -- (266pt,367pt) -- (464.8pt,367pt) arc (270:360:5pt) -- (469.8pt,372pt) -- (469.8pt,441.0078pt) arc (0:90:5pt) -- (464.8pt,446.0078pt) -- (266pt,446.0078pt) arc (90:180:5pt) -- (261pt,441.0078pt) -- cycle;
+\draw[pstyle1] (276pt,383pt) ellipse (11pt and 11pt);
+\node at (276pt,383pt)[]{\textbf{\Large C}};
+\node at (290pt,375.248pt)[below right,color=black]{HighContrastColorScheme};
+\draw[pstyle2] (262pt,399pt) -- (468.8pt,399pt);
+\draw[pstyle3] (269pt,409.252pt) rectangle (275pt,415.252pt);
+\node at (281pt,403pt)[below right,color=black]{colors: List[Color]};
+\draw[pstyle2] (262pt,422.5039pt) -- (468.8pt,422.5039pt);
+\draw[pstyle4] (272pt,435.7559pt) ellipse (3pt and 3pt);
+\node at (281pt,426.5039pt)[below right,color=black]{render()};
+\draw[pstyle0] (363pt,247.5pt) arc (180:270:5pt) -- (368pt,242.5pt) -- (471.0118pt,242.5pt) arc (270:360:5pt) -- (476.0118pt,247.5pt) -- (476.0118pt,285.5pt) arc (0:90:5pt) -- (471.0118pt,290.5pt) -- (368pt,290.5pt) arc (90:180:5pt) -- (363pt,285.5pt) -- cycle;
+\draw[pstyle1] (378pt,258.5pt) ellipse (11pt and 11pt);
+\node at (378pt,258.5pt)[]{\textbf{\Large C}};
+\node at (392pt,250.748pt)[below right,color=black]{TetrisModel};
+\draw[pstyle2] (364pt,274.5pt) -- (475.0118pt,274.5pt);
+\draw[pstyle2] (364pt,282.5pt) -- (475.0118pt,282.5pt);
+\draw[pstyle7] (333.5293pt,112.7438pt) ..controls (333.5293pt,112.7438pt) and (295.84pt,184.67pt) .. (279.89pt,215.12pt);
+\draw[pstyle8] (273.79pt,226.76pt) -- (281.5142pt,220.6496pt) -- (276.1135pt,222.3327pt) -- (274.4305pt,216.932pt) -- (273.79pt,226.76pt) -- cycle;
+\draw[pstyle7] (276.1135pt,222.3327pt) -- (279.82pt,215.245pt);
+\draw[pstyle7] (339.09pt,102.11pt) -- (332.765pt,105.5734pt) -- (333.5293pt,112.7438pt) -- (339.8543pt,109.2805pt) -- (339.09pt,102.11pt) -- cycle;
+\draw[pstyle9] (209.2pt,322.09pt) ..controls (197.01pt,337.11pt) and (184.05pt,353.08pt) .. (172.76pt,366.98pt);
+\draw[pstyle7] (203.97pt,317.43pt) -- (222pt,306.31pt) -- (214.84pt,326.25pt) -- (203.97pt,317.43pt) -- cycle;
+\draw[pstyle9] (297.8pt,322.09pt) ..controls (309.99pt,337.11pt) and (322.95pt,353.08pt) .. (334.24pt,366.98pt);
+\draw[pstyle7] (292.16pt,326.25pt) -- (285pt,306.31pt) -- (303.03pt,317.43pt) -- (292.16pt,326.25pt) -- cycle;
+\draw[pstyle7] (377.24pt,107.03pt) ..controls (388.77pt,150.25pt) and (404.69pt,209.96pt) .. (413.33pt,242.35pt);
+\draw[pstyle8] (375.93pt,102.11pt) -- (374.3804pt,111.8362pt) -- (377.2165pt,106.9416pt) -- (382.1111pt,109.7777pt) -- (375.93pt,102.11pt) -- cycle;
+\node at (564.8207pt,133pt)[below right,color=black]{client};
+\draw[pstyle5] (405.5pt,153.3965pt) -- (405.5pt,191.3965pt) -- (756.5pt,191.3965pt) -- (756.5pt,163.3965pt) -- (746.5pt,153.3965pt) -- (405.5pt,153.3965pt);
+\draw[pstyle5] (746.5pt,153.3965pt) -- (746.5pt,163.3965pt) -- (756.5pt,163.3965pt) -- (746.5pt,153.3965pt);
+\node at (411.5pt,158.3965pt)[below right,color=black]{tetrisBoard.setColorScheme(new DefaultColorScheme)};
+\node at (411.5pt,172.793pt)[below right,color=black]{tetrisBoard.render()};
 \end{tikzpicture}
-}
+
 \end{document}

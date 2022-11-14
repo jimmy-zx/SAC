@@ -13,11 +13,11 @@
 \definecolor{plantucolor0007}{RGB}{3,128,72}
 \definecolor{plantucolor0008}{RGB}{254,255,221}
 \definecolor{plantucolor0009}{RGB}{180,167,229}
-\scalebox{1.75}{
 \begin{tikzpicture}[yscale=-1
 ,pstyle0/.style={color=plantucolor0001,fill=plantucolor0000,line width=0.5pt}
 ,pstyle1/.style={color=plantucolor0001,fill=plantucolor0002,line width=1.0pt}
 ,pstyle2/.style={color=plantucolor0001,line width=0.5pt}
+,pstyle3/.style={color=plantucolor0004,line width=1.0pt}
 ,pstyle4/.style={color=plantucolor0004,fill=plantucolor0005,line width=1.0pt}
 ,pstyle5/.style={color=plantucolor0007,fill=plantucolor0006,line width=1.0pt}
 ,pstyle6/.style={color=plantucolor0001,fill=plantucolor0008,line width=0.5pt}
@@ -25,63 +25,83 @@
 ,pstyle9/.style={color=plantucolor0001,fill=plantucolor0001,line width=1.0pt}
 ,pstyle10/.style={color=plantucolor0001,line width=1.0pt,dash pattern=on 7.0pt off 7.0pt}
 ]
-\draw[pstyle0] (99.5pt,12pt) arc (180:270:5pt) -- (104.5pt,7pt) -- (302.341pt,7pt) arc (270:360:5pt) -- (307.341pt,12pt) -- (307.341pt,127.5195pt) arc (0:90:5pt) -- (302.341pt,132.5195pt) -- (104.5pt,132.5195pt) arc (90:180:5pt) -- (99.5pt,127.5195pt) -- cycle;
-\draw[pstyle1] (160.2069pt,23pt) ellipse (11pt and 11pt);
-\node at (160.2069pt,23pt)[]{\textbf{\Large C}};
-\node at (180.7069pt,15.248pt)[below right,color=black]{TetrisBoard};
-\draw[pstyle2] (100.5pt,39pt) -- (306.341pt,39pt);
-\draw[color=plantucolor0004,line width=1.0pt] (107.5pt,49.252pt) rectangle (113.5pt,55.252pt);
-\node at (119.5pt,43pt)[below right,color=black]{observers: List[Observer]};
-\draw[pstyle2] (100.5pt,62.5039pt) -- (306.341pt,62.5039pt);
-\draw[pstyle4] (107.5pt,72.7559pt) rectangle (113.5pt,78.7559pt);
-\node at (119.5pt,66.5039pt)[below right,color=black]{notifyAll()};
-\draw[pstyle4] (107.5pt,88.2598pt) rectangle (113.5pt,94.2598pt);
-\node at (119.5pt,82.0078pt)[below right,color=black]{onRowClear()};
-\draw[pstyle5] (110.5pt,106.7637pt) ellipse (3pt and 3pt);
-\node at (119.5pt,97.5117pt)[below right,color=black]{addObserver(Observer)};
-\draw[pstyle5] (110.5pt,122.2676pt) ellipse (3pt and 3pt);
-\node at (119.5pt,113.0156pt)[below right,color=black]{removeObserver(Observer)};
-\draw[pstyle6] (342.5pt,53pt) -- (342.5pt,61.1982pt) -- (211.65pt,89.7598pt) -- (342.5pt,69.1982pt) -- (342.5pt,77.3965pt) -- (460.2084pt,77.3965pt) -- (460.2084pt,63pt) -- (450.2084pt,53pt) -- (342.5pt,53pt);
-\draw[pstyle6] (450.2084pt,53pt) -- (450.2084pt,63pt) -- (460.2084pt,63pt) -- (450.2084pt,53pt);
-\node at (348.5pt,58pt)[below right,color=black]{calls notifyAll()};
-\draw[pstyle0] (123.5pt,198pt) arc (180:270:5pt) -- (128.5pt,193pt) -- (278.1531pt,193pt) arc (270:360:5pt) -- (283.1531pt,198pt) -- (283.1531pt,267.0078pt) arc (0:90:5pt) -- (278.1531pt,272.0078pt) -- (128.5pt,272.0078pt) arc (90:180:5pt) -- (123.5pt,267.0078pt) -- cycle;
-\draw[color=plantucolor0001,fill=plantucolor0009,line width=1.0pt] (152.2785pt,209pt) ellipse (11pt and 11pt);
-\node at (152.2785pt,209pt)[]{\textbf{\Large I}};
-\node at (169.3404pt,201.248pt)[below right,color=black]{\textit{ScoreObserver}};
-\draw[pstyle2] (124.5pt,225pt) -- (282.1531pt,225pt);
-\draw[pstyle2] (124.5pt,233pt) -- (282.1531pt,233pt);
-\draw[pstyle5] (134.5pt,246.252pt) ellipse (3pt and 3pt);
-\node at (143.5pt,237pt)[below right,color=black]{getScore(): int};
-\draw[pstyle5] (134.5pt,261.7559pt) ellipse (3pt and 3pt);
-\node at (143.5pt,252.5039pt)[below right,color=black]{update(TetrisBoard)};
-\draw[pstyle0] (7pt,337pt) arc (180:270:5pt) -- (12pt,332pt) -- (181.3905pt,332pt) arc (270:360:5pt) -- (186.3905pt,337pt) -- (186.3905pt,406.0078pt) arc (0:90:5pt) -- (181.3905pt,411.0078pt) -- (12pt,411.0078pt) arc (90:180:5pt) -- (7pt,406.0078pt) -- cycle;
-\draw[pstyle1] (22pt,348pt) ellipse (11pt and 11pt);
-\node at (22pt,348pt)[]{\textbf{\Large C}};
-\node at (36pt,340.248pt)[below right,color=black]{DefaultScoreObserver};
-\draw[pstyle2] (8pt,364pt) -- (185.3905pt,364pt);
-\draw[pstyle2] (8pt,372pt) -- (185.3905pt,372pt);
-\draw[pstyle5] (18pt,385.252pt) ellipse (3pt and 3pt);
-\node at (27pt,376pt)[below right,color=black]{getScore(): int};
-\draw[pstyle5] (18pt,400.7559pt) ellipse (3pt and 3pt);
-\node at (27pt,391.5039pt)[below right,color=black]{update(TetrisBoard)};
-\draw[pstyle0] (221pt,337pt) arc (180:270:5pt) -- (226pt,332pt) -- (395.2pt,332pt) arc (270:360:5pt) -- (400.2pt,337pt) -- (400.2pt,406.0078pt) arc (0:90:5pt) -- (395.2pt,411.0078pt) -- (226pt,411.0078pt) arc (90:180:5pt) -- (221pt,406.0078pt) -- cycle;
-\draw[pstyle1] (236pt,348pt) ellipse (11pt and 11pt);
-\node at (236pt,348pt)[]{\textbf{\Large C}};
-\node at (250pt,340.248pt)[below right,color=black]{ComboScoreObserver};
-\draw[pstyle2] (222pt,364pt) -- (399.2pt,364pt);
-\draw[pstyle2] (222pt,372pt) -- (399.2pt,372pt);
-\draw[pstyle5] (232pt,385.252pt) ellipse (3pt and 3pt);
-\node at (241pt,376pt)[below right,color=black]{getScore(): int};
-\draw[pstyle5] (232pt,400.7559pt) ellipse (3pt and 3pt);
-\node at (241pt,391.5039pt)[below right,color=black]{update(TetrisBoard)};
-\draw[pstyle8] (203.5pt,145.05pt) ..controls (203.5pt,145.05pt) and (203.5pt,169.14pt) .. (203.5pt,179.79pt);
-\draw[pstyle9] (203.5pt,192.8pt) -- (207.5pt,183.8pt) -- (203.5pt,187.8pt) -- (199.5pt,183.8pt) -- (203.5pt,192.8pt) -- cycle;
-\draw[pstyle8] (203.5pt,187.8pt) -- (203.5pt,179.8pt);
-\draw[pstyle9] (203.5pt,133.05pt) -- (199.5pt,139.05pt) -- (203.5pt,145.05pt) -- (207.5pt,139.05pt) -- (203.5pt,133.05pt) -- cycle;
-\draw[pstyle10] (160.91pt,288.03pt) ..controls (149.48pt,302.67pt) and (137.35pt,318.2pt) .. (126.74pt,331.79pt);
-\draw[pstyle8] (155.58pt,283.48pt) -- (173.41pt,272.03pt) -- (166.62pt,292.1pt) -- (155.58pt,283.48pt) -- cycle;
-\draw[pstyle10] (246.09pt,288.03pt) ..controls (257.52pt,302.67pt) and (269.65pt,318.2pt) .. (280.26pt,331.79pt);
-\draw[pstyle8] (240.38pt,292.1pt) -- (233.59pt,272.03pt) -- (251.42pt,283.48pt) -- (240.38pt,292.1pt) -- cycle;
+\draw[pstyle0] (222.5pt,12pt) arc (180:270:5pt) -- (227.5pt,7pt) -- (501.6297pt,7pt) arc (270:360:5pt) -- (506.6297pt,12pt) -- (506.6297pt,127.5195pt) arc (0:90:5pt) -- (501.6297pt,132.5195pt) -- (227.5pt,132.5195pt) arc (90:180:5pt) -- (222.5pt,127.5195pt) -- cycle;
+\draw[pstyle1] (321.3512pt,23pt) ellipse (11pt and 11pt);
+\node at (321.3512pt,23pt)[]{\textbf{\Large C}};
+\node at (341.8512pt,15.248pt)[below right,color=black]{TetrisBoard};
+\draw[pstyle2] (223.5pt,39pt) -- (505.6297pt,39pt);
+\draw[pstyle3] (230.5pt,49.252pt) rectangle (236.5pt,55.252pt);
+\node at (242.5pt,43pt)[below right,color=black]{scoreObservers: List[ScoreObserver]};
+\draw[pstyle2] (223.5pt,62.5039pt) -- (505.6297pt,62.5039pt);
+\draw[pstyle4] (230.5pt,72.7559pt) rectangle (236.5pt,78.7559pt);
+\node at (242.5pt,66.5039pt)[below right,color=black]{notifyAll()};
+\draw[pstyle4] (230.5pt,88.2598pt) rectangle (236.5pt,94.2598pt);
+\node at (242.5pt,82.0078pt)[below right,color=black]{onRowClear()};
+\draw[pstyle5] (233.5pt,106.7637pt) ellipse (3pt and 3pt);
+\node at (242.5pt,97.5117pt)[below right,color=black]{addScoreObserver(ScoreObserver)};
+\draw[pstyle5] (233.5pt,122.2676pt) ellipse (3pt and 3pt);
+\node at (242.5pt,113.0156pt)[below right,color=black]{removeScoreObserver(ScoreObserver)};
+\draw[pstyle6] (541.5pt,53pt) -- (541.5pt,61.1982pt) -- (334.65pt,89.7598pt) -- (541.5pt,69.1982pt) -- (541.5pt,77.3965pt) -- (659.2084pt,77.3965pt) -- (659.2084pt,63pt) -- (649.2084pt,53pt) -- (541.5pt,53pt);
+\draw[pstyle6] (649.2084pt,53pt) -- (649.2084pt,63pt) -- (659.2084pt,63pt) -- (649.2084pt,53pt);
+\node at (547.5pt,58pt)[below right,color=black]{calls notifyAll()};
+\draw[pstyle6] (6pt,45.5pt) -- (6pt,84.293pt) -- (186.5161pt,84.293pt) -- (186.5161pt,68.8965pt) -- (226.5pt,74.2559pt) -- (186.5161pt,60.8965pt) -- (186.5161pt,55.5pt) -- (176.5161pt,45.5pt) -- (6pt,45.5pt);
+\draw[pstyle6] (176.5161pt,45.5pt) -- (176.5161pt,55.5pt) -- (186.5161pt,55.5pt) -- (176.5161pt,45.5pt);
+\node at (12pt,50.5pt)[below right,color=black]{for each in scoreObservers};
+\node at (12pt,64.8965pt)[below right,color=black]{    each.update()};
+\draw[pstyle0] (170.5pt,291pt) arc (180:270:5pt) -- (175.5pt,286pt) -- (325.1531pt,286pt) arc (270:360:5pt) -- (330.1531pt,291pt) -- (330.1531pt,360.0078pt) arc (0:90:5pt) -- (325.1531pt,365.0078pt) -- (175.5pt,365.0078pt) arc (90:180:5pt) -- (170.5pt,360.0078pt) -- cycle;
+\draw[color=plantucolor0001,fill=plantucolor0009,line width=1.0pt] (199.2785pt,302pt) ellipse (11pt and 11pt);
+\node at (199.2785pt,302pt)[]{\textbf{\Large I}};
+\node at (216.3404pt,294.248pt)[below right,color=black]{\textit{ScoreObserver}};
+\draw[pstyle2] (171.5pt,318pt) -- (329.1531pt,318pt);
+\draw[pstyle2] (171.5pt,326pt) -- (329.1531pt,326pt);
+\draw[pstyle5] (181.5pt,339.252pt) ellipse (3pt and 3pt);
+\node at (190.5pt,330pt)[below right,color=black]{getScore(): int};
+\draw[pstyle5] (181.5pt,354.7559pt) ellipse (3pt and 3pt);
+\node at (190.5pt,345.5039pt)[below right,color=black]{update(TetrisBoard)};
+\draw[pstyle0] (62pt,439pt) arc (180:270:5pt) -- (67pt,434pt) -- (225.5709pt,434pt) arc (270:360:5pt) -- (230.5709pt,439pt) -- (230.5709pt,508.0078pt) arc (0:90:5pt) -- (225.5709pt,513.0078pt) -- (67pt,513.0078pt) arc (90:180:5pt) -- (62pt,508.0078pt) -- cycle;
+\draw[pstyle1] (77pt,450pt) ellipse (11pt and 11pt);
+\node at (77pt,450pt)[]{\textbf{\Large C}};
+\node at (91pt,442.248pt)[below right,color=black]{OtherScoreObserver};
+\draw[pstyle2] (63pt,466pt) -- (229.5709pt,466pt);
+\draw[pstyle2] (63pt,474pt) -- (229.5709pt,474pt);
+\draw[pstyle5] (73pt,487.252pt) ellipse (3pt and 3pt);
+\node at (82pt,478pt)[below right,color=black]{getScore(): int};
+\draw[pstyle5] (73pt,502.7559pt) ellipse (3pt and 3pt);
+\node at (82pt,493.5039pt)[below right,color=black]{update(TetrisBoard)};
+\draw[pstyle0] (266pt,431pt) arc (180:270:5pt) -- (271pt,426pt) -- (440.2pt,426pt) arc (270:360:5pt) -- (445.2pt,431pt) -- (445.2pt,515.5117pt) arc (0:90:5pt) -- (440.2pt,520.5117pt) -- (271pt,520.5117pt) arc (90:180:5pt) -- (266pt,515.5117pt) -- cycle;
+\draw[pstyle1] (281pt,442pt) ellipse (11pt and 11pt);
+\node at (281pt,442pt)[]{\textbf{\Large C}};
+\node at (295pt,434.248pt)[below right,color=black]{ComboScoreObserver};
+\draw[pstyle2] (267pt,458pt) -- (444.2pt,458pt);
+\draw[pstyle3] (274pt,468.252pt) rectangle (280pt,474.252pt);
+\node at (286pt,462pt)[below right,color=black]{currentCombo: int};
+\draw[pstyle2] (267pt,481.5039pt) -- (444.2pt,481.5039pt);
+\draw[pstyle5] (277pt,494.7559pt) ellipse (3pt and 3pt);
+\node at (286pt,485.5039pt)[below right,color=black]{getScore(): int};
+\draw[pstyle5] (277pt,510.2598pt) ellipse (3pt and 3pt);
+\node at (286pt,501.0078pt)[below right,color=black]{update(TetrisBoard)};
+\draw[pstyle0] (366pt,306.5pt) arc (180:270:5pt) -- (371pt,301.5pt) -- (474.0118pt,301.5pt) arc (270:360:5pt) -- (479.0118pt,306.5pt) -- (479.0118pt,344.5pt) arc (0:90:5pt) -- (474.0118pt,349.5pt) -- (371pt,349.5pt) arc (90:180:5pt) -- (366pt,344.5pt) -- cycle;
+\draw[pstyle1] (381pt,317.5pt) ellipse (11pt and 11pt);
+\node at (381pt,317.5pt)[]{\textbf{\Large C}};
+\node at (395pt,309.748pt)[below right,color=black]{TetrisModel};
+\draw[pstyle2] (367pt,333.5pt) -- (478.0118pt,333.5pt);
+\draw[pstyle2] (367pt,341.5pt) -- (478.0118pt,341.5pt);
+\draw[pstyle8] (331.6801pt,143.9506pt) ..controls (331.6801pt,143.9506pt) and (289.79pt,237.14pt) .. (273.2pt,274.02pt);
+\draw[pstyle9] (267.83pt,285.97pt) -- (275.1743pt,279.4078pt) -- (269.8841pt,281.4114pt) -- (267.8805pt,276.1213pt) -- (267.83pt,285.97pt) -- cycle;
+\draw[pstyle8] (269.8841pt,281.4114pt) -- (273.16pt,274.11pt);
+\draw[pstyle8] (336.61pt,133.01pt) -- (330.4982pt,136.837pt) -- (331.6801pt,143.9506pt) -- (337.7919pt,140.1236pt) -- (336.61pt,133.01pt) -- cycle;
+\draw[pstyle10] (211.21pt,381.65pt) ..controls (198.83pt,399.03pt) and (185.43pt,417.85pt) .. (174.05pt,433.83pt);
+\draw[pstyle8] (205.6pt,377.47pt) -- (222.9pt,365.24pt) -- (217pt,385.59pt) -- (205.6pt,377.47pt) -- cycle;
+\draw[pstyle10] (290.19pt,381.68pt) ..controls (300.63pt,396.21pt) and (311.8pt,411.74pt) .. (321.89pt,425.77pt);
+\draw[pstyle8] (284.36pt,385.57pt) -- (278.36pt,365.24pt) -- (295.72pt,377.39pt) -- (284.36pt,385.57pt) -- cycle;
+\draw[pstyle8] (379.87pt,138.17pt) ..controls (392.21pt,192.11pt) and (408.82pt,264.69pt) .. (417.19pt,301.3pt);
+\draw[pstyle9] (378.69pt,133.01pt) -- (376.7975pt,142.6753pt) -- (379.8049pt,137.8841pt) -- (384.5961pt,140.8915pt) -- (378.69pt,133.01pt) -- cycle;
+\node at (535.4914pt,164pt)[below right,color=black]{client};
+\draw[pstyle6] (409.5pt,184.3965pt) -- (409.5pt,251.3965pt) -- (694.5pt,251.3965pt) -- (694.5pt,194.3965pt) -- (684.5pt,184.3965pt) -- (409.5pt,184.3965pt);
+\draw[pstyle6] (684.5pt,184.3965pt) -- (684.5pt,194.3965pt) -- (694.5pt,194.3965pt) -- (684.5pt,184.3965pt);
+\node at (415.5pt,189.3965pt)[below right,color=black]{comboScore = new ComboScoreObserver()};
+\node at (415.5pt,203.793pt)[below right,color=black]{tetrisBoard.addScoreObserver(comboScore)};
+\node at (415.5pt,218.1895pt)[below right,color=black]{...};
+\node at (415.5pt,232.5859pt)[below right,color=black]{comboScore.getScore()};
 \end{tikzpicture}
-}
 \end{document}
