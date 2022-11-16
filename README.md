@@ -11,6 +11,22 @@ cd SAC
 mvn package
 ```
 
+### Running
+```shell
+mvn clean javafx:run
+```
+
+or
+```shell
+java -cp target/SAC-[version]-SNAPSHOT.jar sac.App
+```
+
+### Using IntelliJ
+
+1. Open the project
+2. Run -> Edit Configurations -> Add New Configuration -> Maven
+3. Change `Command Line` to `package`
+
 ## Documentation
 
 [Design document](/docs/design)
