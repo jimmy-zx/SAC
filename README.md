@@ -1,5 +1,5 @@
 # SAC
-A Tetris impmenentation
+A Tetris implementation
 
 ![build](https://github.com/jimmy-zx/SAC/actions/workflows/maven.yml/badge.svg)
 
