@@ -10,9 +10,9 @@ name: build
 
 on:
   push:
-    branches: [ "maven-test" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "maven-test" ]
+    branches: [ "main" ]
 
 jobs:
   build:
