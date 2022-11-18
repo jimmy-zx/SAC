@@ -1,5 +1,5 @@
 package sac.model.gamemodes;
 
-public abstract class Gamemode {
+public abstract class GameMode {
 
 }
