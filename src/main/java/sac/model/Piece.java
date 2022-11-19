@@ -41,9 +41,6 @@ public class Piece {
         return this.type;
     }
 
-    public RotationState getState() {
-        return this.state;
-    }
 
     public int getWidth() {
         return width;
@@ -51,14 +48,6 @@ public class Piece {
 
     public int getHeight() {
         return height;
-    }
-
-    public boolean getBody(int x, int y) {
-        return body.get(x).get(y);
-    }
-
-    public void setState(RotationState state) {
-        this.state = state;
     }
 
     public int getLowestYVal(int x) {
