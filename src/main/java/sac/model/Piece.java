@@ -1,11 +1,10 @@
 package sac.model;
 
-import jdk.jshell.spi.ExecutionControl;
 import sac.model.rotations.RotationState;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Map;
-import java.util.Objects;
 
 public class Piece {
     public static enum PieceType {
@@ -18,18 +17,18 @@ public class Piece {
         I,
         Other,
     }
-    private PieceType type;
-    private RotationState state;
+    private final PieceType type;
 
     /* sorted */
-    private ArrayList<ArrayList<Boolean>> body;
+    private final ArrayList<Point> body;
 
     private ArrayList<Integer> lowestYVals;
-    private Map<PieceType, ArrayList<Piece>> cache;
+    private static Map<PieceType, ArrayList<Piece>> cache;
     private int width, height;
 
-    public Piece(PieceType type, ArrayList<ArrayList<Boolean>> body) {
-        this.body = body;
+    public Piece(PieceType type, ArrayList<Point> body) {
+        this.body = new ArrayList<>(body);
+        Collections.sort(this.body);
         this.type = type;
         throw new UnsupportedOperationException();
     }
@@ -67,11 +66,11 @@ public class Piece {
     }
 
     public Piece rotateLeft() {
-        return this.state.rotateLeft();
+        throw new UnsupportedOperationException();
     }
 
     public Piece rotateRight() {
-        return this.state.rotateRight();
+        throw new UnsupportedOperationException();
     }
 
     public String toString() {
