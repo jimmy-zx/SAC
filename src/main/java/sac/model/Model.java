@@ -26,7 +26,7 @@ public class Model {
     }
 
     public Model() {
-        this.board = new Board();
+        // this.board = new Board();
         this.gameOn = false;
     }
 
