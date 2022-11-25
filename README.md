@@ -35,8 +35,8 @@ Project design document
 #### 0.0.2
 A playable instance of Tetris
 
-- [ ] Tetris Piece
-- [ ] Tetris Board
+- [x] Tetris Piece
+- [x] Tetris Board
 - [ ] Tetris Model
 - [ ] Tetris Runner
 - [ ] Tetris View

@@ -6,7 +6,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
 
+/**
+ * An immutable representation of a Tetris Tetromino.
+ * Each piece is defined by the points that make up its body.
+ */
 public class Piece {
+    /**
+     * Based on https://tetris.wiki/Tetromino
+     */
     public static enum PieceType {
         O,
         Z,
@@ -17,14 +24,23 @@ public class Piece {
         I,
         Other,
     }
-    private final PieceType type;
+    public final PieceType type;
+    public final int width, height;
 
-    /* sorted */
-    private final ArrayList<Point> body;
+    /**
+     * Sorted representation of the points that make up the piece.
+     */
+    public final ArrayList<Point> body;
 
-    private ArrayList<Integer> lowestYVals;
+    /**
+     * The lowest y value for each column.
+     */
+    public final ArrayList<Integer> lowestYVals;
+
+    /**
+     * Cache for the rotations of a specific piece
+     */
     private static Map<PieceType, ArrayList<Piece>> cache;
-    private int width, height;
 
     public Piece(PieceType type, ArrayList<Point> body) {
         this.body = new ArrayList<>(body);
@@ -35,23 +51,6 @@ public class Piece {
 
     public static Piece generate(PieceType type) {
         return null;
-    }
-
-    public PieceType getType() {
-        return this.type;
-    }
-
-
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public int getLowestYVal(int x) {
-        return this.lowestYVals.get(x);
     }
 
     public Piece rotateLeft() {
