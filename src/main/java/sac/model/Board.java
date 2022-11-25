@@ -4,7 +4,14 @@ package sac.model;
  * Represents the playground of Tetris.
  */
 public class Board {
+    /**
+     * The width of the board.
+     */
     public final int width;
+
+    /**
+     * The height of the board.
+     */
     public final int height;
 
     /**
@@ -19,8 +26,14 @@ public class Board {
      */
     private int[] rowCounts;
 
+    /**
+     * The backup grid
+     */
     private Piece.PieceType[][] backupGrid;
 
+    /**
+     * The return status for PlacePiece
+     */
     public enum PlacePieceStatus {
         ADD_OK, ADD_ROW_FILLED, ADD_OUT_BOUNDS, ADD_BAD
     }
@@ -88,6 +101,11 @@ public class Board {
         return this.grid[pos.x][pos.y];
     }
 
+    /**
+     * Generates the string representation of the board.
+     *
+     * @return A string representation of the board.
+     */
     public String toString() {
         throw new UnsupportedOperationException();
     }
