@@ -50,7 +50,15 @@ Support for additional features
 
 ## Documentation
 
-[Design document](/docs/design)
+### Code documentation
+To generate code documentation, use
+```shell
+mvn javadoc:javadoc
+```
+
+### Design document
+
+Compile [this document](/docs/design)
 
 ## Troubleshooting
 
