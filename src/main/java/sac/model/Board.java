@@ -84,7 +84,7 @@ public class Board {
     public PlacePieceStatus placePiece(Piece piece, Point position) {
         boolean filled = false;
         for (Point point : piece.body) {
-            Point newPoint = position.add(point);
+            Point newPoint = position.offset(point);
             if (!isValidPoint(newPoint)) {
                 return PlacePieceStatus.ADD_OUT_BOUNDS;
             }
@@ -93,7 +93,7 @@ public class Board {
             }
         }
         for (Point point : piece.body) {
-            Point newPoint = position.add(point);
+            Point newPoint = position.offset(point);
             grid[newPoint.x()][newPoint.y()] = piece.type;
             rowCounts[newPoint.y()]++;
             if (rowCounts[newPoint.y()] == width) {
