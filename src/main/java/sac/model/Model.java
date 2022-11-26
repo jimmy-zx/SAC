@@ -1,28 +1,29 @@
 package sac.model;
 
 import sac.model.gamemodes.GameMode;
-import sac.model.generators.Generator;
-import sac.model.observers.RowClearObserver;
 import sac.model.rotations.RotationState;
 
-import java.util.List;
 
+/**
+ * The Tetris Game model.
+ * <p>
+ * Serves a "driver" for the game. The game details are controlled by GameMode
+ */
 public class Model {
     private Board board;
     private Piece currentPiece;
     private RotationState currentState;
-    private List<RowClearObserver> rowClearObservers;
     private boolean gameOn;
-    private Generator pieceGenerator;
     private GameMode gameMode;
 
     public enum Movement {
-        ROTATE,
+        ROTATE_LEFT,
+        ROTATE_RIGHT,
         LEFT,
         RIGHT,
-        DROP,
         DOWN,
-        KEEP,
+        HARD_DROP,
+        HOLD,
     }
 
     public Model() {
@@ -39,10 +40,27 @@ public class Model {
     }
 
     public void modelTick(Movement movement) {
+        /*
+         * 1. Check gameOn and gameMode.isGameOn(). If false, return.
+         * 2. Perform movement on currentPiece.
+         * 3. If the movement is valid, return.
+         * 4. If the movement is invalid, and the movement is not down, return.
+         * 5. If the movement is invalid, and the movement is down, generate a new Piece.
+         */
         throw new UnsupportedOperationException();
     }
 
-    public boolean getGameOn() {
+    public boolean isGameOn() {
         return this.gameOn;
+    }
+
+    public void setGameOn(boolean gameOn) {
+        this.gameOn = gameOn;
+    }
+
+    public void putGhostPiece() {throw new UnsupportedOperationException();}
+
+    public int getScore() {
+        return gameMode.getScore();
     }
 }
