@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
 
-public abstract class GameMode {
+public class GameMode {
     private Model model;
     private ArrayList<RowClearObserver> rowClearObservers;
     /**
