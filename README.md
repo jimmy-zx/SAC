@@ -35,8 +35,8 @@ Project design document
 #### 0.0.2
 A playable instance of Tetris
 
-- [ ] Tetris Piece
-- [ ] Tetris Board
+- [x] Tetris Piece
+- [x] Tetris Board
 - [ ] Tetris Model
 - [ ] Tetris Runner
 - [ ] Tetris View
@@ -50,7 +50,15 @@ Support for additional features
 
 ## Documentation
 
-[Design document](/docs/design)
+### Code documentation
+To generate code documentation, use
+```shell
+mvn javadoc:javadoc
+```
+
+### Design document
+
+Compile [this document](/docs/design)
 
 ## Troubleshooting
 

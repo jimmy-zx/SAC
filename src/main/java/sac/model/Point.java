@@ -1,17 +1,15 @@
 package sac.model;
 
-public class Point implements Comparable<Point> {
-    public final int x, y;
-
-    public Point(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
+public record Point(int x, int y) implements Comparable<Point> {
     @Override
     public int compareTo(Point o) {
         if (this.x != o.x) {
             return this.x - o.x;
         }
         return this.y - o.y;
+    }
+
+    public Point add(Point rhs) {
+        return new Point(x + rhs.x, y + rhs.y);
     }
 }
