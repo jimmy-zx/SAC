@@ -1,6 +1,5 @@
 package sac.model;
 
-import sac.model.rotations.RotationState;
 import sac.utils.Utility;
 
 import java.util.*;
@@ -47,11 +46,6 @@ public class Piece {
      * The lowest y value for each column.
      */
     public final ArrayList<Integer> lowestYVals;
-
-    /**
-     * Cache for the rotations of a specific piece
-     */
-    private static Map<PieceType, ArrayList<Piece>> rotationMap;
 
     private Piece next;
 

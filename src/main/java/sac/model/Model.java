@@ -3,6 +3,8 @@ package sac.model;
 import sac.model.gamemodes.GameMode;
 import sac.model.rotations.RotationState;
 
+import java.util.ArrayDeque;
+
 
 /**
  * The Tetris Game model.
@@ -11,7 +13,8 @@ import sac.model.rotations.RotationState;
  */
 public class Model {
     private Board board;
-    private Piece currentPiece;
+    private Piece activePiece;
+    private Point currentPosition;
     private RotationState currentState;
     private boolean gameOn;
     private GameMode gameMode;
@@ -36,6 +39,18 @@ public class Model {
     }
 
     public void newGame() {
+        throw new UnsupportedOperationException();
+    }
+
+    public void startGame() {
+        throw new UnsupportedOperationException();
+    }
+
+    public Piece nextPiece() {
+        throw new UnsupportedOperationException();
+    }
+
+    public Board.PlacePieceStatus placePiece(Piece piece, Point position) {
         throw new UnsupportedOperationException();
     }
 
