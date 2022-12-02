@@ -51,6 +51,10 @@ public class Board {
          * The placement failed due to conflict between placed pieces.
          */
         ADD_BAD
+
+        public boolean isSuccess() {
+            return this.ordinal() <= ADD_ROW_FILLED.ordinal();
+        }
     }
 
     /**
