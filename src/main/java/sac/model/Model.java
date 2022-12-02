@@ -39,7 +39,7 @@ public class Model {
         throw new UnsupportedOperationException();
     }
 
-    public void modelTick(Movement movement) {
+    public void modelTick(MoveType movement) {
         /*
          * 1. Check gameOn and gameMode.isGameOn(). If false, return.
          * 2. Perform movement on currentPiece.
