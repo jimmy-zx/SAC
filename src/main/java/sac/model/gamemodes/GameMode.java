@@ -3,6 +3,7 @@ package sac.model.gamemodes;
 import sac.model.Model;
 import sac.model.Piece;
 import sac.model.Point;
+import sac.model.rotations.RotationState;
 
 public abstract class GameMode {
     protected Model model;
@@ -26,6 +27,8 @@ public abstract class GameMode {
     public abstract Piece nextPiece();
 
     public abstract Point getSpawnPosition(Piece.PieceType type);
+
+    public abstract RotationState getInitialRotationState();
 
     public void initModel() {
         model.setGameMode(this);

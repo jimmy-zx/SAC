@@ -62,4 +62,9 @@ public class ClassicGameMode extends GameMode {
     public Point getSpawnPosition(Piece.PieceType type) {
         return null;
     }
+
+    @Override
+    public RotationState getInitialRotationState() {
+        return rotationSystem.getInitialState();
+    }
 }
