@@ -145,6 +145,26 @@ public class Board {
     }
 
     /**
+     * Calculate the expected position of `piece` would be placed.
+     * @param piece
+     * @param position The coordinate of the bottom-left corner of the piece.
+     * @return the expected position of the bottom-left corner of the piece.
+     */
+    public Point dropPosition(Piece piece, Point position) {
+        int expectedY = 0;
+        for (int i = 0; i < piece.width; i++) {
+            int y = position.y() + piece.lowestYVals.get(i) - 1;
+            for (; y >= 0; y--) {
+                if (grid[position.x() + i][y] != null) {
+                    break;
+                }
+            }
+            expectedY = Math.max(y + 1 - piece.lowestYVals.get(i), expectedY);
+        }
+        return new Point(position.x(), expectedY);
+    }
+
+    /**
      * Backup the grid.
      * <p>
      * This function should be only called by the client.
