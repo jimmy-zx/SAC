@@ -1,10 +1,9 @@
 package sac.model;
 
 import sac.model.rotations.RotationState;
+import sac.utils.Utility;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Map;
+import java.util.*;
 
 /**
  * An immutable representation of a Tetris Tetromino.
@@ -15,14 +14,26 @@ public class Piece {
      * Based on https://tetris.wiki/Tetromino
      */
     public static enum PieceType {
-        O,
-        Z,
-        S,
-        L,
-        J,
-        T,
-        I,
-        Other,
+        O("0 0 0 1 1 0 1 1"),
+        Z("0 1 1 0 1 1 2 0"),
+        S("0 0 1 0 1 1 2 1"),
+        L("0 0 1 0 2 0 2 1"),
+        J("0 0 0 1 1 0 2 0"),
+        T("0 0 1 0 1 1 2 0"),
+        I("0 0 1 0 2 0 3 0"),
+        Other;
+
+        private String body;
+        private PieceType(String body) {
+            this.body = body;
+        }
+        private PieceType() {}
+        public String getBodyString() {
+            return body;
+        }
+        public void setBodyString(String body) {
+            this.body = body;
+        }
     }
     public final PieceType type;
     public final int width, height;
@@ -40,33 +51,140 @@ public class Piece {
     /**
      * Cache for the rotations of a specific piece
      */
-    private static Map<PieceType, ArrayList<Piece>> cache;
+    private static Map<PieceType, ArrayList<Piece>> rotationMap;
+
+    private Piece next;
 
     public Piece(PieceType type, ArrayList<Point> body) {
         this.body = new ArrayList<>(body);
-        Collections.sort(this.body);
+        Collections.sort(body);
+
         this.type = type;
-        throw new UnsupportedOperationException();
+
+        width = body.get(body.size() - 1).x() + 1;
+
+        Integer[] lowestYValsArray = new Integer[width];
+
+        int maxHeight = 0;
+        for (Point point : body) {
+            maxHeight = Math.max(maxHeight, point.y() + 1);
+        }
+        height = maxHeight;
+
+        Arrays.fill(lowestYValsArray, height);
+        for (Point point : body) {
+            lowestYValsArray[point.x()] = Math.min(lowestYValsArray[point.x()], point.y());
+        }
+        lowestYVals = new ArrayList<>(Arrays.asList(lowestYValsArray));
     }
 
     public static Piece generate(PieceType type) {
-        return null;
+        return makeFastRotations(new Piece(type, Utility.parsePointsString(type.getBodyString())));
     }
 
+    /**
+     * Returns a new piece that is 90 degrees clockwise
+     * rotated from `origin` piece.
+     *
+     * @param origin: the origin piece
+     * @return the next rotation of the given piece
+     */
+    public static Piece computeNextRotation(Piece origin) {
+        ArrayList<Point> points = new ArrayList<>();
+        for(Point point : origin.body) {
+            points.add(new Point(point.y(), - point.x() + origin.width - 1));
+        }
+        return new Piece(origin.type, points);
+    }
+
+    public static Piece makeFastRotations(Piece root) {
+        Piece cur = root;
+        Piece next = computeNextRotation(cur);
+        while (!root.equals(next)) {
+            cur.next = next;
+            cur = next;
+            next = computeNextRotation(cur);
+        }
+        cur.next = root;
+        return root;
+    }
+
+    public static ArrayList<Piece> generateRotationList(Piece root) {
+        ArrayList<Piece> rotationList = new ArrayList<>();
+        rotationList.add(root);
+        Piece next = computeNextRotation(root);
+        while (!root.equals(next)) {
+            rotationList.add(root);
+            next = computeNextRotation(next);
+        }
+        return rotationList;
+    }
+
+    public static void generateRotationMap() {
+        if (rotationMap != null) {
+            return;
+        }
+        rotationMap = new HashMap<>();
+        for (PieceType type : PieceType.values()) {
+            if (type != PieceType.Other) {
+                rotationMap.put(type, generateRotationList(generate(type)));
+            }
+        }
+    }
+
+    /**
+     * Counter-clockwise
+     * @return
+     */
     public Piece rotateLeft() {
-        throw new UnsupportedOperationException();
+        return this.next.next.next;
     }
 
+    /**
+     * clockwise
+     * @return
+     */
     public Piece rotateRight() {
-        throw new UnsupportedOperationException();
+        return this.next;
     }
 
     public String toString() {
-        throw new UnsupportedOperationException();
+        StringBuilder result = new StringBuilder();
+        boolean[][] grid = new boolean[height][width];
+        for (Point point : body) {
+            grid[point.y()][point.x()] = true;
+        }
+        for (int y = height - 1; y >= 0 ; y--) {
+            for (int x = 0; x < width; x++) {
+
+                if (grid[y][x]) {
+                    result.append(type.name());
+                } else {
+                    result.append(" ");
+                }
+            }
+            result.append("\n");
+        }
+        return result.toString();
     }
 
     @Override
     public boolean equals(Object obj) {
-        throw new UnsupportedOperationException();
+        if (this == obj) return true;
+        if (!(obj instanceof Piece)) return false;
+        Piece other = (Piece)obj;
+        if (this.body.size() != other.body.size()) return false;
+        for (int i = 0; i < body.size(); i++) {
+            if (!body.get(i).equals(other.body.get(i))) return false; // Assume body is sorted.
+        }
+        return true;
     }
+
+    /**
+     * Given a string of x,y pairs (e.g. "0 0 0 1 0 2 1 0"), parses
+     * the points into a list or Points.
+     *
+     * @param string input of x,y pairs
+     * @return a list or Points
+     */
 }
