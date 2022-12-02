@@ -22,14 +22,16 @@ public class Board {
     private Piece.PieceType[][] grid;
 
     /**
+     * The backup grid
+     */
+    private Piece.PieceType[][] backupGrid;
+
+    /**
      * Stores how many coordinates are occupied in each row.
      */
     private int[] rowCounts;
 
-    /**
-     * The backup grid
-     */
-    private Piece.PieceType[][] backupGrid;
+    private int[] backupRowCounts;
 
     /**
      * The return status for PlacePiece
@@ -151,7 +153,13 @@ public class Board {
         if (backupGrid != null) {
             throw new RuntimeException("Cannot backup the grid. Commit or undo first.");
         }
-        backupGrid = grid.clone();
+        backupGrid = new Piece.PieceType[width][height];
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                backupGrid[i][j] = grid[i][j];
+            }
+        }
+        backupRowCounts = rowCounts.clone();
     }
 
     /**
@@ -161,9 +169,10 @@ public class Board {
      */
     public void undo() {
         if (this.backupGrid == null) {
-            throw new RuntimeException("Nothing to undo.");
+            // throw new RuntimeException("Nothing to undo.");
         }
         grid = backupGrid;
+        rowCounts = backupRowCounts;
         commit();
     }
 
@@ -172,9 +181,10 @@ public class Board {
      */
     public void commit() {
         if (backupGrid == null) {
-            throw new RuntimeException("Nothing to commit");
+            // throw new RuntimeException("Nothing to commit");
         }
         backupGrid = null;
+        backupRowCounts = null;
     }
 
     /**
