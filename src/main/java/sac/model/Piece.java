@@ -148,12 +148,9 @@ public class Piece {
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
-        if (!(obj instanceof Piece)) return false;
-        Piece other = (Piece)obj;
-        if (this.body.size() != other.body.size()) return false;
-        for (int i = 0; i < body.size(); i++) {
-            if (!body.get(i).equals(other.body.get(i))) return false; // Assume body is sorted.
+        if (obj instanceof Piece other) {
+            return this.body.equals(other.body);
         }
-        return true;
+        return false;
     }
 }
