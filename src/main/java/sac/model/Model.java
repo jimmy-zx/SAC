@@ -16,7 +16,7 @@ public class Model {
     private boolean gameOn;
     private GameMode gameMode;
 
-    public enum Movement {
+    public enum MoveType {
         ROTATE_LEFT,
         ROTATE_RIGHT,
         LEFT,
