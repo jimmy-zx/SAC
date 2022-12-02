@@ -26,28 +26,6 @@ java -cp target/SAC-[version]-SNAPSHOT.jar sac.App
 1. Open the project
 2. Run -> Edit Configurations -> Add New Configuration -> Maven
 
-## Roadmap
-
-### 0.0
-A Tetris prototype
-#### 0.0.1 (current)
-Project design document
-#### 0.0.2
-A playable instance of Tetris
-
-- [x] Tetris Piece
-- [x] Tetris Board
-- [ ] Tetris Model
-- [ ] Tetris Runner
-- [ ] Tetris View
-### 0.1
-Implement an extensible API
-### 0.2
-Implement most of the [Tetris Guideline](https://tetris.wiki/Tetris_Guideline)
-### 0.3
-Support for additional features
-
-
 ## Documentation
 
 ### Code documentation
@@ -59,6 +37,10 @@ mvn javadoc:javadoc
 ### Design document
 
 Compile [this document](/docs/design)
+
+### Roadmap
+
+[Roadmap](https://github.com/jimmy-zx/SAC/wiki/Roadmap)
 
 ## Troubleshooting
 

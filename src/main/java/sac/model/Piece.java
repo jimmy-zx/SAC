@@ -1,6 +1,5 @@
 package sac.model;
 
-import sac.model.rotations.RotationState;
 import sac.utils.Utility;
 
 import java.util.*;
@@ -48,14 +47,9 @@ public class Piece {
      */
     public final ArrayList<Integer> lowestYVals;
 
-    /**
-     * Cache for the rotations of a specific piece
-     */
-    private static Map<PieceType, ArrayList<Piece>> rotationMap;
-
     private Piece next;
 
-    public Piece(PieceType type, ArrayList<Point> body) {
+    private Piece(PieceType type, ArrayList<Point> body) {
         this.body = new ArrayList<>(body);
         Collections.sort(body);
 
@@ -89,7 +83,7 @@ public class Piece {
      * @param origin: the origin piece
      * @return the next rotation of the given piece
      */
-    public static Piece computeNextRotation(Piece origin) {
+    private static Piece computeNextRotation(Piece origin) {
         ArrayList<Point> points = new ArrayList<>();
         for(Point point : origin.body) {
             points.add(new Point(point.y(), - point.x() + origin.width - 1));
@@ -97,7 +91,7 @@ public class Piece {
         return new Piece(origin.type, points);
     }
 
-    public static Piece makeFastRotations(Piece root) {
+    private static Piece makeFastRotations(Piece root) {
         Piece cur = root;
         Piece next = computeNextRotation(cur);
         while (!root.equals(next)) {
@@ -107,29 +101,6 @@ public class Piece {
         }
         cur.next = root;
         return root;
-    }
-
-    public static ArrayList<Piece> generateRotationList(Piece root) {
-        ArrayList<Piece> rotationList = new ArrayList<>();
-        rotationList.add(root);
-        Piece next = computeNextRotation(root);
-        while (!root.equals(next)) {
-            rotationList.add(root);
-            next = computeNextRotation(next);
-        }
-        return rotationList;
-    }
-
-    public static void generateRotationMap() {
-        if (rotationMap != null) {
-            return;
-        }
-        rotationMap = new HashMap<>();
-        for (PieceType type : PieceType.values()) {
-            if (type != PieceType.Other) {
-                rotationMap.put(type, generateRotationList(generate(type)));
-            }
-        }
     }
 
     /**
@@ -171,20 +142,9 @@ public class Piece {
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
-        if (!(obj instanceof Piece)) return false;
-        Piece other = (Piece)obj;
-        if (this.body.size() != other.body.size()) return false;
-        for (int i = 0; i < body.size(); i++) {
-            if (!body.get(i).equals(other.body.get(i))) return false; // Assume body is sorted.
+        if (obj instanceof Piece other) {
+            return this.body.equals(other.body);
         }
-        return true;
+        return false;
     }
-
-    /**
-     * Given a string of x,y pairs (e.g. "0 0 0 1 0 2 1 0"), parses
-     * the points into a list or Points.
-     *
-     * @param string input of x,y pairs
-     * @return a list or Points
-     */
 }
