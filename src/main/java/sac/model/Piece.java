@@ -55,7 +55,7 @@ public class Piece {
 
     private Piece next;
 
-    public Piece(PieceType type, ArrayList<Point> body) {
+    private Piece(PieceType type, ArrayList<Point> body) {
         this.body = new ArrayList<>(body);
         Collections.sort(body);
 
@@ -89,7 +89,7 @@ public class Piece {
      * @param origin: the origin piece
      * @return the next rotation of the given piece
      */
-    public static Piece computeNextRotation(Piece origin) {
+    private static Piece computeNextRotation(Piece origin) {
         ArrayList<Point> points = new ArrayList<>();
         for(Point point : origin.body) {
             points.add(new Point(point.y(), - point.x() + origin.width - 1));
@@ -97,7 +97,7 @@ public class Piece {
         return new Piece(origin.type, points);
     }
 
-    public static Piece makeFastRotations(Piece root) {
+    private static Piece makeFastRotations(Piece root) {
         Piece cur = root;
         Piece next = computeNextRotation(cur);
         while (!root.equals(next)) {
@@ -107,29 +107,6 @@ public class Piece {
         }
         cur.next = root;
         return root;
-    }
-
-    public static ArrayList<Piece> generateRotationList(Piece root) {
-        ArrayList<Piece> rotationList = new ArrayList<>();
-        rotationList.add(root);
-        Piece next = computeNextRotation(root);
-        while (!root.equals(next)) {
-            rotationList.add(root);
-            next = computeNextRotation(next);
-        }
-        return rotationList;
-    }
-
-    public static void generateRotationMap() {
-        if (rotationMap != null) {
-            return;
-        }
-        rotationMap = new HashMap<>();
-        for (PieceType type : PieceType.values()) {
-            if (type != PieceType.Other) {
-                rotationMap.put(type, generateRotationList(generate(type)));
-            }
-        }
     }
 
     /**
@@ -179,12 +156,4 @@ public class Piece {
         }
         return true;
     }
-
-    /**
-     * Given a string of x,y pairs (e.g. "0 0 0 1 0 2 1 0"), parses
-     * the points into a list or Points.
-     *
-     * @param string input of x,y pairs
-     * @return a list or Points
-     */
 }
