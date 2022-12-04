@@ -2,7 +2,7 @@ package sac.model;
 
 import sac.model.gamemodes.GameMode;
 import sac.model.rotations.RotationState;
-import sac.utils.Locker;
+import sac.utils.Lock;
 
 import java.util.Objects;
 
@@ -19,7 +19,7 @@ public class Model {
     private RotationState currentState;
     private boolean gameOn;
     private GameMode gameMode;
-    private Locker locker;
+    private Lock lock;
 
     public enum MoveType {
         ROTATE_LEFT,
@@ -142,14 +142,14 @@ public class Model {
         }
         if (reachedBottom()) {
             if (moveType == MoveType.HARD_DROP) {  // if HARD_DROP, immediately unlock
-                locker.unlock();
-            } else if (!locker.isLocked()) {  // if there isn't a lock, lock the piece
-                locker.lock(2000);
+                lock.unlock();
+            } else if (!lock.isStarted()) {  // if there isn't a lock, lock the piece
+                lock.lock(2000);
             } else if (moveType == MoveType.DOWN) {  // if there is a lock, but the user does not response
-                locker.unlock();
+                lock.unlock();
             }
-            if (!locker.isExpired()) {  // if a lock has expired OR there is no lock
-                locker.unlock();
+            if (!lock.isLocked()) {  // if a lock has expired OR there is no lock
+                lock.unlock();
                 board.clearRows();
                 gameMode.onRowClear();
                 if (!spawnPiece()) {
