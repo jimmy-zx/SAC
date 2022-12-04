@@ -58,7 +58,7 @@ public class Model {
 
         Piece piece = nextPiece();
         currentState = gameMode.getInitialRotationState();
-        Point spawnPosition = gameMode.getSpawnPosition(piece.type);
+        Point spawnPosition = gameMode.getSpawnPosition(piece);
         Board.PlacePieceStatus result = placePiece(piece, spawnPosition);  // try to place a piece
         if (!result.isSuccess()) {
             setGameOn(false);
@@ -98,14 +98,16 @@ public class Model {
     }
 
     private void executeMove(MoveType moveType) {
-        if (activePiece != null) {
-            board.undo();
+        if (activePiece == null) {
+            throw new RuntimeException("Unable to execute move on piece null");
         }
+        board.undo();
+        board.backup();
 
         Board.PlacePieceStatus placePieceStatus = null;
 
-        Piece newPiece = activePiece;
-        Point newPosition = currentPosition;
+        Piece newPiece;
+        Point newPosition;
 
         switch (moveType) {
             case LEFT, RIGHT, DOWN -> {
@@ -134,6 +136,7 @@ public class Model {
         }
         if (!Objects.requireNonNull(placePieceStatus).isSuccess()) {
             gameMode.getRotationSystem().restore(currentState);
+            gameMode.onInvalidMove();
         }
     }
 

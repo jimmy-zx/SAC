@@ -27,11 +27,13 @@ public abstract class GameMode {
 
     public abstract Piece nextPiece();
 
-    public abstract Point getSpawnPosition(Piece.PieceType type);
+    public abstract Point getSpawnPosition(Piece piece);
 
     public abstract RotationState getInitialRotationState();
 
     public abstract void onRowClear();
+
+    public abstract void onInvalidMove();
 
     public abstract RotationSystem getRotationSystem();  // TODO: Add RotationState.getNextState
 
