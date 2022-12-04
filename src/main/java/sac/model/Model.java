@@ -2,8 +2,8 @@ package sac.model;
 
 import sac.model.gamemodes.GameMode;
 import sac.model.rotations.RotationState;
+import sac.utils.Locker;
 
-import java.util.ArrayDeque;
 import java.util.Objects;
 
 
@@ -19,6 +19,7 @@ public class Model {
     private RotationState currentState;
     private boolean gameOn;
     private GameMode gameMode;
+    private Locker locker;
 
     public enum MoveType {
         ROTATE_LEFT,
@@ -53,7 +54,7 @@ public class Model {
         return gameMode.nextPiece();
     }
 
-    public void spawnPiece() {
+    private boolean spawnPiece() {
         activePiece = null;  // clear activePiece anyway
 
         Piece piece = nextPiece();
@@ -61,9 +62,10 @@ public class Model {
         Point spawnPosition = gameMode.getSpawnPosition(piece);
         Board.PlacePieceStatus result = placePiece(piece, spawnPosition);  // try to place a piece
         if (!result.isSuccess()) {
-            setGameOn(false);
+            return false;
         } else {
             activePiece = piece;
+            return true;
         }
     }
 
@@ -138,6 +140,27 @@ public class Model {
             gameMode.getRotationSystem().restore(currentState);
             gameMode.onInvalidMove();
         }
+        if (reachedBottom()) {
+            if (moveType == MoveType.HARD_DROP) {  // if HARD_DROP, immediately unlock
+                locker.unlock();
+            } else if (!locker.isLocked()) {  // if there isn't a lock, lock the piece
+                locker.lock(2000);
+            } else if (moveType == MoveType.DOWN) {  // if there is a lock, but the user does not response
+                locker.unlock();
+            }
+            if (!locker.isExpired()) {  // if a lock has expired OR there is no lock
+                locker.unlock();
+                board.clearRows();
+                gameMode.onRowClear();
+                if (!spawnPiece()) {
+                    gameOn = false;
+                }
+            }
+        }
+    }
+
+    private boolean reachedBottom() {
+        return currentPosition.equals(board.dropPosition(activePiece, currentPosition));
     }
 
     public void modelTick(MoveType moveType) {
