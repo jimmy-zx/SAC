@@ -4,6 +4,7 @@ import sac.model.Model;
 import sac.model.Piece;
 import sac.model.Point;
 import sac.model.rotations.RotationState;
+import sac.model.rotations.RotationSystem;
 
 public abstract class GameMode {
     protected Model model;
@@ -29,6 +30,10 @@ public abstract class GameMode {
     public abstract Point getSpawnPosition(Piece.PieceType type);
 
     public abstract RotationState getInitialRotationState();
+
+    public abstract void onRowClear();
+
+    public abstract RotationSystem getRotationSystem();  // TODO: Add RotationState.getNextState
 
     public void initModel() {
         model.setGameMode(this);
