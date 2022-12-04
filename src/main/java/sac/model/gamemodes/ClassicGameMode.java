@@ -67,4 +67,13 @@ public class ClassicGameMode extends GameMode {
     public RotationState getInitialRotationState() {
         return rotationSystem.getInitialState();
     }
+
+    @Override
+    public void onRowClear() {
+    }
+
+    @Override
+    public RotationSystem getRotationSystem() {
+        return rotationSystem;
+    }
 }
