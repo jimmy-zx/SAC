@@ -2,87 +2,42 @@ package sac.model.gamemodes;
 
 import sac.model.Model;
 import sac.model.Piece;
-import sac.model.generators.Generator;
-import sac.model.observers.LinearObserver;
-import sac.model.observers.RowClearObserver;
-import sac.model.observers.ScoreObserver;
+import sac.model.Point;
+import sac.model.rotations.RotationState;
+import sac.model.rotations.RotationSystem;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Queue;
-
-public class GameMode {
-    private Model model;
-    private ArrayList<RowClearObserver> rowClearObservers;
-    /**
-     * Stores all observers that calculate score.
-     * <p>
-     * Must be a subset of rowClearObservers
-     */
-    private ArrayList<ScoreObserver> scoreObservers;
-
-    /**
-     * A queue that holds the upcoming pieces
-     */
-    private Queue<Piece> preview;
-    private Generator pieceGenerator;
+public abstract class GameMode {
+    protected Model model;
 
     public GameMode(Model model) {
         this.model = model;
-        scoreObservers = new ArrayList<>(List.of(new LinearObserver()));
-        rowClearObservers = new ArrayList<>();
-        rowClearObservers.addAll(scoreObservers);
     }
 
-    /**
-     * Check if the game can continue.
-     * <p>
-     * Note: this functions depends on whether the game can continue,
-     * which is different from Model.gameOn, which is determined by the
-     * user.
-     * @return If the game can continue.
-     */
-    public boolean isGameOn() {
-        throw new UnsupportedOperationException();
-    }
+    public abstract void onGameStart();
 
-    /**
-     * Calculate the total score.
-     * @return The total score.
-     */
-    public int getScore() {
-        int totalScore = 0;
-        for (ScoreObserver scoreObserver : scoreObservers) {
-            totalScore += scoreObserver.getScore();
-        }
-        return totalScore;
-    }
+    public abstract boolean isGameEnd();
 
-    /**
-     * Trigger when at least one row is cleared.
-     *
-     * @param count The number of rows cleared.
-     */
-    public void onRowClear(int count) {
-        for (RowClearObserver observer : rowClearObservers) {
-            observer.update(model);
-        }
-    }
+    public abstract int getScore();
 
-    /**
-     * Get the next piece of the game.
-     * @return The generated piece.
-     */
-    public Piece nextPiece() {
-        preview.add(pieceGenerator.nextPiece());
-        return preview.remove();
-    }
+    public abstract int getWidth();
 
-    /**
-     * Get the upcoming pieces.
-     * @return An arraylist containing the upcoming pieces.
-     */
-    public ArrayList<Piece> getPreview() {
-        return new ArrayList<>(preview);
+    public abstract int getHeight();
+
+    public abstract int getBuffer();
+
+    public abstract Piece nextPiece();
+
+    public abstract Point getSpawnPosition(Piece piece);
+
+    public abstract RotationState getInitialRotationState();
+
+    public abstract void onRowClear();
+
+    public abstract void onInvalidMove();
+
+    public abstract RotationSystem getRotationSystem();  // TODO: Add RotationState.getNextState
+
+    public void initModel() {
+        model.setGameMode(this);
     }
 }
