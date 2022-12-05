@@ -22,14 +22,16 @@ public class Board {
     private Piece.PieceType[][] grid;
 
     /**
+     * The backup grid
+     */
+    private Piece.PieceType[][] backupGrid;
+
+    /**
      * Stores how many coordinates are occupied in each row.
      */
     private int[] rowCounts;
 
-    /**
-     * The backup grid
-     */
-    private Piece.PieceType[][] backupGrid;
+    private int[] backupRowCounts;
 
     /**
      * The return status for PlacePiece
@@ -50,7 +52,11 @@ public class Board {
         /**
          * The placement failed due to conflict between placed pieces.
          */
-        ADD_BAD
+        ADD_BAD;
+
+        public boolean isSuccess() {
+            return this.ordinal() <= ADD_ROW_FILLED.ordinal();
+        }
     }
 
     /**
@@ -84,7 +90,7 @@ public class Board {
     public PlacePieceStatus placePiece(Piece piece, Point position) {
         boolean filled = false;
         for (Point point : piece.body) {
-            Point newPoint = position.add(point);
+            Point newPoint = position.offset(point);
             if (!isValidPoint(newPoint)) {
                 return PlacePieceStatus.ADD_OUT_BOUNDS;
             }
@@ -93,7 +99,7 @@ public class Board {
             }
         }
         for (Point point : piece.body) {
-            Point newPoint = position.add(point);
+            Point newPoint = position.offset(point);
             grid[newPoint.x()][newPoint.y()] = piece.type;
             rowCounts[newPoint.y()]++;
             if (rowCounts[newPoint.y()] == width) {
@@ -139,6 +145,26 @@ public class Board {
     }
 
     /**
+     * Calculate the expected position of `piece` would be placed.
+     * @param piece
+     * @param position The coordinate of the bottom-left corner of the piece.
+     * @return the expected position of the bottom-left corner of the piece.
+     */
+    public Point dropPosition(Piece piece, Point position) {
+        int expectedY = 0;
+        for (int i = 0; i < piece.width; i++) {
+            int y = position.y() + piece.lowestYVals.get(i) - 1;
+            for (; y >= 0; y--) {
+                if (grid[position.x() + i][y] != null) {
+                    break;
+                }
+            }
+            expectedY = Math.max(y + 1 - piece.lowestYVals.get(i), expectedY);
+        }
+        return new Point(position.x(), expectedY);
+    }
+
+    /**
      * Backup the grid.
      * <p>
      * This function should be only called by the client.
@@ -147,7 +173,13 @@ public class Board {
         if (backupGrid != null) {
             throw new RuntimeException("Cannot backup the grid. Commit or undo first.");
         }
-        backupGrid = grid.clone();
+        backupGrid = new Piece.PieceType[width][height];
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                backupGrid[i][j] = grid[i][j];
+            }
+        }
+        backupRowCounts = rowCounts.clone();
     }
 
     /**
@@ -157,9 +189,10 @@ public class Board {
      */
     public void undo() {
         if (this.backupGrid == null) {
-            throw new RuntimeException("Nothing to undo.");
+            // throw new RuntimeException("Nothing to undo.");
         }
         grid = backupGrid;
+        rowCounts = backupRowCounts;
         commit();
     }
 
@@ -168,9 +201,10 @@ public class Board {
      */
     public void commit() {
         if (backupGrid == null) {
-            throw new RuntimeException("Nothing to commit");
+            // throw new RuntimeException("Nothing to commit");
         }
         backupGrid = null;
+        backupRowCounts = null;
     }
 
     /**

@@ -1,37 +1,43 @@
 package sac.model.gamemodes;
 
 import sac.model.Model;
-import sac.model.observers.LinearObserver;
-import sac.model.observers.RowClearObserver;
-import sac.model.observers.ScoreObserver;
-
-import java.util.ArrayList;
-import java.util.List;
+import sac.model.Piece;
+import sac.model.Point;
+import sac.model.rotations.RotationState;
+import sac.model.rotations.RotationSystem;
 
 public abstract class GameMode {
-    private Model model;
-    private ArrayList<ScoreObserver> scoreObservers;
-    private ArrayList<RowClearObserver> rowClearObservers;
+    protected Model model;
 
     public GameMode(Model model) {
         this.model = model;
-        scoreObservers = new ArrayList<>(List.of(new LinearObserver()));
-        rowClearObservers = new ArrayList<>();
-        rowClearObservers.addAll(scoreObservers);
     }
 
-    public boolean getGameEnd() {
-        return !this.model.getGameOn();
-    }
-    public int getScore() {
-        int totalScore = 0;
-        for (ScoreObserver scoreObserver : scoreObservers) {
-            totalScore += scoreObserver.getScore();
-        }
-        return totalScore;
-    }
+    public abstract void onGameStart();
 
-    public ArrayList<RowClearObserver> getRowClearObservers() {
-        return rowClearObservers;
+    public abstract boolean isGameEnd();
+
+    public abstract int getScore();
+
+    public abstract int getWidth();
+
+    public abstract int getHeight();
+
+    public abstract int getBuffer();
+
+    public abstract Piece nextPiece();
+
+    public abstract Point getSpawnPosition(Piece piece);
+
+    public abstract RotationState getInitialRotationState();
+
+    public abstract void onRowClear();
+
+    public abstract void onInvalidMove();
+
+    public abstract RotationSystem getRotationSystem();  // TODO: Add RotationState.getNextState
+
+    public void initModel() {
+        model.setGameMode(this);
     }
 }
