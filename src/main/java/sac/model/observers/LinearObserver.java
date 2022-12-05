@@ -2,7 +2,7 @@ package sac.model.observers;
 
 import sac.model.Model;
 
-public class LinearObserver extends ScoreObserver {
+public class LinearObserver extends ScoreCalculator {
     private int score = 0;
 
     @Override
@@ -11,7 +11,7 @@ public class LinearObserver extends ScoreObserver {
     }
 
     @Override
-    public void update(Model obj) {
-        this.score += 1;
+    public void update(DataPackage obj) {
+        this.score += obj.rowCleared;
     }
 }

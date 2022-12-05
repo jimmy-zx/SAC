@@ -10,4 +10,5 @@ public class DataPackage {
     public RotationState rotationState;
     public Piece activePiece;
     public int rowCleared;
+
 }
