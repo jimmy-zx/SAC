@@ -78,7 +78,7 @@ public class SuperRotationSystem implements RotationSystem{
         }
 
         @Override
-        public void restore() {
+        public void resetTests() {
             resetTestCnt();
         }
 

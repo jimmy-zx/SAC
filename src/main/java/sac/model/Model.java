@@ -3,7 +3,6 @@ package sac.model;
 import sac.model.gamemodes.GameMode;
 import sac.model.rotations.RotationState;
 
-import java.util.ArrayDeque;
 import java.util.Objects;
 
 
@@ -134,7 +133,7 @@ public class Model {
             case HOLD -> throw new UnsupportedOperationException();
         }
         if (!Objects.requireNonNull(placePieceStatus).isSuccess()) {
-            currentState.restore();
+            currentState.resetTests();
             gameMode.onInvalidMove();
         }
     }
