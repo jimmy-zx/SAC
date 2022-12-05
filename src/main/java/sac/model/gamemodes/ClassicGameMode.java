@@ -5,6 +5,7 @@ import sac.model.Piece;
 import sac.model.Point;
 import sac.model.generators.Generator;
 import sac.model.generators.RandomGenerator;
+import sac.model.observers.DataPackage;
 import sac.model.observers.Observer;
 import sac.model.rotations.RotationState;
 import sac.model.rotations.RotationSystem;
@@ -17,6 +18,7 @@ public class ClassicGameMode extends GameMode {
     public static final int HEIGHT = 20;
     public static final int BUFFER = 4;
     private int score;
+    ArrayList<Observer<DataPackage>> rowClearObservers;
 
     private Generator pieceGenerator;
     private RotationSystem rotationSystem;

@@ -3,6 +3,7 @@ package sac.model.gamemodes;
 import sac.model.Model;
 import sac.model.Piece;
 import sac.model.Point;
+import sac.model.observers.DataPackage;
 import sac.model.rotations.RotationState;
 import sac.model.rotations.RotationSystem;
 
@@ -31,7 +32,7 @@ public abstract class GameMode {
 
     public abstract RotationState getInitialRotationState();
 
-    public abstract void onRowClear();
+    public abstract void onRowClear(DataPackage dataPackage);
 
     public abstract void onInvalidMove();
 
