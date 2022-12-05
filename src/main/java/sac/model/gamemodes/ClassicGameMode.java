@@ -17,6 +17,7 @@ public class ClassicGameMode extends GameMode {
     public static final int HEIGHT = 20;
     public static final int BUFFER = 4;
     private int score;
+    private boolean gameEnd = true;
 
     private Generator pieceGenerator;
     private RotationSystem rotationSystem;
@@ -30,11 +31,12 @@ public class ClassicGameMode extends GameMode {
     @Override
     public void onGameStart() {
         score = 0;
+        gameEnd = false;
     }
 
     @Override
     public boolean isGameEnd() {
-        return false;
+        return gameEnd;
     }
 
     @Override
@@ -79,11 +81,6 @@ public class ClassicGameMode extends GameMode {
 
     @Override
     public void onInvalidMove() {
-        return;
-    }
-
-    @Override
-    public RotationSystem getRotationSystem() {
-        return rotationSystem;
+        gameEnd = true;
     }
 }

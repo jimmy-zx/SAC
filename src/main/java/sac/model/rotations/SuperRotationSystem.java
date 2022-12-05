@@ -70,6 +70,19 @@ public class SuperRotationSystem implements RotationSystem{
             return testCnt < 5;
         }
 
+        @Override
+        public RotationState getNextState(Model.MoveType moveType) {
+            SuperRotationState nextState = SuperRotationSystem.computeNextSuperRotationState(this, moveType);
+            nextState.resetTestCnt();
+            return nextState;
+        }
+
+        @Override
+        public void restore() {
+            resetTestCnt();
+        }
+
+
         public void resetTestCnt() {
             this.testCnt = 0;
         }

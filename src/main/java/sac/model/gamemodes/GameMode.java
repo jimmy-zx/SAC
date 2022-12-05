@@ -35,8 +35,6 @@ public abstract class GameMode {
 
     public abstract void onInvalidMove();
 
-    public abstract RotationSystem getRotationSystem();  // TODO: Add RotationState.getNextState
-
     public void initModel() {
         model.setGameMode(this);
     }

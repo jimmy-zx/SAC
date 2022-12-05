@@ -9,5 +9,8 @@ public interface RotationState {
     Point getRotationOffset(Piece activePiece, Model.MoveType moveType);
 
     public boolean hasNextTest();
-    
+
+    public RotationState getNextState(Model.MoveType moveType);
+
+    public void restore();
 }

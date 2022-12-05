@@ -122,8 +122,7 @@ public class Model {
                     placePieceStatus = placePiece(newPiece, newPosition);
                     if (placePieceStatus.isSuccess()) {
                         activePiece = newPiece;
-                        currentState = gameMode.getRotationSystem().getNextState(currentState,
-                                moveType);
+                        currentState = currentState.getNextState(moveType);
                         break;
                     }
                 }
@@ -135,7 +134,7 @@ public class Model {
             case HOLD -> throw new UnsupportedOperationException();
         }
         if (!Objects.requireNonNull(placePieceStatus).isSuccess()) {
-            gameMode.getRotationSystem().restore(currentState);
+            currentState.restore();
             gameMode.onInvalidMove();
         }
     }
