@@ -1,9 +1,12 @@
 package sac.model;
 
 import sac.model.gamemodes.GameMode;
+import sac.model.observers.DataPackage;
 import sac.model.rotations.RotationState;
 import sac.utils.Lock;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -51,14 +54,14 @@ public class Model {
     }
 
     public Piece nextPiece() {
-        return gameMode.nextPiece();
+        return gameMode.getPieceGenerator().nextPiece();
     }
 
     private boolean spawnPiece() {
         activePiece = null;  // clear activePiece anyway
 
         Piece piece = nextPiece();
-        currentState = gameMode.getInitialRotationState();
+        currentState = gameMode.getRotationSystem().getInitialState();
         Point spawnPosition = gameMode.getSpawnPosition(piece);
         Board.PlacePieceStatus result = placePiece(piece, spawnPosition);  // try to place a piece
         if (!result.isSuccess()) {
@@ -73,9 +76,6 @@ public class Model {
         Board.PlacePieceStatus result = board.placePiece(piece, position);
         if (result.isSuccess()) {
             currentPosition = position;
-            if (result == Board.PlacePieceStatus.ADD_ROW_FILLED) {
-                gameMode.onRowClear();
-            }
         }
         return result;
     }
@@ -138,7 +138,7 @@ public class Model {
         }
         if (!Objects.requireNonNull(placePieceStatus).isSuccess()) {
             gameMode.getRotationSystem().restore(currentState);
-            gameMode.onInvalidMove();
+            // gameMode.onInvalidMove();
         }
         if (reachedBottom()) {
             if (moveType == MoveType.HARD_DROP) {  // if HARD_DROP, immediately unlock
@@ -150,8 +150,13 @@ public class Model {
             }
             if (!lock.isLocked()) {  // if a lock has expired OR there is no lock
                 lock.unlock();
-                board.clearRows();
-                gameMode.onRowClear();
+                int rowCleared = board.clearRows();
+                DataPackage dp = new DataPackage();
+                dp.moveType = moveType;
+                dp.validMove = placePieceStatus.isSuccess();
+                dp.rotationState = currentState;
+                dp.activePiece = activePiece;
+                dp.rowCleared = rowCleared;
                 if (!spawnPiece()) {
                     gameOn = false;
                 }
@@ -183,9 +188,5 @@ public class Model {
 
     public void setGameOn(boolean gameOn) {
         this.gameOn = gameOn;
-    }
-
-    public int getScore() {
-        return gameMode.getScore();
     }
 }
