@@ -1,9 +1,8 @@
 package sac.model.generators;
 
 import org.junit.jupiter.api.Test;
-import sac.model.generators.PerfectGenerator;
 
-public class TestPerfectGenerator {
+public class PerfectGeneratorTest {
     @Test
     void testPerfectGenerator() {
         PerfectGenerator generator = new PerfectGenerator();
