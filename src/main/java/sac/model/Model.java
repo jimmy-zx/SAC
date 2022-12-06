@@ -217,4 +217,13 @@ public class Model {
     public Piece.PieceType getHoldPiece() {
         return holdPiece;
     }
+
+    public List<Point> getGhostPiecePositions() {
+        List<Point> ghostPiecePositions = new ArrayList<>();
+        Point origin = board.dropPosition(activePiece, currentPosition);
+        for (Point point : activePiece.body) {
+            ghostPiecePositions.add(point.offset(origin));
+        }
+        return ghostPiecePositions;
+    }
 }
