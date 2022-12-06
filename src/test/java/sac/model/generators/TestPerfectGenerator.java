@@ -1,4 +1,4 @@
-package sac.generators;
+package sac.model.generators;
 
 import org.junit.jupiter.api.Test;
 import sac.model.generators.PerfectGenerator;
