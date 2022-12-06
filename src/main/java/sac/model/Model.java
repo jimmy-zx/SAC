@@ -3,6 +3,7 @@ package sac.model;
 import sac.model.gamemodes.GameMode;
 import sac.model.observers.DataPackage;
 import sac.model.rotations.RotationState;
+import sac.utils.Lock;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -23,6 +24,9 @@ public class Model {
     private int score;
     private boolean gameOn;
     private long delayStartTime;
+
+    Lock lock;
+
     //    private Generator pieceGenerator;
     private GameMode gameMode;
 
@@ -41,6 +45,7 @@ public class Model {
     public Model() {
         // this.board = new Board();
         this.gameOn = false;
+        lock = new Lock();
 //        this.gameMode = new ClassicGameMode(this); // temporary
 //        this.board = new Board(gameMode.getWidth(), gameMode.getHeight());
     }
@@ -59,7 +64,7 @@ public class Model {
         gameOn = true;
         gameMode.onGameStart();
 
-        lockReset();
+        lock.unlock();
 
         preview = new ArrayDeque<>();
         for (int i = 0; i < previewNumber; i++) {
@@ -171,7 +176,7 @@ public class Model {
             case HARD_DROP:
                 newPosition = board.dropPosition(activePiece, currentPosition);
                 placePiece(activePiece, newPosition);
-                rowCleared = lock(0);
+                lock.unlock();
                 break;
             case HOLD:
                 hold();
@@ -180,14 +185,22 @@ public class Model {
         }
 
         if (validMove) {
-            lockReset();
         } else {
             if (activePiece != null) placePiece(activePiece, currentPosition);
         }
 
         if (reachedBottom()) {
             if (moveType != MoveType.HARD_DROP) {
-                rowCleared = lock(1000);
+                if (!lock.isStarted()) {
+                    lock.lock(1000);
+                } else if (moveType != MoveType.DOWN) {
+                    lock.lock(500);
+                }
+            }
+            if (!lock.isLocked()) {
+                lock.unlock();
+                rowCleared = board.clearRows();
+                spawnPiece();
             }
         }
 
@@ -208,30 +221,6 @@ public class Model {
 
     private boolean reachedBottom() {
         return currentPosition.equals(board.dropPosition(activePiece, currentPosition));
-    }
-
-    /**
-     * Lock current active piece.
-     *
-     * @param delay in ms
-     * @return the number of rows cleared due to this lock
-     */
-    private int lock(long delay) {
-        if (delayStartTime < 0) {
-            delayStartTime = System.currentTimeMillis();
-        }
-        if (System.currentTimeMillis() - delayStartTime < delay) {
-            return 0;
-        } else {
-            int rowCleared = board.clearRows();
-            spawnPiece();
-            lockReset();
-            return rowCleared;
-        }
-    }
-
-    private void lockReset() {
-        delayStartTime = -1;
     }
 
     private void hold() {
