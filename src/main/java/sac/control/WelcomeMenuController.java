@@ -7,6 +7,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.effect.Bloom;
+import javafx.scene.effect.Lighting;
+import javafx.scene.effect.Reflection;
 import javafx.stage.Stage;
 import sac.App;
 import sac.model.Model;
@@ -144,8 +147,17 @@ public class WelcomeMenuController {
     void setColorScheme() {
         switch (((ToggleButton) color.getSelectedToggle()).getText()) {
             case "Classic" -> ControllerFactory.colorscheme = new ClassicColor();
-            case "Splatoon" -> ControllerFactory.colorscheme = new SplatoonColor();
-            case "High Contrast" -> { ControllerFactory.colorscheme = new HighContrastColor(); }
+            case "Splatoon" -> {
+                ControllerFactory.colorscheme = new SplatoonColor();
+                Reflection r = new Reflection();
+                r.setFraction(0.4);
+                r.setInput(new Bloom());
+                ControllerFactory.canvasEffect = r;
+            }
+            case "High Contrast" -> {
+                ControllerFactory.colorscheme = new HighContrastColor();
+                ControllerFactory.canvasEffect = new Lighting();
+            }
         }
     }
 

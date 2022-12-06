@@ -192,8 +192,8 @@ public class MainController {
     private void paintBoard() {
 
         // Draw a rectangle around the whole screen
-        gc.setStroke(Color.GRAY);
-        gc.setFill(Color.GRAY);
+        gc.setStroke(colorscheme.backgroundColor());
+        gc.setFill(colorscheme.backgroundColor());
         gc.fillRect(0, 0, this.width, this.height);
 
         // Draw the line separating the top area on the screen
@@ -207,24 +207,24 @@ public class MainController {
          * draw ghost piece
          */
         for (Point ghostPoint : model.getGhostPiecePositions()) {
-            gc.setFill(Color.WHEAT);
+            gc.setFill(Color.rgb(245, 222, 179, 0.8));
             paintBlock(ghostPoint);
-            gc.setFill(Color.GRAY);
         }
 
         int x, y;
+        gc.setEffect(ControllerFactory.canvasEffect);
         // Loop through and draw all the blocks; sizes of blocks are calibrated relative to screen size
         for (x=0; x<gameMode.getWidth(); x++) {
             // draw from 0 up to the col height
-//            final int yHeight = this.model.getBoard().getColumnHeight(x);
             for (y=0; y<gameMode.getHeight(); y++) {
                 if (this.model.board.getGrid(new Point(x, y)) != null) {
                     gc.setFill(colorscheme.render(this.model.board.getGrid(new Point(x, y))));
                     paintBlock(new Point(x, y));
-                    gc.setFill(Color.GRAY);
+
                 }
             }
         }
+        gc.setEffect(null);
     }
 
     @FXML

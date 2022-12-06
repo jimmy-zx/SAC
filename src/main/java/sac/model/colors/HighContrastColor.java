@@ -28,6 +28,6 @@ public class HighContrastColor implements Colorscheme{
 
     @Override
     public Color backgroundColor() {
-        return Color.WHITE;
+        return Color.valueOf("#a4b0be");
     }
 }
