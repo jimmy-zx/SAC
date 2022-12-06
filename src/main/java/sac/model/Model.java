@@ -3,30 +3,30 @@ package sac.model;
 import sac.model.gamemodes.GameMode;
 import sac.model.observers.DataPackage;
 import sac.model.rotations.RotationState;
-import sac.utils.Lock;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-
-/**
- * The Tetris Game model.
- * <p>
- * Serves a "driver" for the game. The game details are controlled by GameMode
- */
 public class Model {
     public Board board;
     private Piece activePiece;
-    private Point currentPosition;
+    private Point currentPosition; // the position of current activePiece (bottom-left)
+
     private RotationState currentState;
-    private boolean gameOn;
-    private GameMode gameMode;
-    private Lock lock;
+
     private ArrayDeque<Piece> preview;
-    private int previewNumber = 5;
+    private int previewNumber = 5; // temp
+
     private Piece.PieceType holdPiece;
+
+    private int score;
+    private boolean gameOn;
+    private long delayStartTime;
+    //    private Generator pieceGenerator;
+    private GameMode gameMode;
+
+    private DataPackage dataPackage;
 
     public enum MoveType {
         ROTATE_LEFT,
@@ -41,6 +41,8 @@ public class Model {
     public Model() {
         // this.board = new Board();
         this.gameOn = false;
+//        this.gameMode = new ClassicGameMode(this); // temporary
+//        this.board = new Board(gameMode.getWidth(), gameMode.getHeight());
     }
 
     public void setGameMode(GameMode gameMode) {
@@ -48,132 +50,156 @@ public class Model {
     }
 
     public void newGame() {
-        board = new Board(gameMode.getWidth(), gameMode.getHeight());
+        this.board = new Board(gameMode.getWidth(), gameMode.getHeight());
+        gameMode.getPieceGenerator().reset();
+        holdPiece = null;
+    }
+
+    public void startGame() {
+        gameOn = true;
+        gameMode.onGameStart();
+
+        lockReset();
+
         preview = new ArrayDeque<>();
         for (int i = 0; i < previewNumber; i++) {
             preview.add(gameMode.getPieceGenerator().nextPiece());
         }
-        holdPiece = null;
-        startGame();
-    }
 
-    public void startGame() {
-        setGameOn(true);
         spawnPiece();
     }
 
-    public Piece nextPiece() {
+    private Piece nextPiece() {
         preview.add(gameMode.getPieceGenerator().nextPiece());
         return preview.poll();
     }
 
-    private boolean spawnPiece() {
-        activePiece = null;  // clear activePiece anyway
+    private void spawnPiece() {
+        board.commit();
+        activePiece = null;
 
         Piece piece = nextPiece();
         currentState = gameMode.getRotationSystem().getInitialState();
+
         Point spawnPosition = gameMode.getSpawnPosition(piece);
-        Board.PlacePieceStatus result = placePiece(piece, spawnPosition);  // try to place a piece
+
+        Board.PlacePieceStatus result = placePiece(piece, spawnPosition);
+
         if (!result.isSuccess()) {
-            return false;
+            stopGame();
         } else {
             activePiece = piece;
-            return true;
         }
+
+        dataPackage = new DataPackage();
     }
 
-    public Board.PlacePieceStatus placePiece(Piece piece, Point position) {
+    /**
+     * Attempt to place the piece at a given board position
+     *
+     */
+    private Board.PlacePieceStatus placePiece(Piece piece, Point position) {
+        board.backup();
+
         Board.PlacePieceStatus result = board.placePiece(piece, position);
-        if (result.isSuccess()) {
+
+        if (result.isSuccess()) { //success
             currentPosition = position;
+        } else {
+            board.undo();
         }
         return result;
     }
 
-    private Point computeTransitionPosition(MoveType type) {
-        return currentPosition.offset(
-                switch (type) {
-                    case LEFT -> new Point(-1, 0);
-                    case RIGHT -> new Point(1, 0);
-                    case DOWN -> new Point(0, -1);
-                    default -> new Point(0, 0);
-                }
-        );
+    /**
+     * Translation: Only vertical or horizontal.
+     * @param type
+     * @return
+     */
+    private Point computeTranslationPosition(MoveType type) {
+        Point newPosition = currentPosition;
+        switch (type) {
+            case LEFT -> newPosition = currentPosition.offset(-1, 0);
+            case RIGHT -> newPosition = currentPosition.offset(1, 0);
+            case DOWN -> newPosition = currentPosition.offset(0, -1);
+        }
+        return newPosition;
     }
 
     private Piece getRotatedPiece(MoveType type) {
-        return switch (type) {
-            case ROTATE_LEFT -> activePiece.rotateLeft();
-            case ROTATE_RIGHT -> activePiece.rotateRight();
-            default -> activePiece;
-        };
+        Piece newPiece = activePiece;
+        switch (type) {
+            case ROTATE_LEFT -> newPiece = activePiece.rotateLeft();
+            case ROTATE_RIGHT -> newPiece = activePiece.rotateRight();
+        }
+        return newPiece;
     }
 
     private void executeMove(MoveType moveType) {
-        if (activePiece == null) {
-            throw new RuntimeException("Unable to execute move on piece null");
+        if (activePiece != null) {
+            board.undo();	// remove the piece from its old position
         }
-        board.undo();
-        board.backup();
 
-        Board.PlacePieceStatus placePieceStatus = null;
+        boolean validMove = true;
 
-        Piece newPiece;
-        Point newPosition;
+        Piece newPiece = activePiece;
+        Point newPosition = currentPosition;
+
+        int rowCleared = 0;
 
         switch (moveType) {
-            case LEFT, RIGHT, DOWN -> {
-                newPosition = computeTransitionPosition(moveType);
-                placePieceStatus = placePiece(activePiece, newPosition);
-            }
-            case ROTATE_LEFT, ROTATE_RIGHT -> {
+            case LEFT: case RIGHT: case DOWN:
+                newPosition = computeTranslationPosition(moveType);
+                validMove = placePiece(activePiece, newPosition).isSuccess();
+                break;
+            case ROTATE_LEFT: case ROTATE_RIGHT:
                 newPiece = getRotatedPiece(moveType);
                 while (currentState.hasNextTest()) {
-                    newPosition = currentPosition.offset(currentState.getRotationOffset(newPiece,
-                            moveType));
-                    placePieceStatus = placePiece(newPiece, newPosition);
-                    if (placePieceStatus.isSuccess()) {
+                    newPosition = currentPosition.offset(currentState.getRotationOffset(activePiece, moveType));
+                    validMove = placePiece(newPiece, newPosition).isSuccess();
+                    if (validMove) {
                         activePiece = newPiece;
-                        currentState = gameMode.getRotationSystem().getNextState(currentState,
-                                moveType);
+                        currentState = gameMode.getRotationSystem().getNextState(currentState, moveType);
                         break;
                     }
                 }
-            }
-            case HARD_DROP -> {
+
+                break;
+            case HARD_DROP:
                 newPosition = board.dropPosition(activePiece, currentPosition);
-                placePieceStatus = placePiece(activePiece, newPosition);
-            }
-            case HOLD -> {
+                placePiece(activePiece, newPosition);
+                rowCleared = lock(0);
+                break;
+            case HOLD:
                 hold();
                 spawnPiece();
-            }
+
         }
-        if (!Objects.requireNonNull(placePieceStatus).isSuccess()) {
-            gameMode.getRotationSystem().restore(currentState);
-            // gameMode.onInvalidMove();
+
+        if (validMove) {
+            lockReset();
+        } else {
+            if (activePiece != null) placePiece(activePiece, currentPosition);
         }
+
         if (reachedBottom()) {
-            if (moveType == MoveType.HARD_DROP) {  // if HARD_DROP, immediately unlock
-                lock.unlock();
-            } else if (!lock.isStarted()) {  // if there isn't a lock, lock the piece
-                lock.lock(2000);
-            } else if (moveType == MoveType.DOWN) {  // if there is a lock, but the user does not response
-                lock.unlock();
+            if (moveType != MoveType.HARD_DROP){
+                rowCleared = lock(1000);
             }
-            if (!lock.isLocked()) {  // if a lock has expired OR there is no lock
-                lock.unlock();
-                int rowCleared = board.clearRows();
-                DataPackage dp = new DataPackage();
-                dp.moveType = moveType;
-                dp.validMove = placePieceStatus.isSuccess();
-                dp.rotationState = currentState;
-                dp.activePiece = activePiece;
-                dp.rowCleared = rowCleared;
-                if (!spawnPiece()) {
-                    gameOn = false;
-                }
-            }
+        }
+
+        dataPackage.rowCleared = rowCleared;
+        dataPackage.moveType = moveType;
+        dataPackage.validMove = validMove;
+        dataPackage.rotationState = currentState;
+        dataPackage.activePiece = activePiece;
+
+        currentState = gameMode.getRotationSystem().restore(currentState);
+
+        gameMode.notifyAllObservers(dataPackage);
+
+        if (gameMode.isGameEnd()) {
+            stopGame();
         }
     }
 
@@ -181,17 +207,39 @@ public class Model {
         return currentPosition.equals(board.dropPosition(activePiece, currentPosition));
     }
 
-    public void modelTick(MoveType moveType) {
-        /*
-         * 1. Check gameOn and gameMode.isGameOn(). If false, return.
-         * 2. Perform movement on currentPiece.
-         * 3. If the movement is valid, return.
-         * 4. If the movement is invalid, and the movement is not down, return.
-         * 5. If the movement is invalid, and the movement is down, generate a new Piece.
-         */
-        if (!isGameOn() || gameMode.isGameEnd()) {
-            return;
+    /**
+     * Lock current active piece.
+     * @param delay in ms
+     * @return the number of rows cleared due to this lock
+     */
+    private int lock(long delay) {
+        if (delayStartTime < 0) {
+            delayStartTime = System.currentTimeMillis();
         }
+        if (System.currentTimeMillis() - delayStartTime < delay) {
+            return 0;
+        } else {
+            int rowCleared = board.clearRows();
+            spawnPiece();
+            lockReset();
+            return rowCleared;
+        }
+    }
+
+    private void lockReset() {
+        delayStartTime = -1;
+    }
+
+    private void hold() {
+        if (holdPiece != null) {
+            preview.addFirst(Piece.generate(holdPiece));
+        }
+        holdPiece = activePiece.type;
+    }
+
+    public void modelTick(MoveType moveType) {
+        if (!isGameOn() || gameMode.isGameEnd()) return;
+
         executeMove(moveType);
     }
 
@@ -199,22 +247,23 @@ public class Model {
         return this.gameOn;
     }
 
-    public void setGameOn(boolean gameOn) {
-        this.gameOn = gameOn;
-    }
+    private void stopGame() {this.gameOn = false;}
 
-    public ArrayDeque<Piece> getPreview() {
-        return preview;
-    }
-
-    private void hold() {
-        if (holdPiece == null) {
-            preview.addFirst(Piece.generate(holdPiece));
+    public List<Point> getGhostPiecePositions() {
+        // do not know piece type
+        List<Point> ghostPiecePositions = new ArrayList<>();
+        Point origin = board.dropPosition(activePiece, currentPosition);
+        for (Point point : activePiece.body) {
+            ghostPiecePositions.add(point.offset(origin));
         }
-        holdPiece = activePiece.type;
+        return ghostPiecePositions;
     }
 
     public Piece.PieceType getHoldPiece() {
         return holdPiece;
+    }
+
+    public ArrayDeque<Piece> getPreview() {
+        return this.preview.clone();
     }
 }
