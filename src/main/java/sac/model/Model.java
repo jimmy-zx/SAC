@@ -54,14 +54,14 @@ public class Model {
     }
 
     public Piece nextPiece() {
-        return gameMode.nextPiece();
+        return gameMode.getPieceGenerator().nextPiece();
     }
 
     private boolean spawnPiece() {
         activePiece = null;  // clear activePiece anyway
 
         Piece piece = nextPiece();
-        currentState = gameMode.getInitialRotationState();
+        currentState = gameMode.getRotationSystem().getInitialState();
         Point spawnPosition = gameMode.getSpawnPosition(piece);
         Board.PlacePieceStatus result = placePiece(piece, spawnPosition);  // try to place a piece
         if (!result.isSuccess()) {
@@ -138,7 +138,7 @@ public class Model {
         }
         if (!Objects.requireNonNull(placePieceStatus).isSuccess()) {
             gameMode.getRotationSystem().restore(currentState);
-            gameMode.onInvalidMove();
+            // gameMode.onInvalidMove();
         }
         if (reachedBottom()) {
             if (moveType == MoveType.HARD_DROP) {  // if HARD_DROP, immediately unlock
@@ -189,9 +189,4 @@ public class Model {
     public void setGameOn(boolean gameOn) {
         this.gameOn = gameOn;
     }
-
-    public int getScore() {
-        return gameMode.getScore();
-    }
-
 }

@@ -1,6 +1,6 @@
 package sac.model.observers;
 
-public class ComboObserver extends ScoreCalculator{
+public class ComboObserver extends ScoreObserver {
 
     private int score = 0;
     private int comboCount = 0;

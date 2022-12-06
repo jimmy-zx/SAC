@@ -1,9 +1,8 @@
 package sac.model.observers;
 
-import sac.model.rotations.RotationState;
 import sac.model.rotations.SuperRotationSystem;
 
-public class TSpinObserver extends ScoreCalculator{
+public class TSpinObserver extends ScoreObserver {
 
     private int score = 0;
     private SuperRotationSystem.SuperRotationState state;

@@ -3,7 +3,7 @@ package sac.model.observers;
 import sac.model.Piece;
 import sac.model.rotations.SuperRotationSystem;
 
-public class BackToBackObserver extends ScoreObserver{
+public class BackToBackObserver extends ScoreObserver {
 
     boolean lastTspin = false;
     boolean lastTetris = false;
@@ -16,10 +16,11 @@ public class BackToBackObserver extends ScoreObserver{
         if (obj.rowCleared < 4) {
             if (obj.activePiece.type == Piece.PieceType.T && obj.validMove) {
                 if (obj.rotationState instanceof SuperRotationSystem.SuperRotationState) {
-                    if (((SuperRotationSystem.SuperRotationState) obj.rotationState).getTestCnt() > 0) {
+                    if (((SuperRotationSystem.SuperRotationState) obj.rotationState).getTestCnt() >
+                            0) {
                         lastTspin = true;
                         if (lastTetris) {
-                            score += 1000;S
+                            score += 1000;
                         }
                     }
                 }
