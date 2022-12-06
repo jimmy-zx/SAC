@@ -17,7 +17,7 @@ import java.util.Objects;
  * Serves a "driver" for the game. The game details are controlled by GameMode
  */
 public class Model {
-    private Board board;
+    public Board board;
     private Piece activePiece;
     private Point currentPosition;
     private RotationState currentState;
