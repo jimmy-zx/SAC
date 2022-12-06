@@ -132,7 +132,7 @@ public class MainController {
 //        scoreLabel.setText("" + gameMode.getHeight());
     }
 
-    
+
     @FXML
     private void onMainPaneKeyPressed(KeyEvent k){
         switch (k.getCode()) {
@@ -227,6 +227,57 @@ public class MainController {
         }
     }
 
+    @FXML
+    ImageView menuIcon;
+
+    @FXML
+    private void onMenuMouseEntered() {
+        Bloom bloom = new Bloom(0.1);
+        menuIcon.setEffect(bloom);
+    }
+
+    @FXML
+    private void onMenuMouseExited() {
+        menuIcon.setEffect(null);
+    }
+
+    @FXML
+    private void onMenuMouseClicked() {
+        openStopMenu();
+    }
+
+    private void openStopMenu() {
+        this.paused = true;
+        if (ControllerFactory.stopMenu == null) {
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("StopMenu.fxml"));
+            StopMenuController stopMenuController = new StopMenuController(this);
+            fxmlLoader.setController(stopMenuController);
+            try {
+                Stage stopMenu = new Stage();
+                stopMenu.setScene(new Scene(fxmlLoader.load()));
+                stopMenu.setTitle("PAUSED");
+                stopMenu.show();
+                ControllerFactory.stopMenu = stopMenu;
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            ControllerFactory.stopMenu.show();
+        }
+    }
+
+    private void addFloatController (FloatController fc) {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("MessagePane.fxml"));
+        fxmlLoader.setController(fc);
+        try {
+            fxmlLoader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        if (fc instanceof UpdatableController) {
+            updatableControllers.add((UpdatableController) fc);
+        }
+    }
 
     
 }
