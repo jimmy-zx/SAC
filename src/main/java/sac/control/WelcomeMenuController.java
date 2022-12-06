@@ -13,6 +13,7 @@ import sac.model.Model;
 import sac.model.Piece;
 import sac.model.Point;
 import sac.model.colors.ClassicColor;
+import sac.model.colors.HighContrastColor;
 import sac.model.colors.SplatoonColor;
 import sac.model.gamemodes.*;
 import sac.model.generators.Generator;
@@ -22,7 +23,7 @@ import sac.model.observers.BackToBackObserver;
 import sac.model.observers.ComboObserver;
 import sac.model.observers.LinearObserver;
 import sac.model.observers.TSpinObserver;
-// import sac.model.rotations.BasicRotationSystem;
+import sac.model.rotations.BasicRotationSystem;
 import sac.model.rotations.RotationSystem;
 import sac.model.rotations.SuperRotationSystem;
 
@@ -125,7 +126,7 @@ public class WelcomeMenuController {
 
         switch (((ToggleButton) rotation.getSelectedToggle()).getText()) {
             case "Super" -> {}
-            // case "Basic" -> rotationSystem = new BasicRotationSystem();
+            case "Basic" -> rotationSystem = new BasicRotationSystem();
         }
 
         CustomizeCore gameCore = new CustomizeCore() {
@@ -144,6 +145,7 @@ public class WelcomeMenuController {
         switch (((ToggleButton) color.getSelectedToggle()).getText()) {
             case "Classic" -> ControllerFactory.colorscheme = new ClassicColor();
             case "Splatoon" -> ControllerFactory.colorscheme = new SplatoonColor();
+            case "High Contrast" -> { ControllerFactory.colorscheme = new HighContrastColor(); }
         }
     }
 
