@@ -1,11 +1,14 @@
 package sac.model.observers;
 
+import sac.model.Model;
+
 public class LinearObserver extends ScoreObserver {
     private int score = 0;
+    private int level = 1;
 
     @Override
     public int getScore() {
-        int result = score;
+        int result = score * level;
         score = 0;
         return result;
     }
