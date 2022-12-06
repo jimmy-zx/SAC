@@ -11,6 +11,9 @@ public class HighContrastColor implements Colorscheme{
 
     @Override
     public Color render(Piece.PieceType type) {
+        if (type == null) {
+            return backgroundColor();
+        }
         switch (type) {
             case S : return Color.rgb(105,255,50);
             case I : return Color.rgb(100,205,255);
