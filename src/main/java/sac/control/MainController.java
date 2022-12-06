@@ -175,4 +175,58 @@ public class MainController {
     }
 
 
+    private final int yPixel(int y) {
+        return (this.height - (y+1) * blockSpace) + blockMargin;
+    }
+    private final int xPixel(int x) {
+        return x * blockSpace + blockMargin;
+    }
+
+    private void paintBlock(Point position) {
+        gc.fillRect(xPixel(position.x()), yPixel(position.y()), blockWidth, blockWidth);
+    }
+
+    /**
+     * Draw the board
+     */
+    private void paintBoard() {
+
+        // Draw a rectangle around the whole screen
+        gc.setStroke(Color.GRAY);
+        gc.setFill(Color.GRAY);
+        gc.fillRect(0, 0, this.width, this.height);
+
+        // Draw the line separating the top area on the screen
+        gc.setFill(Color.BLACK);
+        int spacerY = yPixel(this.gameMode.getHeight() - this.gameMode.getBuffer() - 1) - 2 * blockMargin;
+//        System.out.println(spacerY);
+        gc.fillRect(0, spacerY, this.width, 2 * blockMargin);
+
+
+        /**
+         * draw ghost piece
+         */
+        for (Point ghostPoint : model.getGhostPiecePositions()) {
+            gc.setFill(Color.WHEAT);
+            paintBlock(ghostPoint);
+            gc.setFill(Color.GRAY);
+        }
+
+        int x, y;
+        // Loop through and draw all the blocks; sizes of blocks are calibrated relative to screen size
+        for (x=0; x<gameMode.getWidth(); x++) {
+            // draw from 0 up to the col height
+//            final int yHeight = this.model.getBoard().getColumnHeight(x);
+            for (y=0; y<gameMode.getHeight(); y++) {
+                if (this.model.board.getGrid(new Point(x, y)) != null) {
+                    gc.setFill(colorscheme.render(this.model.board.getGrid(new Point(x, y))));
+                    paintBlock(new Point(x, y));
+                    gc.setFill(Color.GRAY);
+                }
+            }
+        }
+    }
+
+
+    
 }
