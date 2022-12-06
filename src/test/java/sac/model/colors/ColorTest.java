@@ -1,4 +1,4 @@
-package sac.colors;
+package sac.model.colors;
 
 import org.junit.jupiter.api.Test;
 import sac.model.Piece;
