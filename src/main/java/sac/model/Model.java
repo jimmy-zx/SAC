@@ -5,6 +5,7 @@ import sac.model.observers.DataPackage;
 import sac.model.rotations.RotationState;
 import sac.utils.Lock;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -16,13 +17,16 @@ import java.util.Objects;
  * Serves a "driver" for the game. The game details are controlled by GameMode
  */
 public class Model {
-    private Board board;
+    public Board board;
     private Piece activePiece;
     private Point currentPosition;
     private RotationState currentState;
     private boolean gameOn;
     private GameMode gameMode;
     private Lock lock;
+    private ArrayDeque<Piece> preview;
+    private int previewNumber = 5;
+    private Piece.PieceType holdPiece;
 
     public enum MoveType {
         ROTATE_LEFT,
@@ -45,6 +49,11 @@ public class Model {
 
     public void newGame() {
         board = new Board(gameMode.getWidth(), gameMode.getHeight());
+        preview = new ArrayDeque<>();
+        for (int i = 0; i < previewNumber; i++) {
+            preview.add(gameMode.getPieceGenerator().nextPiece());
+        }
+        holdPiece = null;
         startGame();
     }
 
@@ -54,7 +63,8 @@ public class Model {
     }
 
     public Piece nextPiece() {
-        return gameMode.getPieceGenerator().nextPiece();
+        preview.add(gameMode.getPieceGenerator().nextPiece());
+        return preview.poll();
     }
 
     private boolean spawnPiece() {
@@ -134,7 +144,10 @@ public class Model {
                 newPosition = board.dropPosition(activePiece, currentPosition);
                 placePieceStatus = placePiece(activePiece, newPosition);
             }
-            case HOLD -> throw new UnsupportedOperationException();
+            case HOLD -> {
+                hold();
+                spawnPiece();
+            }
         }
         if (!Objects.requireNonNull(placePieceStatus).isSuccess()) {
             gameMode.getRotationSystem().restore(currentState);
@@ -188,5 +201,29 @@ public class Model {
 
     public void setGameOn(boolean gameOn) {
         this.gameOn = gameOn;
+    }
+
+    public ArrayDeque<Piece> getPreview() {
+        return preview;
+    }
+
+    private void hold() {
+        if (holdPiece == null) {
+            preview.addFirst(Piece.generate(holdPiece));
+        }
+        holdPiece = activePiece.type;
+    }
+
+    public Piece.PieceType getHoldPiece() {
+        return holdPiece;
+    }
+
+    public List<Point> getGhostPiecePositions() {
+        List<Point> ghostPiecePositions = new ArrayList<>();
+        Point origin = board.dropPosition(activePiece, currentPosition);
+        for (Point point : activePiece.body) {
+            ghostPiecePositions.add(point.offset(origin));
+        }
+        return ghostPiecePositions;
     }
 }
