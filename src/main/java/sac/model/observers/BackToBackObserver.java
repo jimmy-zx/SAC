@@ -19,8 +19,7 @@ public class BackToBackObserver extends ScoreObserver{
                     if (((SuperRotationSystem.SuperRotationState) obj.rotationState).getTestCnt() > 0) {
                         lastTspin = true;
                         if (lastTetris) {
-                            score += 1000;
-                            System.out.println("btb");
+                            score += 1000;S
                         }
                     }
                 }
@@ -32,7 +31,6 @@ public class BackToBackObserver extends ScoreObserver{
             lastTetris = true;
             if (lastTspin) {
                 score += 1000;
-                System.out.println("btb");
             }
         }
     }
