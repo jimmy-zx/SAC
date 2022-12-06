@@ -132,4 +132,47 @@ public class MainController {
 //        scoreLabel.setText("" + gameMode.getHeight());
     }
 
+    
+    @FXML
+    private void onMainPaneKeyPressed(KeyEvent k){
+        switch (k.getCode()) {
+            case W -> {
+                model.modelTick(Model.MoveType.HARD_DROP);
+            }
+            case A -> model.modelTick(Model.MoveType.LEFT);
+            case S -> model.modelTick(Model.MoveType.DOWN);
+            case D -> model.modelTick(Model.MoveType.RIGHT);
+            case J -> model.modelTick(Model.MoveType.ROTATE_LEFT);
+            case K -> model.modelTick(Model.MoveType.ROTATE_RIGHT);
+            case H -> {
+                model.modelTick(Model.MoveType.HOLD);
+                hc.update();
+            }
+            case R -> {
+                model.newGame();
+                model.startGame();
+                mainPane.requestFocus();
+                paused = false;
+            }
+            case P -> paused = !paused;
+            case ESCAPE -> openStopMenu();
+        }
+        paintBoard();
+    }
+
+    private void updateBoard() {
+        if (this.paused != true) {
+            paintBoard();
+            this.model.modelTick(Model.MoveType.DOWN);
+            for (UpdatableController c : updatableControllers) {
+                c.update();
+            }
+
+            if (!model.isGameOn()) {
+                paused = true;
+            }
+        }
+    }
+
+
 }
