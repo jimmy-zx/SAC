@@ -41,6 +41,24 @@ public class TimedLayer implements GameLayer{
         this.timer = (min * 60 + sec) * 1000;
     }
 
+    /**
+     * Get the elapsed time since game starts.
+     * @return the elapsed time in the form of "mm:ss"
+     */
+    public String getCurrentTime() {
+//        System.out.println(System.currentTimeMillis());
+        long elapsed;
+        if (!isGameEnd()) {
+            elapsed = (System.currentTimeMillis() - startTime) / 1000;
+        } else {
+            elapsed = timer / 1000;
+        }
+
+        int min = (int) elapsed / 60;
+        int sec = (int) elapsed % 60;
+
+        return String.format("%d:%02d", min, sec);
+    }
 
 
     /**
