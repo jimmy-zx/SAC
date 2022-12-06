@@ -30,7 +30,7 @@ public class ColorTest {
             if (type == Piece.PieceType.Other) {
                 continue;
             }
-            assertNotNull(colorscheme.render(Piece.generate(type)));
+            assertNotNull(colorscheme.render(type));
         }
         assertNotNull(colorscheme.render(null));
     }

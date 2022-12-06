@@ -226,4 +226,5 @@ public class Model {
         }
         return ghostPiecePositions;
     }
+
 }

@@ -9,6 +9,9 @@ import sac.model.Piece;
 public class ClassicColor implements Colorscheme {
     @Override
     public Color render(Piece.PieceType type) {
+        if (type == null) {
+            return backgroundColor();
+        }
         switch (type) {
             case I: return Color.LIGHTBLUE;
             case J: return Color.DARKBLUE;
