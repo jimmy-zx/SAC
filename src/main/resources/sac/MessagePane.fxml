@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox fx:id="messageVBox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="message-pane" stylesheets="@defaultStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="messageTitleLabel" alignment="CENTER" styleClass="message-pane-title" text="Message" textFill="#2a2f33">
+         <font>
+            <Font name="Arial Black" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="messageLabel" styleClass="message-pane-content" text="0" textAlignment="CENTER">
+         <font>
+            <Font name="Arial Black" size="24.0" />
+         </font>
+      </Label>
+   </children>
+</VBox>
