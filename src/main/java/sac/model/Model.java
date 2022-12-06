@@ -1,9 +1,12 @@
 package sac.model;
 
 import sac.model.gamemodes.GameMode;
+import sac.model.observers.DataPackage;
 import sac.model.rotations.RotationState;
 import sac.utils.Lock;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -73,9 +76,6 @@ public class Model {
         Board.PlacePieceStatus result = board.placePiece(piece, position);
         if (result.isSuccess()) {
             currentPosition = position;
-            if (result == Board.PlacePieceStatus.ADD_ROW_FILLED) {
-                gameMode.onRowClear();
-            }
         }
         return result;
     }
@@ -150,8 +150,13 @@ public class Model {
             }
             if (!lock.isLocked()) {  // if a lock has expired OR there is no lock
                 lock.unlock();
-                board.clearRows();
-                gameMode.onRowClear();
+                int rowCleared = board.clearRows();
+                DataPackage dp = new DataPackage();
+                dp.moveType = moveType;
+                dp.validMove = placePieceStatus.isSuccess();
+                dp.rotationState = currentState;
+                dp.activePiece = activePiece;
+                dp.rowCleared = rowCleared;
                 if (!spawnPiece()) {
                     gameOn = false;
                 }
@@ -188,4 +193,5 @@ public class Model {
     public int getScore() {
         return gameMode.getScore();
     }
+
 }
