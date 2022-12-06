@@ -1,5 +1,6 @@
 package sac.control;
 
+import javafx.scene.effect.Effect;
 import javafx.stage.Stage;
 import sac.model.Model;
 import sac.model.colors.Colorscheme;
@@ -11,6 +12,7 @@ public class ControllerFactory {
     protected static Model model;
 
     protected static Colorscheme colorscheme;
+    protected static Effect canvasEffect;
 
     protected static ScoreSystemLayer scoreSystemLayer;
     protected static TimedLayer timedLayer;

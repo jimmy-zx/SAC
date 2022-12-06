@@ -213,18 +213,19 @@ public class MainController {
         }
 
         int x, y;
+        gc.setEffect(ControllerFactory.canvasEffect);
         // Loop through and draw all the blocks; sizes of blocks are calibrated relative to screen size
         for (x=0; x<gameMode.getWidth(); x++) {
             // draw from 0 up to the col height
-//            final int yHeight = this.model.getBoard().getColumnHeight(x);
             for (y=0; y<gameMode.getHeight(); y++) {
                 if (this.model.board.getGrid(new Point(x, y)) != null) {
                     gc.setFill(colorscheme.render(this.model.board.getGrid(new Point(x, y))));
                     paintBlock(new Point(x, y));
-                    gc.setFill(Color.GRAY);
+
                 }
             }
         }
+        gc.setEffect(null);
     }
 
     @FXML
