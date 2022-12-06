@@ -30,5 +30,9 @@ public class TSpinObserverTest {
         rotationState.getRotationOffset(piece, Model.MoveType.ROTATE_RIGHT);
         observer.update(dataPackage);
         assertEquals(8, observer.getScore());
+
+        dataPackage.activePiece = Piece.generate(Piece.PieceType.O);
+        observer.update(dataPackage);
+        assertEquals(0, observer.getScore());
     }
 }
