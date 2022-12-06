@@ -53,6 +53,7 @@ public class Model {
         for (int i = 0; i < previewNumber; i++) {
             preview.add(gameMode.getPieceGenerator().nextPiece());
         }
+        holdPiece = null;
         startGame();
     }
 
@@ -143,7 +144,10 @@ public class Model {
                 newPosition = board.dropPosition(activePiece, currentPosition);
                 placePieceStatus = placePiece(activePiece, newPosition);
             }
-            case HOLD -> throw new UnsupportedOperationException();
+            case HOLD -> {
+                hold();
+                spawnPiece();
+            }
         }
         if (!Objects.requireNonNull(placePieceStatus).isSuccess()) {
             gameMode.getRotationSystem().restore(currentState);
@@ -201,5 +205,16 @@ public class Model {
 
     public ArrayDeque<Piece> getPreview() {
         return preview;
+    }
+
+    private void hold() {
+        if (holdPiece == null) {
+            preview.addFirst(Piece.generate(holdPiece));
+        }
+        holdPiece = activePiece.type;
+    }
+
+    public Piece.PieceType getHoldPiece() {
+        return holdPiece;
     }
 }
