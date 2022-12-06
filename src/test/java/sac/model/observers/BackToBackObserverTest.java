@@ -17,8 +17,8 @@ public class BackToBackObserverTest {
         dataPackage.activePiece = piece;
         dataPackage.rotationState = rotationState;
         dataPackage.validMove = true;
-        rotationState.getRotationOffset(piece, Model.MoveType.ROTATE_LEFT);
-        rotationState.getRotationOffset(piece, Model.MoveType.ROTATE_LEFT);
+        rotationState.getRotationOffset(piece, Model.MoveType.ROTATE_RIGHT);
+        rotationState.getRotationOffset(piece, Model.MoveType.ROTATE_RIGHT);
         assertEquals(2, rotationState.getTestCnt());
         observer.update(dataPackage);
         assertEquals(0, observer.getScore());
