@@ -55,5 +55,31 @@ public class HoldController extends FloatController implements UpdatableControll
         gc = canvas.getGraphicsContext2D();
     }
 
-    
+    private final int yPixel(int y) {
+        return (this.height - (y+1) * blockSpace) + blockMargin;
+    }
+    private final int xPixel(int x) {
+        return x * blockSpace + blockMargin;
+    }
+
+    /**
+     * Redraw the hold canvas as model ticks.
+     */
+    @Override
+    public void update() {
+        gc.setFill(Color.valueOf("#2a2f33"));
+        gc.fillRect(0, 0, width, height);
+
+        if (ControllerFactory.model.getHoldPiece() != null) {
+            Piece holdPiece = Piece.generate(ControllerFactory.model.getHoldPiece());
+            gc.setFill(ControllerFactory.colorscheme.render(holdPiece.type));
+
+            final float xOffset = (float) width / 2 - (float) (holdPiece.width * blockSpace) / 2 ;
+            final float yOffset = (float) height / 2 - (float) (holdPiece.height * blockSpace) / 2 ;
+
+            for (Point position : holdPiece.body) {
+                gc.fillRect(xPixel(position.x()) + xOffset, yPixel(position.y()) - yOffset, blockWidth, blockWidth);
+            }
+        }
+    }
 }
