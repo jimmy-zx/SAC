@@ -5,6 +5,7 @@ import sac.model.observers.DataPackage;
 import sac.model.rotations.RotationState;
 import sac.utils.Lock;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -23,6 +24,8 @@ public class Model {
     private boolean gameOn;
     private GameMode gameMode;
     private Lock lock;
+    private ArrayDeque<Piece> preview;
+    private int previewNumber = 5;
 
     public enum MoveType {
         ROTATE_LEFT,
@@ -50,11 +53,16 @@ public class Model {
 
     public void startGame() {
         setGameOn(true);
+        preview = new ArrayDeque<>();
+        for (int i = 0; i < previewNumber; i++) {
+            preview.add(gameMode.getPieceGenerator().nextPiece());
+        }
         spawnPiece();
     }
 
     public Piece nextPiece() {
-        return gameMode.getPieceGenerator().nextPiece();
+        preview.add(gameMode.getPieceGenerator().nextPiece());
+        return preview.poll();
     }
 
     private boolean spawnPiece() {
@@ -188,5 +196,9 @@ public class Model {
 
     public void setGameOn(boolean gameOn) {
         this.gameOn = gameOn;
+    }
+
+    public ArrayDeque<Piece> getPreview() {
+        return preview;
     }
 }
