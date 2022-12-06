@@ -192,8 +192,8 @@ public class MainController {
     private void paintBoard() {
 
         // Draw a rectangle around the whole screen
-        gc.setStroke(Color.GRAY);
-        gc.setFill(Color.GRAY);
+        gc.setStroke(colorscheme.backgroundColor());
+        gc.setFill(colorscheme.backgroundColor());
         gc.fillRect(0, 0, this.width, this.height);
 
         // Draw the line separating the top area on the screen
@@ -207,9 +207,8 @@ public class MainController {
          * draw ghost piece
          */
         for (Point ghostPoint : model.getGhostPiecePositions()) {
-            gc.setFill(Color.WHEAT);
+            gc.setFill(Color.rgb(245, 222, 179, 0.8));
             paintBlock(ghostPoint);
-            gc.setFill(Color.GRAY);
         }
 
         int x, y;
