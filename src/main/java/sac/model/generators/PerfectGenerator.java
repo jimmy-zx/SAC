@@ -61,7 +61,7 @@ public class PerfectGenerator implements Generator{
                 pack.add(piece);
             }
         }
-        System.out.println(pack.size());
+        // System.out.println(pack.size());
         return pack.poll();
     }
 
