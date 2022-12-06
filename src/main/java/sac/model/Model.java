@@ -26,6 +26,7 @@ public class Model {
     private Lock lock;
     private ArrayDeque<Piece> preview;
     private int previewNumber = 5;
+    private Piece.PieceType holdPiece;
 
     public enum MoveType {
         ROTATE_LEFT,
@@ -48,15 +49,15 @@ public class Model {
 
     public void newGame() {
         board = new Board(gameMode.getWidth(), gameMode.getHeight());
+        preview = new ArrayDeque<>();
+        for (int i = 0; i < previewNumber; i++) {
+            preview.add(gameMode.getPieceGenerator().nextPiece());
+        }
         startGame();
     }
 
     public void startGame() {
         setGameOn(true);
-        preview = new ArrayDeque<>();
-        for (int i = 0; i < previewNumber; i++) {
-            preview.add(gameMode.getPieceGenerator().nextPiece());
-        }
         spawnPiece();
     }
 
