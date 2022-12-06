@@ -96,7 +96,6 @@ public class Model {
 
     /**
      * Attempt to place the piece at a given board position
-     *
      */
     private Board.PlacePieceStatus placePiece(Piece piece, Point position) {
         board.backup();
@@ -113,6 +112,7 @@ public class Model {
 
     /**
      * Translation: Only vertical or horizontal.
+     *
      * @param type
      * @return
      */
@@ -137,7 +137,7 @@ public class Model {
 
     private void executeMove(MoveType moveType) {
         if (activePiece != null) {
-            board.undo();	// remove the piece from its old position
+            board.undo();    // remove the piece from its old position
         }
 
         boolean validMove = true;
@@ -148,11 +148,14 @@ public class Model {
         int rowCleared = 0;
 
         switch (moveType) {
-            case LEFT: case RIGHT: case DOWN:
+            case LEFT:
+            case RIGHT:
+            case DOWN:
                 newPosition = computeTranslationPosition(moveType);
                 validMove = placePiece(activePiece, newPosition).isSuccess();
                 break;
-            case ROTATE_LEFT: case ROTATE_RIGHT:
+            case ROTATE_LEFT:
+            case ROTATE_RIGHT:
                 newPiece = getRotatedPiece(moveType);
                 while (currentState.hasNextTest()) {
                     newPosition = currentPosition.offset(currentState.getRotationOffset(activePiece, moveType));
@@ -183,7 +186,7 @@ public class Model {
         }
 
         if (reachedBottom()) {
-            if (moveType != MoveType.HARD_DROP){
+            if (moveType != MoveType.HARD_DROP) {
                 rowCleared = lock(1000);
             }
         }
@@ -209,6 +212,7 @@ public class Model {
 
     /**
      * Lock current active piece.
+     *
      * @param delay in ms
      * @return the number of rows cleared due to this lock
      */
@@ -247,7 +251,9 @@ public class Model {
         return this.gameOn;
     }
 
-    private void stopGame() {this.gameOn = false;}
+    private void stopGame() {
+        this.gameOn = false;
+    }
 
     public List<Point> getGhostPiecePositions() {
         // do not know piece type
