@@ -1,0 +1,161 @@
+.canvas-pane {
+	-fx-border-color: #fb5b63;
+	-fx-border-radius: 20;
+	-fx-border-width: 3;
+	-fx-alignment: TOP_CENTER;
+	-fx-padding:5;
+	-fx-spacing:5;
+}
+.canvas-pane-title {
+	-fx-text-fill: #fb5b63;
+	-fx-font-size: 14.0;
+	-fx-font-family: "Arial Black";
+}
+
+.message-pane {
+	-fx-background-color: #daf13f;
+	-fx-background-radius: 20;
+	-fx-alignment: CENTER;
+	-fx-min-width: 100;
+	-fx-padding:5;
+	-fx-spacing:5;
+}
+.message-pane-title {
+	-fx-text-fill: #2a2f33;
+	-fx-font-size: 14.0;
+	-fx-font-family: "Arial Black";
+}
+.message-pane-content {
+	-fx-text-fill: #2a2f33;
+	-fx-font-size: 24.0;
+	-fx-font-family: "Arial Black";
+}
+
+.background-pane {
+	-fx-background-color: #2a2f33;
+}
+
+.stop-menu-pane {
+	-fx-background-color: #2a2f33;
+	-fx-alignment: Top_CENTER;
+	-fx-spacing:8;
+	-fx-padding:5;
+}
+
+.stop-menu-title {
+	-fx-text-fill: #ffffff;
+	-fx-font-size: 40.0;
+	-fx-font-family: "Arial Black";
+}
+
+.stop-menu-button {
+	-fx-text-fill: #ffffff;
+	-fx-font-size: 20.0;
+	-fx-font-family: "Arial Black";
+
+	-fx-min-width: 200;
+
+	-fx-background-color: #2a2f33;
+
+	-fx-border-color: #ffffff;
+	-fx-border-radius: 20;
+	-fx-border-width: 3;
+}
+
+.stop-menu-button:hover {
+/*	-fx-effect: bloom(0.1);*/
+	-fx-text-fill: #daf13f;
+	-fx-border-color: #daf13f;
+}
+
+.stop-menu-button:pressed {
+/*	-fx-effect: bloom(0.1);*/
+	-fx-border-insets: -3;
+}
+
+
+/*.menu-seperator {
+	-fx-border-color: #ffffff;
+	-fx-border-width: 1;
+	-fx-background-color: #2a2f33;
+}*/
+.menu-separator *.line {
+    -fx-border-style: solid;
+    -fx-border-width: 0 0 1 0; /* its make really one-pixel-border */
+    -fx-border-color: #ffffff;
+}
+.menu-section {
+	-fx-alignment: CENTER;
+	-fx-padding:5;
+	-fx-spacing:5;
+}
+.menu-toggle-button {
+	-fx-text-fill: #ffffff;
+	-fx-font-size: 14.0;
+	-fx-font-family: "Arial Black";
+
+	-fx-min-width: 100;
+
+	-fx-background-color: #2a2f33;
+
+	-fx-border-color: #ffffff;
+	-fx-border-radius: 20;
+	-fx-border-width: 3;
+}
+.menu-toggle-button:hover {
+/*	-fx-effect: bloom(0.1);*/
+	-fx-text-fill: #daf13f;
+	-fx-border-color: #daf13f;
+}
+.menu-toggle-button:selected {
+	--fx-text-fill: #daf13f;
+	-fx-border-color: #daf13f;
+}
+.menu-text-field {
+	-fx-text-fill: #ffffff;
+	-fx-font-size: 14.0;
+	-fx-font-family: "Arial Black";
+
+	-fx-background-color: #2a2f33;
+
+	-fx-border-color: #ffffff;
+/*	-fx-border-radius: 20;*/
+	-fx-border-width: 3;
+}
+
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-opacity: 0;
+}
+.tab-pane
+{
+    -fx-tab-min-width:90px;
+}
+.tab{
+    -fx-background-insets: 0 1 0 1,0,0;
+}
+.tab-pane .tab
+{
+    -fx-background-color: #bfc0c2;
+
+}
+.tab-pane .tab:selected
+{
+    -fx-background-color: #2a2f33;
+    -fx-border-color: #ffffff;
+    -fx-border-insets: 0 0 -5 0;
+    -fx-border-width: 3;
+    -fx-border-radius: 5;
+}
+
+.tab .tab-label { 
+    -fx-alignment: CENTER;
+    -fx-text-fill: #2a2f33;
+	-fx-font-size: 14.0;
+	-fx-font-family: "Arial Black";
+}
+
+.tab:selected .tab-label { 
+    -fx-alignment: CENTER;
+    -fx-text-fill: #ffffff;
+}

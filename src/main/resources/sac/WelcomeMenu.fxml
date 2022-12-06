@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="stop-menu-pane" stylesheets="@defaultStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label styleClass="stop-menu-title" text="WELCOME" />
+      <TabPane tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+            <Tab text="Mode">
+               <content>
+                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="menu-section">
+                     <children>
+                        <ToggleButton mnemonicParsing="false" selected="true" styleClass="menu-toggle-button" text="Classic">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="mode" />
+                           </toggleGroup>
+                        </ToggleButton>
+                        <ToggleButton mnemonicParsing="false" styleClass="menu-toggle-button" text="Custom" toggleGroup="$mode" />
+                        <ToggleButton mnemonicParsing="false" styleClass="menu-toggle-button" text="Training" toggleGroup="$mode" />
+                     </children>
+                  </HBox>
+               </content>
+            </Tab>
+          <Tab text="Feature">
+               <content>
+                  <VBox styleClass="menu-section">
+                     <children>
+                        <HBox styleClass="menu-section">
+                           <children>
+                              <ToggleButton fx:id="lineCountToggle" mnemonicParsing="false" styleClass="menu-toggle-button" text="Line" />
+                              <TextField fx:id="lineCountField" promptText="Set a threshold" styleClass="menu-text-field" text="40" />
+                           </children>
+                        </HBox>
+                        <HBox styleClass="menu-section">
+                           <children>
+                              <ToggleButton fx:id="timerToggle" mnemonicParsing="false" styleClass="menu-toggle-button" text="Timer" />
+                              <TextField fx:id="timerField" promptText="Set a timer (mm:ss)" styleClass="menu-text-field" text="1:00" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </content>
+          </Tab>
+          <Tab text="Generator">
+               <content>
+                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="menu-section">
+                     <children>
+                        <ToggleButton mnemonicParsing="false" selected="true" styleClass="menu-toggle-button" text="Random">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="generator" />
+                           </toggleGroup>
+                        </ToggleButton>
+                        <ToggleButton mnemonicParsing="false" styleClass="menu-toggle-button" text="Perfect" toggleGroup="$generator" />
+                        <ToggleButton mnemonicParsing="false" styleClass="menu-toggle-button" text="T-Spin" toggleGroup="$generator" />
+                     </children>
+                  </HBox>
+               </content>
+          </Tab>
+            <Tab text="RotationSystem">
+               <content>
+                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="menu-section">
+                     <children>
+                        <ToggleButton mnemonicParsing="false" selected="true" styleClass="menu-toggle-button" text="Super">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="rotation" />
+                           </toggleGroup>
+                        </ToggleButton>
+                        <ToggleButton mnemonicParsing="false" styleClass="menu-toggle-button" text="Basic" toggleGroup="$rotation" />
+                     </children>
+                  </HBox>
+               </content>
+            </Tab>
+            <Tab text="Score">
+               <content>
+                  <VBox styleClass="menu-section">
+                     <children>
+                        <ToggleButton fx:id="lineScore" mnemonicParsing="false" selected="true" styleClass="menu-toggle-button" text="Line" />
+                        <ToggleButton fx:id="tSpinScore" mnemonicParsing="false" selected="true" styleClass="menu-toggle-button" text="T-Spin" />
+                        <ToggleButton fx:id="backToBackScore" mnemonicParsing="false" selected="true" styleClass="menu-toggle-button" text="Back-to-Back" />
+                        <ToggleButton fx:id="comboScore" mnemonicParsing="false" selected="true" styleClass="menu-toggle-button" text="Combo" />
+                        <ToggleButton mnemonicParsing="false" styleClass="menu-toggle-button" text="Hard Drop" />
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+            <Tab text="Board">
+               <content>
+                  <VBox styleClass="menu-section">
+                     <children>
+                        <HBox styleClass="menu-section">
+                           <children>
+                              <ToggleButton disable="true" mnemonicParsing="false" styleClass="menu-toggle-button" text="Width" />
+                              <TextField fx:id="widthField" promptText="Set a threshold" styleClass="menu-text-field" text="10" />
+                           </children>
+                        </HBox>
+                        <HBox styleClass="menu-section">
+                           <children>
+                              <ToggleButton disable="true" mnemonicParsing="false" styleClass="menu-toggle-button" text="Height" />
+                              <TextField fx:id="heightField" promptText="Set a timer (mm:ss)" styleClass="menu-text-field" text="20" />
+                           </children>
+                        </HBox>
+                        <HBox styleClass="menu-section">
+                           <children>
+                              <ToggleButton disable="true" mnemonicParsing="false" styleClass="menu-toggle-button" text="Buffer" />
+                              <TextField fx:id="bufferField" promptText="Set a threshold" styleClass="menu-text-field" text="4" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+            <Tab text="Colorscheme">
+               <content>
+                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="menu-section">
+                     <children>
+                        <ToggleButton mnemonicParsing="false" selected="true" styleClass="menu-toggle-button" text="Classic">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="color" />
+                           </toggleGroup>
+                        </ToggleButton>
+                        <ToggleButton mnemonicParsing="false" styleClass="menu-toggle-button" text="Splatoon" toggleGroup="$color" />
+                        <ToggleButton mnemonicParsing="false" styleClass="menu-toggle-button" text="High Contrast" toggleGroup="$color" />
+                     </children>
+                  </HBox>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <Button fx:id="startButton" mnemonicParsing="false" onAction="#onStartButtonClicked" styleClass="stop-menu-button" text="START" />
+   </children>
+</VBox>
