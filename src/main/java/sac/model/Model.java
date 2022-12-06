@@ -5,6 +5,8 @@ import sac.model.observers.DataPackage;
 import sac.model.rotations.RotationState;
 import sac.utils.Lock;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -191,4 +193,5 @@ public class Model {
     public int getScore() {
         return gameMode.getScore();
     }
+
 }
