@@ -9,6 +9,9 @@ import sac.model.Piece;
 public class SplatoonColor implements Colorscheme{
     @Override
     public Color render(Piece.PieceType type) {
+        if (type == null) {
+            return backgroundColor();
+        }
         switch (type) {
             case I: return Color.valueOf("#15fefd");
             case J: return Color.valueOf("#0e5cfc");
