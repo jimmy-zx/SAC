@@ -28,17 +28,9 @@ java -cp target/SAC-[version]-SNAPSHOT.jar sac.App
 
 ## Documentation
 
-### Code documentation
-To generate code documentation, use
-```shell
-mvn javadoc:javadoc
-```
+[API Documentation](https://jimmy-zx.github.io/SAC/)
 
-### Design document
-
-Compile [this document](/docs/design)
-
-### Roadmap
+[Design Document](/docs/design)
 
 [Roadmap](https://github.com/jimmy-zx/SAC/wiki/Roadmap)
 
