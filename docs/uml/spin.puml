@@ -25,7 +25,7 @@ class Model {
 + setRotationState(Rotation State)
 }
 
-note right of Model::modelTick
+note left of Model::modelTick
 if MoveType == Rotate:
     Calls RotationState.getRotationOffset(...)
 end note
