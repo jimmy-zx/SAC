@@ -10,6 +10,10 @@ interface GameCore {
 + getBuffer(): int
 }
 
+note bottom of GameCore
+Unique features of each game.
+end note
+
 class DefaultCore {
 }
 
@@ -24,6 +28,10 @@ interface GameLayer {
 + isGameEnd(): boolean
 + notifyAllObservers(DataPackage)
 }
+
+note bottom of GameLayer
+Pluggable extra features of game.
+end note
 
 class LineCountLayer {
 - count: int
@@ -52,6 +60,7 @@ class GameMode {
 }
 
 note top of GameMode
+Servers as a mediator.
 Implements GameCore by passing the call directly to core.
 Implements GameLayer by composing all layers.
 end note

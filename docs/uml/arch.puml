@@ -1,0 +1,48 @@
+@startuml
+'https://plantuml.com/component-diagram
+
+left to right direction
+
+package "model" {
+[Model] *--> [Board]
+}
+
+package "gamemodes" {
+[GameMode]
+[GameCore]
+[GameLayer]
+
+[GameCore] <--* [GameMode]
+[GameLayer] <--o [GameMode]
+}
+
+package "core features" {
+[RotationSystem]
+[Generator]
+}
+
+package "layer features" {
+[ScoreObserver] <--o [ScoreSystemLayer]
+[ScoreSystemLayer]
+[LineCountLayer]
+}
+
+[ScoreSystemLayer] ..|> [GameLayer]
+[GameMode] <--* [Model]
+[Generator] <--* [GameCore]
+[RotationSystem] <--* [GameCore]
+[LineCountLayer] ..|> [GameLayer]
+
+package "controller" {
+[ScoreController]
+[LineCountController]
+[MainController]
+}
+
+package "view"
+
+[ScoreController] *--> [ScoreSystemLayer]
+[MainController] *--> [Model]
+[LineCountLayer] <--* [LineCountController]
+
+@enduml
