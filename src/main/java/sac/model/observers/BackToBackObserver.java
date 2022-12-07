@@ -3,6 +3,9 @@ package sac.model.observers;
 import sac.model.Piece;
 import sac.model.rotations.SuperRotationSystem;
 
+/**
+ * A ScoreObserver to calculate score based on consecutive Tetris or T-Spin.
+ */
 public class BackToBackObserver extends ScoreObserver{
 
     boolean lastTspin = false;

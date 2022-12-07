@@ -1,7 +1,8 @@
 package sac.model.observers;
 
-import sac.model.Model;
-
+/**
+ * A ScoreObserver to calculate score based on number of row cleared.
+ */
 public class LinearObserver extends ScoreObserver {
     private int score = 0;
     private int level = 1;
