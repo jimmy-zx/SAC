@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"sac"},{"l":"sac.control"},{"l":"sac.model"},{"l":"sac.model.colors"},{"l":"sac.model.gamemodes"},{"l":"sac.model.generators"},{"l":"sac.model.observers"},{"l":"sac.model.rotations"},{"l":"sac.utils"}];updateSearchResults();
