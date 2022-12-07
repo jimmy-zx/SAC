@@ -1,59 +1,67 @@
 @startgantt
 
-[Class structure design] as [A] lasts 2 days
-[Class structure design completed] happens at [A]'s end
-[Gameplay Improvements] lasts 28 days
+Project starts 2022-11-25
 
-[Lock delay] starts at [A]'s end
-[Lock delay] lasts 3 days
+[Sprint 1] is colored in GreenYellow
+[Sprint 1] starts 2022-11-25
+[Sprint 1] ends 2022-12-1
 
-[Hold] starts at [A]'s end
-[Hold] lasts 1 days
+[Framework design] starts at [Sprint 1]'s start
+[Framework design] ends 2022-12-1
 
-[Score calculation] starts at [Hold]'s end
-[Score calculation] lasts 3 days
+[Score calculation] starts 2022-11-26
+[Score calculation] ends 2022-12-1
 
-[Observer Pattern Implemented] happens at [Score calculation]'s end
+[Piece generator] starts at [Sprint 1]'s start
+[Piece generator] lasts 3 days
 
-[Reduce delay] starts at [Hold]'s end
-[Reduce delay] lasts 4 days
+[Super Rotation System] starts at [Piece generator]'s end
+[Super Rotation System] ends 2022-12-1
 
-[Sprint 1 completed] as [1] happens at [Reduce delay]'s end
+[Colorscheme] starts at 2022-11-27
+[Colorscheme] lasts 2 days
 
-[Ghost piece] starts at [1]'s end
-[Ghost piece] lasts 3 days
+[Sprint 2] is colored in GreenYellow
+[Sprint 2] starts at [Sprint 1]'s end
+[Sprint 2] ends 2022-12-5
 
-[Piece preview] starts at [1]'s end
-[Piece preview] lasts 2 days
+[Score calculation (cont)] starts at [Score calculation]'s start
+[Score calculation (cont)] ends 2022-12-3
 
-[T-spin] starts at [1]'s end
-[T-spin] lasts 7 days
+[Piece preview] starts at [Score calculation (cont)]'s end
 
-[Sprint 2 completed] as [2] happens at [T-spin]'s end
+[Timed mode] starts at [Score calculation (cont)]'s end
+[Timed mode] lasts 2 days
 
-[Game mode] starts at [2]'s end
-[Game mode] lasts 4 days
+[Super Rotation System (cont)] starts at [Super Rotation System]'s start
+[Super Rotation System (cont)] ends at 2022-12-3
 
-[Template method pattern implemented] happens at [Game mode]'s end
+[Game mode] starts at [Sprint 2]'s start
+[Game mode] ends at 2022-12-3
 
-[Training mode] lasts 2 days
-[Training mode] starts at [Game mode]'s end
+[Flexible view] starts at [Sprint 2]'s start
+[Flexible view] ends 2022-12-5
 
-[Gameplay Improvements completed] happens at [Training mode]'s end
+[Hold] starts at 2022-12-4
+[Line count mode] starts at [Hold]'s end
 
-[Accessibility Improvments] lasts 28 days
 
-[Colour scheme] lasts 3 days
-[Colour scheme] starts at [A]'s end
+[Lock delay] starts at 2022-12-2
 
-[Strategy Pattern Implemented] happens at [Colour scheme]'s end
+[Ghost piece] starts at [Lock delay]'s end
+[Ghost piece] lasts 2 days
 
-[Adaptive input device support] starts at [2]'s end
-[Adaptive input device support] lasts 4 days
+[Tetris effect] starts at [Ghost piece]'s end
 
-[Haptic feedback] lasts 3 days
-[Haptic feedback] starts at [Adaptive input device support]'s end
-[Accessibility improvements completed] happens at [Haptic feedback]'s end
-[Sprint 3 completed] as [3] happens at [Haptic feedback]'s end
-[Project completed] happens at [Haptic feedback]'s end
+[Sprint 3] is colored in GreenYellow
+[Sprint 3] starts at [Sprint 2]'s end
+[Sprint 3] ends 2022-12-7
+
+[Tests] starts at [Sprint 3]'s start
+[Tests] lasts 2 days
+
+[Documentation] starts at [Sprint 3]'s start
+[Documentation] lasts 2 days
+
+[Project completed] happens at [Sprint 3]'s end
 @endgantt
