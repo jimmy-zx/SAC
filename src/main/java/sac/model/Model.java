@@ -9,6 +9,12 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The model for a Tetris Game.
+ * <p>
+ *     This class acts as a wrapper for Board with extra functionality.
+ * </p>
+ */
 public class Model {
     public Board board;
     private Piece activePiece;
@@ -32,16 +38,43 @@ public class Model {
 
     private DataPackage dataPackage;
 
+    /**
+     * The type of movement.
+     */
     public enum MoveType {
+        /**
+         * Rotate the current piece 90 degrees counterclockwise.
+         */
         ROTATE_LEFT,
+        /**
+         * Rotate the current piece 90 degrees clockwise.
+         */
         ROTATE_RIGHT,
+        /**
+         * Move the piece left by one unit.
+         */
         LEFT,
+        /**
+         * Move the piece right by one unit.
+         */
         RIGHT,
+        /**
+         * Move the piece down by one unit.
+         */
         DOWN,
+        /**
+         * Drop the current piece.
+         */
         HARD_DROP,
+        /**
+         * Hold the current piece and replace it with a new one.
+         */
         HOLD,
     }
 
+    /**
+     * Initialize a new model.
+     */
     public Model() {
         // this.board = new Board();
         this.gameOn = false;
@@ -50,16 +83,29 @@ public class Model {
 //        this.board = new Board(gameMode.getWidth(), gameMode.getHeight());
     }
 
+    /**
+     * Set the game mode.
+     * <p>
+     *     Note: GameMode stores the actual game logic.
+     * </p>
+     * @param gameMode The desired GameMode.
+     */
     public void setGameMode(GameMode gameMode) {
         this.gameMode = gameMode;
     }
 
+    /**
+     * Clear the current game and create a new one.
+     */
     public void newGame() {
         this.board = new Board(gameMode.getWidth(), gameMode.getHeight());
         gameMode.getPieceGenerator().reset();
         holdPiece = null;
     }
 
+    /**
+     * Start the game.
+     */
     public void startGame() {
         gameOn = true;
         gameMode.onGameStart();
@@ -230,20 +276,35 @@ public class Model {
         holdPiece = activePiece.type;
     }
 
+    /**
+     * Update the model by moveType
+     * @param moveType The movement.
+     */
     public void modelTick(MoveType moveType) {
         if (!isGameOn() || gameMode.isGameEnd()) return;
 
         executeMove(moveType);
     }
 
+    /**
+     * Check if the game is on.
+     * @return If the game is on.
+     */
     public boolean isGameOn() {
         return this.gameOn;
     }
 
+    /**
+     * Stop the current game.
+     */
     private void stopGame() {
         this.gameOn = false;
     }
 
+    /**
+     * Calculate the ghost piece of current piece.
+     * @return A list of point representing the body of the ghost piece.
+     */
     public List<Point> getGhostPiecePositions() {
         // do not know piece type
         List<Point> ghostPiecePositions = new ArrayList<>();
@@ -254,10 +315,18 @@ public class Model {
         return ghostPiecePositions;
     }
 
+    /**
+     * Get the current piece being held.
+     * @return The piece being held.
+     */
     public Piece.PieceType getHoldPiece() {
         return holdPiece;
     }
 
+    /**
+     * Get the upcoming pieces.
+     * @return A list of upcoming pieces.
+     */
     public ArrayDeque<Piece> getPreview() {
         return this.preview.clone();
     }
