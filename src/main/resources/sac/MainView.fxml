@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onMainPaneKeyPressed" styleClass="background-pane" stylesheets="@defaultStyle.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <Canvas fx:id="mainCanvas" height="200.0" width="200.0" BorderPane.alignment="CENTER" />
+   </center>
+   <top>
+      <ImageView fx:id="menuIcon" fitHeight="30.0" fitWidth="30.0" onMouseClicked="#onMenuMouseClicked" onMouseEntered="#onMenuMouseEntered" onMouseExited="#onMenuMouseExited" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER_LEFT">
+         <image>
+            <Image url="@menu.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <BorderPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </BorderPane.margin>
+      </ImageView>
+   </top>
+   <left>
+      <VBox fx:id="leftVBox" alignment="TOP_CENTER" spacing="5.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </BorderPane.margin>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </VBox>
+   </left>
+   <right>
+      <VBox fx:id="rightVBox" alignment="TOP_CENTER" spacing="5.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </BorderPane.margin>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </VBox>
+   </right>
+   <bottom>
+      <Button mnemonicParsing="false" text="SAC" BorderPane.alignment="CENTER_RIGHT" />
+   </bottom>
+</BorderPane>

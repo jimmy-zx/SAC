@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" styleClass="stop-menu-pane" stylesheets="@defaultStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label styleClass="stop-menu-title" text="PAUSED" />
+      <Button fx:id="resumeButton" mnemonicParsing="false" onAction="#onResumeButtonClicked" styleClass="stop-menu-button" text="RESUME">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="newGameButton" mnemonicParsing="false" onAction="#onNewGameButtonClicked" styleClass="stop-menu-button" text="NEW GAME">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="mainMenuButton" mnemonicParsing="false" onAction="#onMainMenuButtonClicked" styleClass="stop-menu-button" text="MAIN MENU">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="exitButton" mnemonicParsing="false" onAction="#onExitButtonClicked" styleClass="stop-menu-button" text="EXIT">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</VBox>

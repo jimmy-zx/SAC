@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox fx:id="canvasVBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="canvas-pane" stylesheets="@defaultStyle.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="canvasTitleLabel" styleClass="canvas-pane-title" text="Title" />
+      <Canvas fx:id="canvas" height="200.0" width="200.0">
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </Canvas>
+   </children>
+</VBox>
