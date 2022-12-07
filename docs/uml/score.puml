@@ -8,6 +8,16 @@ class ScoreSystemLayer {
 + addScoreObserver(ScoreObserver): ScoreSystemLayer
 }
 
+note right of ScoreSystemLayer::notifyAllObservers
+for ScoreObserver o in scoreObservers:
+    o.update(DataPackage)
+end note
+
+note left of ScoreSystemLayer::getScore
+for ScoreObserver o in scoreObservers:
+    this.score += o.getScore()
+end note
+
 abstract ScoreObserver {
 + getScore(): int
 + update(DataPackage)
@@ -37,10 +47,19 @@ class BackToBackObserver {
 + update(DataPackage)
 }
 
+class Controller {
+
+}
+
+note right of Controller
+Controller call scoreSystemLayer.getScore(),
+then update score to the view
+end note
+
 ScoreSystemLayer o--> ScoreObserver
 ScoreObserver <|.. LinearObserver
 ScoreObserver <|.. ComboScoreObserver
 ScoreObserver <|.. TSpinObserver
 ScoreObserver <|.. BackToBackObserver
-
+Controller --> ScoreSystemLayer
 @enduml

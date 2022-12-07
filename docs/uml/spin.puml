@@ -1,27 +1,36 @@
 @startuml
 
 interface RotationState {
-+ getRotationOffset(Piece, MoveType): Point
++ getRotationOffset(Piece, MoveType, Model): Point
 }
 
 enum SuperRotationState {
-+ getRotationOffset(Piece, MoveType): Point
+- Model model
++ getRotationOffset(Piece, MoveType, Model): Point
+- getNextState()
 }
 
+note left of SuperRotationState::getRotationOffset
+super rotation logic ...
+Call model.setRotationState(this.getNextState)
+end note
+
 class BasicRotationState {
-+ getRotationOffset(Piece, MoveType): Point
++ getRotationOffset(Piece, MoveType, Model): Point
 }
 
 class Model {
 + currentState: RotationState
 + modelTick(MoveType)
++ setRotationState(Rotation State)
 }
 
 note right of Model::modelTick
-Calls RotationState.getRotationOffset()
+if MoveType == Rotate:
+    Calls RotationState.getRotationOffset(...)
 end note
 
-RotationState o--> Model
+RotationState <--o Model
 SuperRotationState ..|> RotationState
 BasicRotationState ..|> RotationState
 

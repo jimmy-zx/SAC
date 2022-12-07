@@ -3,26 +3,33 @@
 class MainController {
 - colorScheme: ColorScheme
 - paintBoard()
++ setColorScheme(ColorScheme)
 }
 
 note left of MainController::paintBoard
-colorScheme.render()
+get color from colorScheme.render(pieceType)
+specific to a pieceType
+end note
+
+note right of MainController::setColorScheme
+Client can change colorscheme
+by calling setColorScheme()
 end note
 
 interface ColorScheme {
-+ render(): Color
++ render(PieceType): Color
 }
 
 class ClassicColorScheme {
-+ render(): Color
++ render(PieceType): Color
 }
 
 class HighContrastColor {
-+ render(): Color
++ render(PieceType): Color
 }
 
 class SplatoonColor {
-+ render(): Color
++ render(PieceType): Color
 }
 
 MainController o--> ColorScheme
