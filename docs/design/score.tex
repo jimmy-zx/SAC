@@ -10,101 +10,124 @@
 \definecolor{plantucolor0004}{RGB}{200,41,48}
 \definecolor{plantucolor0005}{RGB}{132,190,132}
 \definecolor{plantucolor0006}{RGB}{3,128,72}
-\definecolor{plantucolor0007}{RGB}{169,220,223}
+\definecolor{plantucolor0007}{RGB}{254,255,221}
+\definecolor{plantucolor0008}{RGB}{169,220,223}
 \begin{tikzpicture}[yscale=-1
 ,pstyle0/.style={color=plantucolor0001,fill=plantucolor0000,line width=0.5pt}
 ,pstyle1/.style={color=plantucolor0001,fill=plantucolor0002,line width=1.0pt}
 ,pstyle2/.style={color=plantucolor0001,line width=0.5pt}
 ,pstyle3/.style={color=plantucolor0004,line width=1.0pt}
 ,pstyle4/.style={color=plantucolor0006,fill=plantucolor0005,line width=1.0pt}
-,pstyle6/.style={color=plantucolor0001,line width=1.0pt}
-,pstyle8/.style={color=plantucolor0001,line width=1.0pt,dash pattern=on 7.0pt off 7.0pt}
+,pstyle5/.style={color=plantucolor0001,fill=plantucolor0007,line width=0.5pt}
+,pstyle7/.style={color=plantucolor0001,line width=1.0pt}
+,pstyle8/.style={color=plantucolor0001,fill=plantucolor0001,line width=1.0pt}
+,pstyle9/.style={color=plantucolor0001,line width=1.0pt,dash pattern=on 7.0pt off 7.0pt}
 ]
-\draw[pstyle0] (230.5pt,12pt) arc (180:270:5pt) -- (235.5pt,7pt) -- (705.1pt,7pt) arc (270:360:5pt) -- (710.1pt,12pt) -- (710.1pt,131.4844pt) arc (0:90:5pt) -- (705.1pt,136.4844pt) -- (235.5pt,136.4844pt) arc (90:180:5pt) -- (230.5pt,131.4844pt) -- cycle;
-\draw[pstyle1] (388.5508pt,23pt) ellipse (11pt and 11pt);
-\node at (388.5508pt,23pt)[]{\textbf{\Large C}};
-\node at (409.0508pt,14.8516pt)[below right,color=black]{ScoreSystemLayer};
-\draw[pstyle2] (231.5pt,39pt) -- (709.1pt,39pt);
-\draw[pstyle3] (238.5pt,49.6484pt) rectangle (244.5pt,55.6484pt);
-\node at (250.5pt,43pt)[below right,color=black]{scoreObservers: List\textless ScoreObserver\textgreater };
-\draw[pstyle3] (238.5pt,65.9453pt) rectangle (244.5pt,71.9453pt);
-\node at (250.5pt,59.2969pt)[below right,color=black]{score: int};
-\draw[pstyle2] (231.5pt,79.5938pt) -- (709.1pt,79.5938pt);
-\draw[pstyle4] (241.5pt,93.2422pt) ellipse (3pt and 3pt);
-\node at (250.5pt,83.5938pt)[below right,color=black]{notifyAllObservers(DataPackage)};
-\draw[pstyle4] (241.5pt,109.5391pt) ellipse (3pt and 3pt);
-\node at (250.5pt,99.8906pt)[below right,color=black]{getScore(): int};
-\draw[pstyle4] (241.5pt,125.8359pt) ellipse (3pt and 3pt);
-\node at (250.5pt,116.1875pt)[below right,color=black]{addScoreObserver(ScoreObserver): ScoreSystemLayer};
-\draw[pstyle0] (370pt,201pt) arc (180:270:5pt) -- (375pt,196pt) -- (565.88pt,196pt) arc (270:360:5pt) -- (570.88pt,201pt) -- (570.88pt,271.5938pt) arc (0:90:5pt) -- (565.88pt,276.5938pt) -- (375pt,276.5938pt) arc (90:180:5pt) -- (370pt,271.5938pt) -- cycle;
-\draw[color=plantucolor0001,fill=plantucolor0007,line width=1.0pt] (405.4202pt,212pt) ellipse (11pt and 11pt);
-\node at (405.4202pt,212pt)[]{\textbf{\Large A}};
-\node at (423.958pt,203.8516pt)[below right,color=black]{\textit{ScoreObserver}};
-\draw[pstyle2] (371pt,228pt) -- (569.88pt,228pt);
-\draw[pstyle2] (371pt,236pt) -- (569.88pt,236pt);
-\draw[pstyle4] (381pt,249.6484pt) ellipse (3pt and 3pt);
-\node at (390pt,240pt)[below right,color=black]{getScore(): int};
-\draw[pstyle4] (381pt,265.9453pt) ellipse (3pt and 3pt);
-\node at (390pt,256.2969pt)[below right,color=black]{update(DataPackage)};
-\draw[pstyle0] (7pt,350pt) arc (180:270:5pt) -- (12pt,345pt) -- (202.88pt,345pt) arc (270:360:5pt) -- (207.88pt,350pt) -- (207.88pt,436.8906pt) arc (0:90:5pt) -- (202.88pt,441.8906pt) -- (12pt,441.8906pt) arc (90:180:5pt) -- (7pt,436.8906pt) -- cycle;
-\draw[pstyle1] (40.1669pt,361pt) ellipse (11pt and 11pt);
-\node at (40.1669pt,361pt)[]{\textbf{\Large C}};
-\node at (58.204pt,352.8516pt)[below right,color=black]{LinearObserver};
-\draw[pstyle2] (8pt,377pt) -- (206.88pt,377pt);
-\draw[pstyle3] (15pt,387.6484pt) rectangle (21pt,393.6484pt);
-\node at (27pt,381pt)[below right,color=black]{level: int};
-\draw[pstyle2] (8pt,401.2969pt) -- (206.88pt,401.2969pt);
-\draw[pstyle4] (18pt,414.9453pt) ellipse (3pt and 3pt);
-\node at (27pt,405.2969pt)[below right,color=black]{getScore(): int};
-\draw[pstyle4] (18pt,431.2422pt) ellipse (3pt and 3pt);
-\node at (27pt,421.5938pt)[below right,color=black]{update(DataPackage)};
-\draw[pstyle0] (243pt,350pt) arc (180:270:5pt) -- (248pt,345pt) -- (450.5806pt,345pt) arc (270:360:5pt) -- (455.5806pt,350pt) -- (455.5806pt,436.8906pt) arc (0:90:5pt) -- (450.5806pt,441.8906pt) -- (248pt,441.8906pt) arc (90:180:5pt) -- (243pt,436.8906pt) -- cycle;
-\draw[pstyle1] (258pt,361pt) ellipse (11pt and 11pt);
-\node at (258pt,361pt)[]{\textbf{\Large C}};
-\node at (272pt,352.8516pt)[below right,color=black]{ComboScoreObserver};
-\draw[pstyle2] (244pt,377pt) -- (454.5806pt,377pt);
-\draw[pstyle3] (251pt,387.6484pt) rectangle (257pt,393.6484pt);
-\node at (263pt,381pt)[below right,color=black]{combo: int};
-\draw[pstyle2] (244pt,401.2969pt) -- (454.5806pt,401.2969pt);
-\draw[pstyle4] (254pt,414.9453pt) ellipse (3pt and 3pt);
-\node at (263pt,405.2969pt)[below right,color=black]{getScore(): int};
-\draw[pstyle4] (254pt,431.2422pt) ellipse (3pt and 3pt);
-\node at (263pt,421.5938pt)[below right,color=black]{update(DataPackage)};
-\draw[pstyle0] (491pt,358pt) arc (180:270:5pt) -- (496pt,353pt) -- (686.88pt,353pt) arc (270:360:5pt) -- (691.88pt,358pt) -- (691.88pt,428.5938pt) arc (0:90:5pt) -- (686.88pt,433.5938pt) -- (496pt,433.5938pt) arc (90:180:5pt) -- (491pt,428.5938pt) -- cycle;
-\draw[pstyle1] (526.6579pt,369pt) ellipse (11pt and 11pt);
-\node at (526.6579pt,369pt)[]{\textbf{\Large C}};
-\node at (545.2485pt,360.8516pt)[below right,color=black]{TSpinObserver};
-\draw[pstyle2] (492pt,385pt) -- (690.88pt,385pt);
-\draw[pstyle2] (492pt,393pt) -- (690.88pt,393pt);
-\draw[pstyle4] (502pt,406.6484pt) ellipse (3pt and 3pt);
-\node at (511pt,397pt)[below right,color=black]{getScore(): int};
-\draw[pstyle4] (502pt,422.9453pt) ellipse (3pt and 3pt);
-\node at (511pt,413.2969pt)[below right,color=black]{update(DataPackage)};
-\draw[pstyle0] (727pt,342pt) arc (180:270:5pt) -- (732pt,337pt) -- (930.96pt,337pt) arc (270:360:5pt) -- (935.96pt,342pt) -- (935.96pt,445.1875pt) arc (0:90:5pt) -- (930.96pt,450.1875pt) -- (732pt,450.1875pt) arc (90:180:5pt) -- (727pt,445.1875pt) -- cycle;
-\draw[pstyle1] (742pt,353pt) ellipse (11pt and 11pt);
-\node at (742pt,353pt)[]{\textbf{\Large C}};
-\node at (756pt,344.8516pt)[below right,color=black]{BackToBackObserver};
-\draw[pstyle2] (728pt,369pt) -- (934.96pt,369pt);
-\draw[pstyle3] (735pt,379.6484pt) rectangle (741pt,385.6484pt);
-\node at (747pt,373pt)[below right,color=black]{lastTetris: boolean};
-\draw[pstyle3] (735pt,395.9453pt) rectangle (741pt,401.9453pt);
-\node at (747pt,389.2969pt)[below right,color=black]{lastTspin: boolean};
-\draw[pstyle2] (728pt,409.5938pt) -- (934.96pt,409.5938pt);
-\draw[pstyle4] (738pt,423.2422pt) ellipse (3pt and 3pt);
-\node at (747pt,413.5938pt)[below right,color=black]{getScore(): int};
-\draw[pstyle4] (738pt,439.5391pt) ellipse (3pt and 3pt);
-\node at (747pt,429.8906pt)[below right,color=black]{update(DataPackage)};
-\draw[pstyle6] (470.5pt,148.45pt) ..controls (470.5pt,148.45pt) and (470.5pt,171.97pt) .. (470.5pt,182.43pt);
-\draw[pstyle6] (470.5pt,136.45pt) -- (466.5pt,142.45pt) -- (470.5pt,148.45pt) -- (474.5pt,142.45pt) -- (470.5pt,136.45pt) -- cycle;
-\draw[color=plantucolor0001,fill=plantucolor0001,line width=1.0pt] (470.5pt,195.7pt) -- (474.5pt,186.7pt) -- (470.5pt,190.7pt) -- (466.5pt,186.7pt) -- (470.5pt,195.7pt) -- cycle;
-\draw[pstyle6] (470.5pt,190.7pt) -- (470.5pt,182.7pt);
-\draw[pstyle8] (351.19pt,284.46pt) ..controls (311.06pt,300.65pt) and (266.16pt,319.2pt) .. (225.5pt,337pt) ..controls (219.69pt,339.54pt) and (213.75pt,342.19pt) .. (207.76pt,344.9pt);
-\draw[pstyle6] (348.69pt,277.92pt) -- (369.86pt,276.95pt) -- (353.91pt,290.91pt) -- (348.69pt,277.92pt) -- cycle;
-\draw[pstyle8] (427.19pt,292.99pt) ..controls (413.96pt,309.92pt) and (399.55pt,328.39pt) .. (386.76pt,344.76pt);
-\draw[pstyle6] (421.83pt,288.47pt) -- (439.65pt,277.01pt) -- (432.86pt,297.09pt) -- (421.83pt,288.47pt) -- cycle;
-\draw[pstyle8] (513.83pt,293pt) ..controls (529.26pt,312.77pt) and (546.31pt,334.61pt) .. (560.5pt,352.79pt);
-\draw[pstyle6] (508.14pt,297.09pt) -- (501.35pt,277.01pt) -- (519.17pt,288.47pt) -- (508.14pt,297.09pt) -- cycle;
-\draw[pstyle8] (586.17pt,284.77pt) ..controls (625.43pt,301.05pt) and (669.48pt,319.57pt) .. (709.5pt,337pt) ..controls (715.15pt,339.46pt) and (720.94pt,342.01pt) .. (726.78pt,344.6pt);
-\draw[pstyle6] (583.42pt,291.21pt) -- (567.61pt,277.09pt) -- (588.77pt,278.27pt) -- (583.42pt,291.21pt) -- cycle;
+\draw[pstyle0] (298.5pt,120pt) arc (180:270:5pt) -- (303.5pt,115pt) -- (685.4592pt,115pt) arc (270:360:5pt) -- (690.4592pt,120pt) -- (690.4592pt,235.5195pt) arc (0:90:5pt) -- (685.4592pt,240.5195pt) -- (303.5pt,240.5195pt) arc (90:180:5pt) -- (298.5pt,235.5195pt) -- cycle;
+\draw[pstyle1] (427.9735pt,131pt) ellipse (11pt and 11pt);
+\node at (427.9735pt,131pt)[]{\textbf{\Large C}};
+\node at (448.4735pt,123.248pt)[below right,color=black]{ScoreSystemLayer};
+\draw[pstyle2] (299.5pt,147pt) -- (689.4592pt,147pt);
+\draw[pstyle3] (306.5pt,157.252pt) rectangle (312.5pt,163.252pt);
+\node at (318.5pt,151pt)[below right,color=black]{scoreObservers: List\textless ScoreObserver\textgreater };
+\draw[pstyle3] (306.5pt,172.7559pt) rectangle (312.5pt,178.7559pt);
+\node at (318.5pt,166.5039pt)[below right,color=black]{score: int};
+\draw[pstyle2] (299.5pt,186.0078pt) -- (689.4592pt,186.0078pt);
+\draw[pstyle4] (309.5pt,199.2598pt) ellipse (3pt and 3pt);
+\node at (318.5pt,190.0078pt)[below right,color=black]{notifyAllObservers(DataPackage)};
+\draw[pstyle4] (309.5pt,214.7637pt) ellipse (3pt and 3pt);
+\node at (318.5pt,205.5117pt)[below right,color=black]{getScore(): int};
+\draw[pstyle4] (309.5pt,230.2676pt) ellipse (3pt and 3pt);
+\node at (318.5pt,221.0156pt)[below right,color=black]{addScoreObserver(ScoreObserver): ScoreSystemLayer};
+\draw[pstyle5] (726pt,153.5pt) -- (726pt,168.8965pt) -- (541.3pt,197.7598pt) -- (726pt,176.8965pt) -- (726pt,192.293pt) -- (982.6571pt,192.293pt) -- (982.6571pt,163.5pt) -- (972.6571pt,153.5pt) -- (726pt,153.5pt);
+\draw[pstyle5] (972.6571pt,153.5pt) -- (972.6571pt,163.5pt) -- (982.6571pt,163.5pt) -- (972.6571pt,153.5pt);
+\node at (732pt,158.5pt)[below right,color=black]{for ScoreObserver o in scoreObservers:};
+\node at (732pt,172.8965pt)[below right,color=black]{    o.update(DataPackage)};
+\draw[pstyle5] (6pt,153.5pt) -- (6pt,192.293pt) -- (262.6571pt,192.293pt) -- (262.6571pt,176.8965pt) -- (302.5pt,213.2637pt) -- (262.6571pt,168.8965pt) -- (262.6571pt,163.5pt) -- (252.6571pt,153.5pt) -- (6pt,153.5pt);
+\draw[pstyle5] (252.6571pt,153.5pt) -- (252.6571pt,163.5pt) -- (262.6571pt,163.5pt) -- (252.6571pt,153.5pt);
+\node at (12pt,158.5pt)[below right,color=black]{for ScoreObserver o in scoreObservers:};
+\node at (12pt,172.8965pt)[below right,color=black]{    this.score += o.getScore()};
+\draw[pstyle0] (411pt,306pt) arc (180:270:5pt) -- (416pt,301pt) -- (573pt,301pt) arc (270:360:5pt) -- (578pt,306pt) -- (578pt,375.0078pt) arc (0:90:5pt) -- (573pt,380.0078pt) -- (416pt,380.0078pt) arc (90:180:5pt) -- (411pt,375.0078pt) -- cycle;
+\draw[color=plantucolor0001,fill=plantucolor0008,line width=1.0pt] (443.0846pt,317pt) ellipse (11pt and 11pt);
+\node at (443.0846pt,317pt)[]{\textbf{\Large A}};
+\node at (460.8812pt,309.248pt)[below right,color=black]{\textit{ScoreObserver}};
+\draw[pstyle2] (412pt,333pt) -- (577pt,333pt);
+\draw[pstyle2] (412pt,341pt) -- (577pt,341pt);
+\draw[pstyle4] (422pt,354.252pt) ellipse (3pt and 3pt);
+\node at (431pt,345pt)[below right,color=black]{getScore(): int};
+\draw[pstyle4] (422pt,369.7559pt) ellipse (3pt and 3pt);
+\node at (431pt,360.5039pt)[below right,color=black]{update(DataPackage)};
+\draw[pstyle0] (99pt,452.5pt) arc (180:270:5pt) -- (104pt,447.5pt) -- (261pt,447.5pt) arc (270:360:5pt) -- (266pt,452.5pt) -- (266pt,537.0117pt) arc (0:90:5pt) -- (261pt,542.0117pt) -- (104pt,542.0117pt) arc (90:180:5pt) -- (99pt,537.0117pt) -- cycle;
+\draw[pstyle1] (128.9079pt,463.5pt) ellipse (11pt and 11pt);
+\node at (128.9079pt,463.5pt)[]{\textbf{\Large C}};
+\node at (146.2208pt,455.748pt)[below right,color=black]{LinearObserver};
+\draw[pstyle2] (100pt,479.5pt) -- (265pt,479.5pt);
+\draw[pstyle3] (107pt,489.752pt) rectangle (113pt,495.752pt);
+\node at (119pt,483.5pt)[below right,color=black]{level: int};
+\draw[pstyle2] (100pt,503.0039pt) -- (265pt,503.0039pt);
+\draw[pstyle4] (110pt,516.2559pt) ellipse (3pt and 3pt);
+\node at (119pt,507.0039pt)[below right,color=black]{getScore(): int};
+\draw[pstyle4] (110pt,531.7598pt) ellipse (3pt and 3pt);
+\node at (119pt,522.5078pt)[below right,color=black]{update(DataPackage)};
+\draw[pstyle0] (301pt,452.5pt) arc (180:270:5pt) -- (306pt,447.5pt) -- (475.2pt,447.5pt) arc (270:360:5pt) -- (480.2pt,452.5pt) -- (480.2pt,537.0117pt) arc (0:90:5pt) -- (475.2pt,542.0117pt) -- (306pt,542.0117pt) arc (90:180:5pt) -- (301pt,537.0117pt) -- cycle;
+\draw[pstyle1] (316pt,463.5pt) ellipse (11pt and 11pt);
+\node at (316pt,463.5pt)[]{\textbf{\Large C}};
+\node at (330pt,455.748pt)[below right,color=black]{ComboScoreObserver};
+\draw[pstyle2] (302pt,479.5pt) -- (479.2pt,479.5pt);
+\draw[pstyle3] (309pt,489.752pt) rectangle (315pt,495.752pt);
+\node at (321pt,483.5pt)[below right,color=black]{combo: int};
+\draw[pstyle2] (302pt,503.0039pt) -- (479.2pt,503.0039pt);
+\draw[pstyle4] (312pt,516.2559pt) ellipse (3pt and 3pt);
+\node at (321pt,507.0039pt)[below right,color=black]{getScore(): int};
+\draw[pstyle4] (312pt,531.7598pt) ellipse (3pt and 3pt);
+\node at (321pt,522.5078pt)[below right,color=black]{update(DataPackage)};
+\draw[pstyle0] (515pt,460.5pt) arc (180:270:5pt) -- (520pt,455.5pt) -- (677pt,455.5pt) arc (270:360:5pt) -- (682pt,460.5pt) -- (682pt,529.5078pt) arc (0:90:5pt) -- (677pt,534.5078pt) -- (520pt,534.5078pt) arc (90:180:5pt) -- (515pt,529.5078pt) -- cycle;
+\draw[pstyle1] (545.1472pt,471.5pt) ellipse (11pt and 11pt);
+\node at (545.1472pt,471.5pt)[]{\textbf{\Large C}};
+\node at (562.5133pt,463.748pt)[below right,color=black]{TSpinObserver};
+\draw[pstyle2] (516pt,487.5pt) -- (681pt,487.5pt);
+\draw[pstyle2] (516pt,495.5pt) -- (681pt,495.5pt);
+\draw[pstyle4] (526pt,508.752pt) ellipse (3pt and 3pt);
+\node at (535pt,499.5pt)[below right,color=black]{getScore(): int};
+\draw[pstyle4] (526pt,524.2559pt) ellipse (3pt and 3pt);
+\node at (535pt,515.0039pt)[below right,color=black]{update(DataPackage)};
+\draw[pstyle0] (717.5pt,445pt) arc (180:270:5pt) -- (722.5pt,440pt) -- (888.9129pt,440pt) arc (270:360:5pt) -- (893.9129pt,445pt) -- (893.9129pt,545.0156pt) arc (0:90:5pt) -- (888.9129pt,550.0156pt) -- (722.5pt,550.0156pt) arc (90:180:5pt) -- (717.5pt,545.0156pt) -- cycle;
+\draw[pstyle1] (732.5pt,456pt) ellipse (11pt and 11pt);
+\node at (732.5pt,456pt)[]{\textbf{\Large C}};
+\node at (746.5pt,448.248pt)[below right,color=black]{BackToBackObserver};
+\draw[pstyle2] (718.5pt,472pt) -- (892.9129pt,472pt);
+\draw[pstyle3] (725.5pt,482.252pt) rectangle (731.5pt,488.252pt);
+\node at (737.5pt,476pt)[below right,color=black]{lastTetris: boolean};
+\draw[pstyle3] (725.5pt,497.7559pt) rectangle (731.5pt,503.7559pt);
+\node at (737.5pt,491.5039pt)[below right,color=black]{lastTspin: boolean};
+\draw[pstyle2] (718.5pt,511.0078pt) -- (892.9129pt,511.0078pt);
+\draw[pstyle4] (728.5pt,524.2598pt) ellipse (3pt and 3pt);
+\node at (737.5pt,515.0078pt)[below right,color=black]{getScore(): int};
+\draw[pstyle4] (728.5pt,539.7637pt) ellipse (3pt and 3pt);
+\node at (737.5pt,530.5117pt)[below right,color=black]{update(DataPackage)};
+\draw[pstyle0] (445.5pt,12pt) arc (180:270:5pt) -- (450.5pt,7pt) -- (538.6286pt,7pt) arc (270:360:5pt) -- (543.6286pt,12pt) -- (543.6286pt,50pt) arc (0:90:5pt) -- (538.6286pt,55pt) -- (450.5pt,55pt) arc (90:180:5pt) -- (445.5pt,50pt) -- cycle;
+\draw[pstyle1] (460.5pt,23pt) ellipse (11pt and 11pt);
+\node at (460.5pt,23pt)[]{\textbf{\Large C}};
+\node at (474.5pt,15.248pt)[below right,color=black]{Controller};
+\draw[pstyle2] (446.5pt,39pt) -- (542.6286pt,39pt);
+\draw[pstyle2] (446.5pt,47pt) -- (542.6286pt,47pt);
+\draw[pstyle5] (579pt,11.5pt) -- (579pt,27pt) -- (543.7pt,31pt) -- (579pt,35pt) -- (579pt,50.293pt) -- (867.539pt,50.293pt) -- (867.539pt,21.5pt) -- (857.539pt,11.5pt) -- (579pt,11.5pt);
+\draw[pstyle5] (857.539pt,11.5pt) -- (857.539pt,21.5pt) -- (867.539pt,21.5pt) -- (857.539pt,11.5pt);
+\node at (585pt,16.5pt)[below right,color=black]{Controller call scoreSystemLayer.getScore(),};
+\node at (585pt,30.8965pt)[below right,color=black]{then update score to the view};
+\draw[pstyle7] (494.5pt,253.05pt) ..controls (494.5pt,253.05pt) and (494.5pt,277.14pt) .. (494.5pt,287.79pt);
+\draw[pstyle7] (494.5pt,241.05pt) -- (490.5pt,247.05pt) -- (494.5pt,253.05pt) -- (498.5pt,247.05pt) -- (494.5pt,241.05pt) -- cycle;
+\draw[pstyle8] (494.5pt,300.8pt) -- (498.5pt,291.8pt) -- (494.5pt,295.8pt) -- (490.5pt,291.8pt) -- (494.5pt,300.8pt) -- cycle;
+\draw[pstyle7] (494.5pt,295.8pt) -- (494.5pt,287.8pt);
+\draw[pstyle9] (392.52pt,387.75pt) ..controls (357.74pt,403.88pt) and (318.74pt,422.37pt) .. (283.5pt,440pt) ..controls (277.81pt,442.85pt) and (271.96pt,445.83pt) .. (266.09pt,448.86pt);
+\draw[pstyle7] (389.73pt,381.33pt) -- (410.82pt,379.3pt) -- (395.6pt,394.04pt) -- (389.73pt,381.33pt) -- cycle;
+\draw[pstyle9] (456.69pt,396.94pt) ..controls (445.42pt,413.47pt) and (433.19pt,431.41pt) .. (422.34pt,447.31pt);
+\draw[pstyle7] (450.94pt,392.96pt) -- (467.99pt,380.38pt) -- (462.5pt,400.84pt) -- (450.94pt,392.96pt) -- cycle;
+\draw[pstyle9] (532.43pt,397.12pt) ..controls (545.64pt,416.49pt) and (560.16pt,437.78pt) .. (572.22pt,455.46pt);
+\draw[pstyle7] (526.5pt,400.84pt) -- (521.01pt,380.38pt) -- (538.06pt,392.96pt) -- (526.5pt,400.84pt) -- cycle;
+\draw[pstyle9] (594.19pt,388.83pt) ..controls (627.73pt,404.9pt) and (665.31pt,423.08pt) .. (699.5pt,440pt) ..controls (705.33pt,442.89pt) and (711.33pt,445.88pt) .. (717.37pt,448.91pt);
+\draw[pstyle7] (591.04pt,395.08pt) -- (576.02pt,380.13pt) -- (597.08pt,382.45pt) -- (591.04pt,395.08pt) -- cycle;
+\draw[pstyle7] (494.5pt,55.3pt) ..controls (494.5pt,70.08pt) and (494.5pt,90.03pt) .. (494.5pt,109.49pt);
+\draw[pstyle8] (494.5pt,114.96pt) -- (498.5pt,105.96pt) -- (494.5pt,109.96pt) -- (490.5pt,105.96pt) -- (494.5pt,114.96pt) -- cycle;
 \end{tikzpicture}
 \end{document}
