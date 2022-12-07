@@ -46,4 +46,10 @@ public class PieceTest {
         Piece piece = Piece.generate(Piece.PieceType.L);
         assertEquals(piece, piece.rotateLeft().rotateRight());
     }
+
+    @Test
+    void testToString() {
+        Piece piece = Piece.generate(Piece.PieceType.L);
+        assertTrue(piece.toString().length() > 0);
+    }
 }

@@ -246,8 +246,15 @@ public class Model {
             if (!lock.isLocked()) {
                 lock.unlock();
                 rowCleared = board.clearRows();
+                if (currentPosition.y() + activePiece.height > gameMode.getHeight() - gameMode.getBuffer()) {
+                    stopGame();
+                }
                 spawnPiece();
             }
+        }
+
+        if (!gameOn) {
+            return;
         }
 
         dataPackage.rowCleared = rowCleared;
