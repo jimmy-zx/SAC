@@ -1,53 +1,46 @@
 @startuml
 
-class TetrisBoard {
-- notifyAll()
-- onRowClear()
-- scoreObservers: List[ScoreObserver]
-+ addScoreObserver(ScoreObserver)
-+ removeScoreObserver(ScoreObserver)
+class ScoreSystemLayer {
+- scoreObservers: List<ScoreObserver>
+- score: int
++ notifyAllObservers(DataPackage)
++ getScore(): int
++ addScoreObserver(ScoreObserver): ScoreSystemLayer
 }
 
-note right of TetrisBoard::onRowClear
-calls notifyAll()
-end note
-
-note left of TetrisBoard::notifyAll
-for each in scoreObservers
-    each.update()
-end note
-
-interface ScoreObserver {
+abstract ScoreObserver {
 + getScore(): int
-+ update(TetrisBoard)
++ update(DataPackage)
 }
 
-class OtherScoreObserver {
+class LinearObserver {
+- level: int
 + getScore(): int
-+ update(TetrisBoard)
++ update(DataPackage)
 }
 
 class ComboScoreObserver {
-- currentCombo: int
+- combo: int
 + getScore(): int
-+ update(TetrisBoard)
++ update(DataPackage)
 }
 
-class TetrisModel {
-
+class TSpinObserver {
++ getScore(): int
++ update(DataPackage)
 }
 
+class BackToBackObserver {
+- lastTetris: boolean
+- lastTspin: boolean
++ getScore(): int
++ update(DataPackage)
+}
 
-TetrisBoard o--> ScoreObserver
-ScoreObserver <|.. OtherScoreObserver
+ScoreSystemLayer o--> ScoreObserver
+ScoreObserver <|.. LinearObserver
 ScoreObserver <|.. ComboScoreObserver
-TetrisBoard <-- TetrisModel: client
-
-note on link
-comboScore = new ComboScoreObserver()
-tetrisBoard.addScoreObserver(comboScore)
-...
-comboScore.getScore()
-end note
+ScoreObserver <|.. TSpinObserver
+ScoreObserver <|.. BackToBackObserver
 
 @enduml
