@@ -1,38 +1,33 @@
 @startuml
 
-class TetrisBoard {
-- currentColorScheme: ColorScheme
-+ render()
-+ setColorScheme(ColorScheme)
+class MainController {
+- colorScheme: ColorScheme
+- paintBoard()
 }
 
-note left of TetrisBoard::render
-currentColorScheme.render()
+note left of MainController::paintBoard
+colorScheme.render()
 end note
 
 interface ColorScheme {
-- colors: List[Color]
-+ render()
++ render(): Color
 }
 
-class DefaultColorScheme {
-- colors: List[Color]
-+ render()
+class ClassicColorScheme {
++ render(): Color
 }
 
-class HighContrastColorScheme {
-- colors: List[Color]
-+ render()
+class HighContrastColor {
++ render(): Color
 }
 
-TetrisBoard o--> ColorScheme
-ColorScheme <|.. DefaultColorScheme
-ColorScheme <|.. HighContrastColorScheme
-TetrisBoard <-- TetrisModel: client
+class SplatoonColor {
++ render(): Color
+}
 
-note on link
-tetrisBoard.setColorScheme(new DefaultColorScheme)
-tetrisBoard.render()
-end note
+MainController o--> ColorScheme
+ColorScheme <|.. ClassicColorScheme
+ColorScheme <|.. HighContrastColor
+ColorScheme <|.. SplatoonColor
 
 @enduml
