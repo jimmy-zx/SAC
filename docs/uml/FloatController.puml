@@ -1,0 +1,35 @@
+@startuml
+
+abstract FloatController {
+# container: VBox
+# root: Node
+# initialize()
+# init()
+}
+
+class HoldController {
+# init()
+}
+
+class LineCountController {
+lineCountLayer: LineCountLayer
+# init()
+}
+
+class ScoreController {
+scoreLayer: ScoreSystemLayer
+# init()
+}
+
+class TimedController {
+timedLayer: TimedLayer
+# init()
+}
+
+FloatController <|-- HoldController
+FloatController <|-- LineCountController
+FloatController <|-- ScoreController
+FloatController <|-- TimedController
+
+
+@enduml
