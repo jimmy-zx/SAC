@@ -3,6 +3,9 @@ package sac.model.observers;
 import sac.model.Piece;
 import sac.model.rotations.SuperRotationSystem;
 
+/**
+ * A ScoreObserver to calculate score based on T-Spin.
+ */
 public class TSpinObserver extends ScoreObserver {
 
     private int score;

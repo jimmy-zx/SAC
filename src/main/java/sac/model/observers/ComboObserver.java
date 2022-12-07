@@ -2,6 +2,9 @@ package sac.model.observers;
 
 import sac.model.Model;
 
+/**
+ * A ScoreObserver to calculate score based on consecutive row clears.
+ */
 public class ComboObserver extends ScoreObserver{
 
     private int combo = 0;
