@@ -1,44 +1,28 @@
 @startuml
 
-class TetrisBoard {
-+ placePiece(Piece, int, int)
+interface RotationState {
++ getRotationOffset(Piece, MoveType): Point
 }
 
-note right of TetrisBoard::placePiece
-calculate the state of the piece and calls Piece.setState()
+enum SuperRotationState {
++ getRotationOffset(Piece, MoveType): Point
+}
+
+class BasicRotationState {
++ getRotationOffset(Piece, MoveType): Point
+}
+
+class Model {
++ currentState: RotationState
++ modelTick(MoveType)
+}
+
+note right of Model::modelTick
+Calls RotationState.getRotationOffset()
 end note
 
-interface State {
-+ rotate(Piece): Piece
-}
-
-class DefaultState {
-+ rotate(Piece): Piece
-}
-
-class LeftWallKick {
-+ rotate(Piece): Piece
-}
-
-class RightWallKick {
-+ rotate(Piece): Piece
-}
-
-abstract Piece {
-+ state: State
-+ setState(State)
-+ rotate(Piece): Piece
-}
-
-note right of Piece::rotate
-calls State.rotate()
-end note
-
-TetrisBoard <.. State
-TetrisBoard <-- Piece
-Piece o--> State
-State <|.. DefaultState
-State <|.. LeftWallKick
-State <|.. RightWallKick
+RotationState o--> Model
+SuperRotationState ..|> RotationState
+BasicRotationState ..|> RotationState
 
 @enduml
