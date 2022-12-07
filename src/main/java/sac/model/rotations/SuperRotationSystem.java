@@ -61,7 +61,7 @@ public class SuperRotationSystem implements RotationSystem{
             if (activePiece.type == Piece.PieceType.O) {
                 testCnt = 5;
             }
-            System.out.println(this.name() + ": " + testCnt);
+            // System.out.println(this.name() + ": " + testCnt);
             return offset;
         }
 
