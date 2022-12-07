@@ -1,58 +1,71 @@
 @startuml
 
-class TetrisView {
-- currentGameMode: GameMode
-+ setGameMode(GameMode)
-+ runGame()
+
+interface GameCore {
++ getPieceGenerator(): Generator
++ getRotationSystem(): RotationSystem
++ getSpawnPosition(Piece): Point
++ getWidth(): int
++ getHeight(): int
++ getBuffer(): int
 }
 
-note left of TetrisView::runGame
-currentGameMode.runGame()
-end note
+class DefaultCore {
+}
 
-note left of GameMode::runGame
-onGameStart()
-while not checkGameEnd():
-    tick()
-onGameEnd()
-end note
+class CustomizeCore {
++ setPieceGenerator(Generator)
++ setRotationSystem(RotationSystem)
++ setSize(int, int, int)
+}
+
+interface GameLayer {
++ onGameStart()
++ isGameEnd(): boolean
++ notifyAllObservers(DataPackage)
+}
+
+class LineCountLayer {
+- count: int
+- total: int
++ isGameEnd()
+}
+
+class TimedLayer {
+- startTime: long
+- timer: long
++ isGameEnd()
+}
+
+class ScoreSystemLayer {
+- score: int
++ getScore(): int
++ notifyAllObservers(DataPackage)
+}
 
 class GameMode {
-- PieceGenerator generator
-+ runGame()
-+ onGameStart()
-+ onGameEnd()
-+ checkGameEnd(): boolean
-+ tick()
+- core: GameCore
+- layers: Stack<GameLayer>
++ setCore(GameCore)
++ addLayer(GameLayer)
++ removeLayer(GameLayer)
 }
 
-note right of GameMode
-checkGameEnd() returns whether maximum height is reached
-tick() picks a piece from the random generator
+note top of GameMode
+Implements GameCore by passing the call directly to core.
+Implements GameLayer by composing all layers.
 end note
 
-class TimeLimitedMode {
-- currentTime
-- timeLimit
-+ checkGameEnd(): boolean
-}
+GameMode o--> GameLayer
+GameMode o--> GameCore
 
-note bottom of TimeLimitedMode
-check if currentTime > timeLimit
-end note
+DefaultCore ..|> GameCore
+CustomizeCore ..|> GameCore
+GameMode ..|> GameCore
 
-class TrainingMode {
-+ checkGameEnd(): boolean
-+ tick()
-}
-
-note bottom of TrainingMode
-checkGameEnd() always returns false
-tick() pops up a window to let user select a piece to generate
-end note
-
-TetrisView o--> GameMode
-GameMode <|-- TrainingMode
-GameMode <|-- TimeLimitedMode
+LineCountLayer ..|> GameLayer
+ScoreSystemLayer ..|> GameLayer
+TimedLayer ..|> GameLayer
+GameMode ..|> GameLayer
 
 @enduml
