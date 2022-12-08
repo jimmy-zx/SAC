@@ -1,6 +1,6 @@
 \documentclass{article}
 % \usepackage[utf8]{inputenc}
-\usepackage[a4paper, margin=1in]{geometry}
+\usepackage[a4paper,margin=1in,lmargin=0.5in,rmargin=0.5in]{geometry}
 \usepackage{listings}
 % \usepackage{graphicx}
 % \usepackage{amsthm,amsmath,amssymb,amsfonts}
@@ -33,7 +33,7 @@
 \pagestyle{fancy}
 % \counterwithin*{equation}{section}
 
-\title{CSC207 Project}
+\title{CSC207 Project Design Document}
 \author{SAC \\ Shiqi Chen, Jianjun Zhao, Junxi Liu, Kaitian Zheng}
 
 \date{December 2022}
@@ -49,10 +49,10 @@
 As stated in the phase 1 design document, this project intends to create an advance version of Tetris from Assignment 2, following the \href{https://tetris.wiki/Tetris_Guideline}{Tetris Design Guideline}. While the main goal does not differ significantly, our focus gradually shifted to creating a highly customizable and extensible Tetris. Users will be provided with various options to customize their own game.
 
 \section{User Story}
-This project uses the MVC pattern. The terms "model", "view" and "controller" used below are related to the MVC pattern.
+This project uses the MVC pattern. The terms, ``model'', ``view'' and ``controller'' used below are related to the MVC pattern.
 
 % \begin{xltabular}{\textwidth}{|X|X|X|l|l|l|}
-\begin{xltabular}{\textwidth}{|p{2cm}|p{0.5cm}|p{1.5cm}|p{3cm}|p{3.5cm}|p{1.75cm}|p{1.25cm}|}
+\begin{xltabular}{\textwidth}{|p{2cm}|p{0.5cm}|p{1.5cm}|p{4cm}|p{4.7cm}|p{1.3cm}|p{1cm}|}
 \hline
 \textbf{Name}&\textbf{ID} &\textbf{Owner}&\textbf{Description}&\textbf{Implementation Details}&\textbf{Priority}&\textbf{Effort} \\
 
@@ -66,9 +66,9 @@ As a classic Tetris player, I want a scoring system which recognizes my advanced
 \textbf{Observer pattern}. \verb|ScoreSystemLayer| would maintain a list of \verb|ScoreObserver|'s which are notified whenever the Model ticks (advances a step). Then each score observer will calculate the score based on its own score scheme.&
 1 & 3 \\
 
-\hline \sout{Hold} & \sout{1.2} & & & Delayed to 3.2 & &  \\
+\hline \sout{Hold} & \sout{1.2} & & & Delayed to 3.2 because 2.5 Flexible View needs to be implemented first. & &  \\
 
-\hline \sout{Piece Preview} & \sout{1.3} & & & Delayed to 3.4 & &  \\
+\hline \sout{Piece Preview} & \sout{1.3} & & & Delayed to 3.4 because 2.5 Flexible View needs to be implemented first. & &  \\
 
 \hline Colour scheme (Accessibility) & 1.4 & Junxi Liu &
 As a user who has trouble distinguishing colours due to visual impairment such as colour blindness, I want a different colour scheme (like high-contrast) so that I can quickly distinguish GUI elements. &
@@ -77,22 +77,22 @@ As a user who has trouble distinguishing colours due to visual impairment such a
 
 \hline Piece Generator & 1.5 & Kaitian Zheng &
 As an advanced player and developer, I want to facilitate different kinds of piece generators. In this way, in some special game modes, we are able to make a perfect row clear according to the behind-scene algorithm. &
-\textbf{Strategy Pattern} Maintain an extensible \verb|Generator| interface which enables the later modifications such as adding a new piece generator system. &
+\textbf{Strategy Pattern} Maintain an extensible \verb|Generator| interface. The Model will delegate piece generating to a \verb|Generator| object. The model can change its \verb|Generator| (strategy) at any time. This facilitates the later modifications such as replacing with a new piece generator system. &
 1 & 1 \\
 
 \hline T-spin & 1.6 & Kaitian Zheng &
 As an advanced player, I want to perform special operations like \href{https://tetris.wiki/T-Spin}{T-Spin} (i.e., a mechanism where tetris pieces rotate differently according to their position) so that I can have a more challenging game experience. &
-\textbf{State pattern}. Assign every \verb|Piece| a \verb|RotationState| object. A concrete State contains a specific rotation mechanism. A \verb|Piece| can be set to a different State so that its rotation behaviour changes accordingly. &
+\textbf{State pattern}. Assign Model a \verb|RotationState| object. A concrete State contains a specific rotation mechanism. The Model can be set to a different State so that its rotation behaviour changes accordingly. &
 2 & 3 \\
 
 \hline Game mode & 2.4 & Kaitian Zheng &
 As a player, I want different kinds of game modes (e.g., marathon, 40-lines, time-limited) so that I can have various gaming experiences. &
-\textbf{Mediator pattern} Provide two interfaces, \verb|GameCore| and \verb|GameLayer|. The \verb|GameCore| interface is a template for unique features in a Tetris game, such as piece generator and rotation system. The \verb|GameLayer| interface is a template for some stackable additional features, such as the score calculation system and timed mode. A mediator class \verb|GameMode| is provided to aggregate the \verb|GameCore| and a stack of \verb|GameLayer|. &
+\textbf{Mediator pattern} Provide two interfaces, \verb|GameCore| and \verb|GameLayer|. The \verb|GameCore| interface is a template for unique features in a Tetris game, such as piece generator and rotation system. The \verb|GameLayer| interface is a template for some stackable additional features, such as the score calculation system and timed mode. A mediator class \verb|GameMode| is provided to combine the \verb|GameCore| and a stack of \verb|GameLayer|. \verb|GameCore| and \verb|GameLayer| can be reused to compose new \verb|GameMode|. &
 2 & 3 \\
 
 \hline Flexible View & 2.5 & Junxi Liu &
-As a UI developer, I'd like to implement a method to design and control different boxes conveniently in the user interface. &
-\textbf{Template pattern} Provide an abstract class \verb|FloatController|. The client can add arbitray floating element by inheriting \verb|FloatController|, and the \verb|FloatController| will take care for adding the floating element into the main view. &
+As a user, I want to customize the position of GUI elements according to my own need such that I can have a satisfying layout &
+\textbf{Template pattern} Provide an abstract class \verb|FloatController| that implements the logic of setting an element into a specific container (position). The client can add an arbitrary floating element by inheriting \verb|FloatController| and only override some intermediate steps (like setting a specific container) without reinventing the whole process. &
 1 & 3 \\
 
 
@@ -103,7 +103,7 @@ Maintain a buffer in the model. The client can store the current \verb|Piece| in
 
 \hline Lock Delay & 3.3 & Jianjun Zhao &
 As a user, I want the game not to lock the tetris piece once it touches the floor. Instead, I need a lock delay so that I can adjust where to place the tetris piece with more flexibility. &
-When a tetris piece reaches bottom and is not a hard drop, start a \verb|Lock| timer that expires in a specific interval. When the next tick is reached, the user does not perform any movement, and the \verb|Lock| timer expired, then the current tetris piece will be fixed and a new piece is generated. 
+When a tetris piece reaches bottom and is not a hard drop, start a \verb|Lock| timer that expires in a specific interval. When the next tick is reached, the user does not perform any movement, and the \verb|Lock| timer expired, then the current tetris piece will be fixed and a new piece is generated. &
 2 & 1 \\
 
 \hline Piece Preview  & 3.4 & Shiqi Chen &
@@ -117,8 +117,8 @@ Calculate the position where a tetris piece will be placed in advance. Then temp
 1 & 2 \\
 
 \hline Timed Mode & 3.6 & Shiqi Chen &
-As an advanced player, I want to increase the difficulty level of playing Tetris so that the point we get from placing the tetris piece is also related to the time we spent in each interval. &
-Add a new \verb|GameLayer| to calculate the time elapsed and check if a specified target of time has elapsed. The elapsed time will be reflected on the main view, and this layer will end the game once a target time is reached. &
+As an advanced player, I want to set a timer when I play the game such that I can know how fast I can play. &
+Add a new \verb|GameLayer| to calculate the time elapsed and check if a specified target of time has elapsed. The elapsed time will be displayed on the main view, and this layer will end the game once a target time is reached. &
 3 & 1 \\
 
 \hline Line Count Mode & 3.7 & Junxi Liu &
@@ -168,7 +168,7 @@ This pattern is used to implement user story 2.5 (Flexible View).
 
 \paragraph{Implementation Details}
 
-The \verb`FloatController` is an abstract template class for controllers for floating elements. The user is able to create concrete controllers for floating elements, such as \verb`HoldController`, \verb`LineCountController`, and etc independently, without bothering to consider the element's location in the stage.
+A floating GUI element is an element that can adjust its position (container) as needed. The \verb`FloatController` is an abstract template class for controllers of those floating GUI elements. The abstract class contains a template method \verb|initialize()| that calls other methods in a specific order such that the \verb|root| element it stores will be properly initialized. \verb|initialize()| guarantees that a container is specified before the \verb|root| element is put inside. Other concrete \verb|FloatController|s only need to override some intermediate steps to change the behaviour. The code for initialization will be automatically reused.
 
 \clearpage
 
@@ -203,24 +203,6 @@ This pattern is used to implement user story 2.3 (T-Spin).
 \paragraph{Implementation Details}
 
 The essence of the T-spin implementation is a rotation system that rotates tetris pieces differently according to their different states. For example, \verb`SuperRotationState` represents the state where a basic rotation is obstructed by the wall and the game attempts to rotate the Pieces in an alternative way. \verb`Model` stores the reference to one of the concrete \verb`RotationState` and delegates the state-specific rotation function to it. The client can change the rotation method of a \verb|Model| by changing its state using \verb`setRotationState()`. \verb`RotationState` also stores a backreference to the \verb`Model` object such that \verb`RotationState` can change the \verb`currentState` of \verb`Model`.
-
-\clearpage
-
-\subsection{Design Pattern 5: Mediator}
-
-\paragraph{Overview}
-This pattern is used to implement user story 2.4 (Game mode)
-
-\paragraph{UML Diagam}\hfill
-
-\begin{figure}[H]
-\centering
-\includestandalone[width=0.7\linewidth]{gamemode}
-\end{figure}
-
-\paragraph{Implementation Details}
-
-The game logic was split into two parts: a \verb|GameCore| and a stack of \verb|GameLayer|s. A \verb|GameCore| contains a logic that is unique for each game, such as the piece generators, and the rotation system. A \verb|GameLayer| contains additional features of the game, such as score calculation, line counts, and etc. A \verb|GameMode| implements both \verb|GameCore| and \verb|GameLayer| and contains a \verb|GameCore core| and a \verb|Stack<GameLayer> layers|. It implements \verb|GameCore| by passing the call directly to \verb|core|, and implements \verb|GameLayer| by aggregating the result of each layer in \verb|layers|. In short, \verb|GameMode| serves as a mediator that allows the \verb|Model| to send events to every \verb|GameCore| and \verb|GameLayer| without knowing their implementation details.
 
 \clearpage
 
